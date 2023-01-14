@@ -10,7 +10,7 @@ pub fn is_file_with_ext(p: &Path, file_ext: &str) -> bool {
         Some(e) => e,
         None => return false,
     };
-    ext.to_string_lossy() == file_ext
+    ext.to_string_lossy() == file_ext;
 }
 
 fn main() {
@@ -236,7 +236,9 @@ fn crusts() {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use serial_test::serial;
     #[test]
+    #[serial]
     fn test_crusts() {
         let dir = std::path::Path::new("test1");
         if dir.exists() {
@@ -285,9 +287,10 @@ r###"
             "###
             );
         }
-        test_unsafe();
     }
 
+    #[test]
+    #[serial]
     fn test_unsafe() {
         let dir = std::path::Path::new("test2");
         if dir.exists() {
@@ -321,7 +324,6 @@ pub unsafe extern "C" fn add_value(mut p: *mut tvm_program_t, val: i32) -> *mut 
         std::env::set_current_dir(dir).ok();
         crusts();
         std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).ok();
-        // TODO There is a bug here: the statement fresh8 should be insider the unsafe block
         if let Ok(s) = std::fs::read_to_string("test2/main.rs") {
             insta :: assert_snapshot! (s, @
 r###"
@@ -348,10 +350,10 @@ r###"
             "###
             );
         }
-        test_stdio();
     }
 
-    
+    #[test]
+    #[serial]
     fn test_stdio() {
         let dir = std::path::Path::new("test3");
         if dir.exists() {
@@ -374,13 +376,9 @@ int main() {
         main();
         std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).ok();
         if let Ok(s) = std::fs::read_to_string("test3/src/main.rs") {
-            insta :: assert_snapshot! (s, @
-r###"
+            insta :: assert_snapshot! (s, @ r###"
 
-            "###
-            );
+            "###);
         }
     }
-
-
 }

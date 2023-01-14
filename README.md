@@ -71,7 +71,7 @@ fi
 
 ## Usage:
 
-Run `crusts` in the folder where there is a `Makefile, using
+Run `crusts` in the folder where there is a `Makefile`, using
 
 ```bash
 crusts [-v | -c2rust]

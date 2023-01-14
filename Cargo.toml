@@ -11,7 +11,7 @@ authors = [
     "Ahmed E. Hassan <hassan@queensu.ca>",
 ]
 description = "CRustS - From Unsafe C to safer Rust"
-repository = "https://github.com/yijunyu/crusts"
+repository = "https://github.com/trusted-programming/crusts"
 documentation = "https://docs.rs/crusts"
 keywords = ["rust", "c2rust", "refactoring"]
 license = "Apache-2.0"
@@ -23,4 +23,5 @@ flate2 = "1.0.25"
 tar = "0.4.38"
 
 [dev-dependencies]
-insta = "1.23.0"
+insta = "1.24.1"
+serial_test = "0.10.0"
