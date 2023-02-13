@@ -10,7 +10,7 @@ pub fn is_file_with_ext(p: &Path, file_ext: &str) -> bool {
         Some(e) => e,
         None => return false,
     };
-    ext.to_string_lossy() == file_ext;
+    ext.to_string_lossy() == file_ext
 }
 
 fn main() {
