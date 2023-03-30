@@ -3,8 +3,10 @@ use jwalk::WalkDir;
 use std::{
     path::Path,
     process::{Command, Stdio},
+    env
 };
 use tar::Archive;
+
 pub fn is_file_with_ext(p: &Path, file_ext: &str) -> bool {
     let ext = match p.extension() {
         Some(e) => e,
@@ -17,10 +19,25 @@ fn main() {
     let mut args = std::env::args();
     let mut versioning = false;
     let mut stop_refactoring = false;
-    if args.len() == 2 {
+    let mut txl_on = false;
+    let mut help = false;
+    if args.len() == 2{
         let arg = args.nth(1).unwrap();
         versioning = arg == "-v";
         stop_refactoring = arg == "-c2rust";
+        help = arg == "-h"
+    }
+    if args.len() == 4{
+        let arg = args.nth(1).unwrap();
+        txl_on = arg == "-txl";
+    }
+    if help {        
+        println!("arguments hints!");
+        println!("No args : will run the c2rust and instinctive txl rules");
+        println!("-v : check version");
+        println!("-c2rust : c2rust only without further refactoring");
+        println!("-txl <txl file path> <filename.txl>: run customized txl rule after crusts completed");
+        return;
     }
     if versioning {
         let version = env!("CARGO_PKG_VERSION");
@@ -139,8 +156,15 @@ fn main() {
             }
         }
     }
-    if !stop_refactoring {
-        crusts();
+    if !stop_refactoring {        
+        if txl_on {
+            let filepath = args.nth(0).unwrap();
+            let filename = args.nth(0).unwrap();
+            crusts(txl_on,&filepath, &filename);
+        }
+        else{
+            crusts(txl_on,"", "");
+        }            
     }
 }
 
@@ -164,7 +188,7 @@ const URL: &str = "http://bertrust.s3.amazonaws.com/crusts-windows.tar.gz";
 const BEAR: &str = "intercept-build";
 #[cfg(target_os = "windows")]
 const BEAR_ARGS: [&str; 1] = ["make"];
-fn crusts() {
+fn crusts(txl_on:bool,filepath:&str, filename:&str) {
     let mut home = "/home/ubuntu".to_string();
     if let Ok(h) = std::env::var("HOME") {
         home = format!("{}", h);
@@ -186,7 +210,7 @@ fn crusts() {
             return;
         }
     }
-    let rules = vec![
+    let mut rules = vec![
         "formalizeCode.x",
         "varTypeNoBounds.x",
         "null.x",
@@ -198,7 +222,36 @@ fn crusts() {
         "const2mut.x",
         "stdio.x",
         "unsafe.x",
-    ];
+    ];    
+    
+    //store current directory
+    let old_dir = env::current_dir().unwrap();
+    //jump to the directory where txl file is
+    let _dir = env::set_current_dir(filepath);
+    //compile the .txl file to .x file
+    let _txl_command = Command::new("txlc")
+                .arg(filename)
+                .stdout(Stdio::piped())
+                .output()
+                .expect("failed txl command");
+    //build the name of .x file
+    let exe_filename = filename.split(".").nth(0).unwrap();
+    let exe_file = format!("{}{}",exe_filename,".x");
+    if txl_on{        
+        //copy .x file to dedicated directory
+        let _cp_command = Command::new("cp")
+            .arg(&exe_file)
+            .arg(&p)
+            .stdout(Stdio::piped())
+            .spawn()
+            .expect("copying .x file faild");
+        //go back to original folder
+        let _dir = env::set_current_dir(&old_dir);
+        //push the new .x file into the vector         
+        rules.push(&exe_file);
+    }
+
+
     let var_path = format!("{}/Rust:{}:{}", &p, &p, std::env::var("PATH").unwrap());
     std::env::set_var("PATH", var_path);
     for r in rules {
