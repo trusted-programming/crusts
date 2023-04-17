@@ -1,5 +1,6 @@
 mod c2rust;
 mod cli;
+mod crown;
 mod crusts;
 mod utils;
 
@@ -12,6 +13,10 @@ fn main() {
 
     if !cli.stop_refactoring {
         crusts::run(cli.custom_txl);
+    }
+
+    if cli.crown {
+        crown::run();
     }
 }
 
