@@ -20,10 +20,13 @@ pub const URL: &str = "http://bertrust.s3.amazonaws.com/crusts-windows.tar.gz";
 pub fn run(txl: Option<PathBuf>) {
     let mut home = "/home/ubuntu".to_string();
     if let Ok(h) = std::env::var("HOME") {
-        home = format!("{}", h);
+        home = h;
     }
+
+    dbg!(&home);
+
     let p = format!("{}/.cargo/bin", home);
-    if !std::path::Path::new(&format!("{}/Rust/unsafe.x", p)).exists() {
+    if !std::path::Path::new(&format!("{}/c/unsafe.x", p)).exists() {
         println!("downloading txl rules ... ");
         if let Ok(resp) = reqwest::blocking::get(URL) {
             if let Ok(bytes) = resp.bytes() {
@@ -52,11 +55,11 @@ pub fn run(txl: Option<PathBuf>) {
         "stdio.x",
         "unsafe.x",
     ];
-    let txl_on = txl.is_some();
-    let mut filename = String::new();
-    let mut filepath = String::new();
-
+    let old_dir = env::current_dir().unwrap();
+    let exe_file;
     if let Some(file_path) = txl {
+        let mut filename = String::new();
+        let mut filepath = String::new();
         // Get file name without path
         if let Some(file_name) = file_path.file_name() {
             if let Some(name_str) = file_name.to_str() {
@@ -74,22 +77,16 @@ pub fn run(txl: Option<PathBuf>) {
                 println!("Parent path is not valid UTF-8.");
             }
         }
-    }
-
-    //store current directory
-    let old_dir = env::current_dir().unwrap();
-    //jump to the directory where txl file is
-    let _dir = env::set_current_dir(&filepath);
-    //compile the .txl file to .x file
-    let _txl_command = Command::new("txlc")
-        .arg(&filename)
-        .stdout(Stdio::piped())
-        .output()
-        .expect("failed txl command");
-    //build the name of .x file
-    let exe_filename = filename.split(".").nth(0).unwrap();
-    let exe_file = format!("{}{}", exe_filename, ".x");
-    if txl_on {
+        //store current directory
+        //jump to the directory where txl file is
+        env::set_current_dir(&filepath).unwrap();
+        let _txl_command = Command::new("txlc")
+            .arg(&filename)
+            .stdout(Stdio::piped())
+            .output()
+            .expect("failed txl command");
+        let exe_filename = filename.split(".").nth(0).unwrap();
+        exe_file = format!("{}{}", exe_filename, ".x");
         //copy .x file to dedicated directory
         let _cp_command = Command::new("cp")
             .arg(&exe_file)
@@ -102,6 +99,8 @@ pub fn run(txl: Option<PathBuf>) {
         //push the new .x file into the vector
         rules.push(&exe_file);
     }
+
+    //build the name of .x file
 
     let var_path = format!("{}/Rust:{}:{}", &p, &p, std::env::var("PATH").unwrap());
     std::env::set_var("PATH", var_path);
