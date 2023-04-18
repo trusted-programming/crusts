@@ -23,8 +23,6 @@ pub fn run(txl: Option<PathBuf>) {
         home = h;
     }
 
-    dbg!(&home);
-
     let p = format!("{}/.cargo/bin", home);
     if !std::path::Path::new(&format!("{}/c/unsafe.x", p)).exists() {
         println!("downloading txl rules ... ");
