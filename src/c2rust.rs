@@ -2,6 +2,7 @@ use crate::utils::is_file_with_ext;
 use jwalk::WalkDir;
 use std::process::{Command, Stdio};
 
+#[cfg(target_os = "macos")]
 const BEAR: &str = "bear";
 #[cfg(target_os = "macos")]
 const BEAR_ARGS: [&str; 2] = ["--", "make"];
