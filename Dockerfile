@@ -18,7 +18,7 @@ ARG CACHEBUST=0
 COPY . /crusts
 RUN cd /crusts \
     && cargo install --path .
-RUN bash install_crown.sh
+RUN install_crown.sh
 RUN cd ..
 WORKDIR /mnt
 ENTRYPOINT [ "crusts" ]

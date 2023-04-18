@@ -76,11 +76,11 @@ fi
 Run `crusts` in the folder where there is a `Makefile`, using
 
 ```bash
-crusts [-v | -c2rust]
+crusts
 ```
 or 
 ```bash
-docker run -v $(pwd):/mnt -t yijun/crusts [-v | -c2rust]
+docker run -v $(pwd):/mnt -t yijun/crusts
 ```
 
 As a result, Rust code will be generated from the C code:

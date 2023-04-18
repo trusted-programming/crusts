@@ -1,5 +1,6 @@
 use crate::utils::is_file_with_ext;
 use jwalk::WalkDir;
+use log::info;
 use std::process::{Command, Stdio};
 
 #[cfg(target_os = "macos")]
@@ -51,7 +52,7 @@ pub fn run() {
                     .spawn()
                 {
                     if let Ok(output) = command.wait_with_output() {
-                        println!("{:?}", output);
+                        info!("{:?}", output);
                     }
                 }
             }
@@ -60,7 +61,7 @@ pub fn run() {
             {
                 if let Ok(command) = Command::new("./configure").stdout(Stdio::piped()).spawn() {
                     if let Ok(output) = command.wait_with_output() {
-                        println!("{:?}", output);
+                        info!("{:?}", output);
                     }
                 }
             }
@@ -79,7 +80,7 @@ pub fn run() {
                                 .spawn()
                             {
                                 if let Ok(output) = command.wait_with_output() {
-                                    println!("{}", String::from_utf8_lossy(&output.stdout));
+                                    info!("{}", String::from_utf8_lossy(&output.stdout));
                                 }
                             }
                         } else {
@@ -89,7 +90,7 @@ pub fn run() {
                                 .spawn()
                             {
                                 if let Ok(output) = command.wait_with_output() {
-                                    println!("{}", String::from_utf8_lossy(&output.stdout));
+                                    info!("{}", String::from_utf8_lossy(&output.stdout));
                                 }
                             }
                         }
@@ -101,7 +102,7 @@ pub fn run() {
                         .spawn()
                     {
                         if let Ok(output) = command.wait_with_output() {
-                            println!("{}", String::from_utf8_lossy(&output.stdout));
+                            info!("{}", String::from_utf8_lossy(&output.stdout));
                         }
                     } else {
                         panic!("Please install bear or scan-build\n");
@@ -116,7 +117,7 @@ pub fn run() {
         {
             Ok(command) => {
                 if let Ok(output) = command.wait_with_output() {
-                    println!("{}", String::from_utf8_lossy(&output.stdout));
+                    info!("{}", String::from_utf8_lossy(&output.stdout));
                 }
             }
             Err(_) => {

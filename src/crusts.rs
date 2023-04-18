@@ -1,6 +1,7 @@
 use crate::utils::is_file_with_ext;
 use flate2::read::GzDecoder;
 use jwalk::WalkDir;
+use log::{error, info};
 use reqwest;
 use std::{
     env,
@@ -24,18 +25,18 @@ pub fn run(txl: Option<PathBuf>) {
 
     let p = format!("{}/.cargo/bin", home);
     if !std::path::Path::new(&format!("{}/c/unsafe.x", p)).exists() {
-        println!("downloading txl rules ... ");
+        info!("downloading txl rules ... ");
         if let Ok(resp) = reqwest::blocking::get(URL) {
             if let Ok(bytes) = resp.bytes() {
                 let tar = GzDecoder::new(&bytes[..]);
                 let mut archive = Archive::new(tar);
                 archive.unpack(&p).ok();
             } else {
-                eprintln!("Couldn't download, please check your network connection.");
+                error!("Couldn't download, please check your network connection.");
             }
-            println!("downloaded ... ");
+            info!("downloaded ... ");
         } else {
-            eprintln!("Couldn't download, please check your network connection.");
+            error!("Couldn't download, please check your network connection.");
             return;
         }
     }
@@ -62,7 +63,7 @@ pub fn run(txl: Option<PathBuf>) {
             if let Some(name_str) = file_name.to_str() {
                 filename = name_str.to_string();
             } else {
-                println!("File name is not valid UTF-8.");
+                info!("File name is not valid UTF-8.");
             }
         }
 
@@ -71,7 +72,7 @@ pub fn run(txl: Option<PathBuf>) {
             if let Some(path_str) = parent_path.to_str() {
                 filepath = path_str.to_string();
             } else {
-                println!("Parent path is not valid UTF-8.");
+                info!("Parent path is not valid UTF-8.");
             }
         }
         //store current directory
@@ -102,7 +103,7 @@ pub fn run(txl: Option<PathBuf>) {
     let var_path = format!("{}/Rust:{}:{}", &p, &p, std::env::var("PATH").unwrap());
     std::env::set_var("PATH", var_path);
     for r in rules {
-        println!("applying {r}...");
+        info!("applying {r}...");
         WalkDir::new(".").sort(true).into_iter().for_each(|entry| {
             if let Ok(e) = entry {
                 let path = e.path();
