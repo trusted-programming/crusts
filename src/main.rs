@@ -15,7 +15,7 @@ fn main() {
         crusts::run(cli.custom_txl);
     }
 
-    if cli.crown {
+    if !cli.skip_crown {
         crown::run();
     }
 }
@@ -125,10 +125,8 @@ int main() {
                     let ref mut fresh7 = *((*p).values).offset((*p).num_values as isize);
                     *fresh7 = calloc(1, ::core::mem::size_of::<i32>() as u64) as *mut i32;
                     **((*p).values).offset((*p).num_values as isize) = val;
-                }
-                let fresh8 = (*p).num_values;
-                (*p).num_values = (*p).num_values + 1;
-                unsafe {
+                    let fresh8 = (*p).num_values;
+                    (*p).num_values = (*p).num_values + 1;
                     return *((*p).values).offset(fresh8 as isize);
                 }
             }

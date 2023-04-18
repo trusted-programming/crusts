@@ -14,6 +14,6 @@ pub struct Cli {
     )]
     pub custom_txl: Option<PathBuf>,
 
-    #[arg(short = 'c', long = "crown", action = clap::ArgAction::SetTrue, help = "run crown after CRustS")]
-    pub crown: bool,
+    #[arg(short = 'c', long = "skip-crown", action = clap::ArgAction::SetTrue, help = "run crown after CRustS")]
+    pub skip_crown: bool,
 }

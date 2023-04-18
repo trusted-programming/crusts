@@ -49,6 +49,7 @@ if [ $(uname -s) == "Darwin" ]; then
    cd -
    brew install bear
    export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+   bash install_crown.sh
 
    cargo install crusts
 
@@ -59,6 +60,7 @@ elif [ $(uname -s) == "Linux" ]; then
    rustup override set nightly-2021-11-22-x86_64-unknown-linux-gnu
    rustup component add rustfmt --toolchain nightly-2021-11-22-x86_64-unknown-linux-gnu
    export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+   bash install_crown.sh
 
    cargo install crusts
 

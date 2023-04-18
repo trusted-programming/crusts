@@ -11,7 +11,6 @@ use tar::Archive;
 
 #[cfg(target_os = "macos")]
 pub const URL: &str = "http://bertrust.s3.amazonaws.com/crusts-macosx.tar.gz";
-#[cfg(target_os = "macos")]
 #[cfg(target_os = "linux")]
 pub const URL: &str = "http://bertrust.s3.amazonaws.com/crusts-linux.tar.gz";
 #[cfg(target_os = "windows")]

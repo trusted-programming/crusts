@@ -7,7 +7,6 @@ RUN apt install libclang-dev -y
 ENV LLVM_LIB_DIR /usr/lib/llvm-11/lib
 RUN cargo install c2rust
 RUN apt install bear -y
-#RUN cargo install txl-rs
 #RUN cargo init --bin abc \
 # && cd abc \
 # && txl-rs abc/main.rs \
@@ -18,6 +17,8 @@ RUN rustup component add rustfmt --toolchain nightly-2021-11-22-x86_64-unknown-l
 ARG CACHEBUST=0
 COPY . /crusts
 RUN cd /crusts \
- && cargo install --path .
+    && cargo install --path .
+RUN bash install_crown.sh
+RUN cd ..
 WORKDIR /mnt
 ENTRYPOINT [ "crusts" ]

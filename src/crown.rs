@@ -1,4 +1,4 @@
-use std::{env, path::Path, process::Command};
+use std::process::Command;
 
 pub fn run() {
     Command::new("crown")
