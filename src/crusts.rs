@@ -1,4 +1,5 @@
 use crate::utils::is_file_with_ext;
+use dirs;
 use flate2::read::GzDecoder;
 use jwalk::WalkDir;
 use log::{error, info};
@@ -18,28 +19,27 @@ pub const URL: &str = "http://bertrust.s3.amazonaws.com/crusts-linux.tar.gz";
 pub const URL: &str = "http://bertrust.s3.amazonaws.com/crusts-windows.tar.gz";
 
 pub fn run(txl: Option<PathBuf>) {
-    let mut home = "/home/ubuntu".to_string();
-    if let Ok(h) = std::env::var("HOME") {
-        home = h;
-    }
+    let path = dirs::home_dir().unwrap().join(".cargo/bin");
+    let path_string = path.to_str().unwrap().to_string();
 
-    let p = format!("{}/.cargo/bin", home);
-    if !std::path::Path::new(&format!("{}/c/unsafe.x", p)).exists() {
-        info!("downloading txl rules ... ");
+    if !path.join("c/unsafe.x").exists() {
+        info!("unsafe.x not found, downloading all txl rules... ");
         if let Ok(resp) = reqwest::blocking::get(URL) {
             if let Ok(bytes) = resp.bytes() {
                 let tar = GzDecoder::new(&bytes[..]);
                 let mut archive = Archive::new(tar);
-                archive.unpack(&p).ok();
+                archive.unpack(&path).ok();
+                info!("downloaded txl rules successfully");
             } else {
                 error!("Couldn't download, please check your network connection.");
+                return;
             }
-            info!("downloaded ... ");
         } else {
             error!("Couldn't download, please check your network connection.");
             return;
         }
     }
+
     let mut rules = vec![
         "formalizeCode.x",
         "varTypeNoBounds.x",
@@ -88,7 +88,7 @@ pub fn run(txl: Option<PathBuf>) {
         //copy .x file to dedicated directory
         let _cp_command = Command::new("cp")
             .arg(&exe_file)
-            .arg(&p)
+            .arg(&path)
             .stdout(Stdio::piped())
             .spawn()
             .expect("copying .x file faild");
@@ -100,7 +100,12 @@ pub fn run(txl: Option<PathBuf>) {
 
     //build the name of .x file
 
-    let var_path = format!("{}/Rust:{}:{}", &p, &p, std::env::var("PATH").unwrap());
+    let var_path = format!(
+        "{}/Rust:{}:{}",
+        &path_string,
+        &path_string,
+        std::env::var("PATH").unwrap()
+    );
     std::env::set_var("PATH", var_path);
     for r in rules {
         info!("applying {r}...");
@@ -115,7 +120,7 @@ pub fn run(txl: Option<PathBuf>) {
                     .args(vec![
                         file.to_string(),
                         "-".to_string(),
-                        format!("{}/Rust", p),
+                        format!("{}/Rust", &path_string),
                     ])
                     .stdout(Stdio::piped())
                     .spawn()
