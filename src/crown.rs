@@ -6,7 +6,9 @@ pub fn run() {
         .arg("preprocess")
         .arg("in-place")
         .output()
-        .expect("failed to run crown main.rs preprocess in-place");
+        .expect(
+            "failed to run crown main.rs preprocess in-place, please install crown if you haven't or check that main.rs is present",
+        );
 
     Command::new("crown")
         .arg("main.rs")
