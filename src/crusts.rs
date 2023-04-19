@@ -91,7 +91,7 @@ pub fn run(txl: Option<PathBuf>) {
             .arg(&path)
             .stdout(Stdio::piped())
             .spawn()
-            .expect("copying .x file faild");
+            .expect("copying .x file failed");
         //go back to original folder
         let _dir = env::set_current_dir(&old_dir);
         //push the new .x file into the vector
