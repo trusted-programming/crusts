@@ -27,7 +27,7 @@ mod tests {
     #[test]
     #[serial]
     fn test_crusts() {
-        let dir = std::path::Path::new("test1");
+        let dir = std::path::Path::new("tests/test1");
         if dir.exists() {
             std::fs::remove_dir_all(dir).ok();
         }
@@ -39,7 +39,7 @@ mod tests {
 int main() {
     printf("Hello, world!\n");
     return 0;
-}
+
 "#,
         )
         .ok();
@@ -75,7 +75,7 @@ int main() {
     #[test]
     #[serial]
     fn test_unsafe() {
-        let dir = std::path::Path::new("test2");
+        let dir = std::path::Path::new("tests/test1");
         if dir.exists() {
             std::fs::remove_dir_all(dir).ok();
         }
@@ -138,7 +138,7 @@ int main() {
     #[test]
     #[serial]
     fn test_stdio() {
-        let dir = std::path::Path::new("test3");
+        let dir = std::path::Path::new("tests/test1");
         if dir.exists() {
             std::fs::remove_dir_all(dir).ok();
         }

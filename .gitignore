@@ -1,6 +1,5 @@
 /target
-test*
 Cargo.lock
 src/txl
 src/.main.rs.pending-snap
-crown/
+tests

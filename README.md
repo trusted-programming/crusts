@@ -100,7 +100,7 @@ Cargo.toml build.rs lib.rs -- contains the `cargo build` configurations;
 * `-txl` -- implement customized txl rule
 
 ## References
-* Michael Ling, Yijun Yu, Haitao Wu, Yuan Wang, James Cordy, Ahmed Hassan. "[In Rust We Trust: A transpiler from Unsafe C to Safer Rust](https://ieeexplore.ieee.org/document/9793767)", In: Proeedings of ICSE, 2022. 
+* Michael Ling, Yijun Yu, Haitao Wu, Yuan Wang, James Cordy, Ahmed Hassan. "[In Rust We Trust: A transpiler from Unsafe C to Safer Rust](https://ieeexplore.ieee.org/document/9793767)", In: Proceedings of ICSE, 2022. 
 * Mehmet Emre, Ryan Schroeder, Kyle Dewey, and Ben Hardekopf. 2021. [Translating C to safer Rust](https://doi.org/10.1145/3485498). Proc. ACM Program. Lang. 5, OOPSLA, Article 121 (October 2021), 29 pages. ([code](https://zenodo.org/record/5442253#.Y61WJtXP3iB))
 * [TXL](https://github.com/CordyJ/OpenTxl)
 * [C2Rust](https://github.com/immunant/c2rust)

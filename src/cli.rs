@@ -17,3 +17,9 @@ pub struct Cli {
     #[arg(short = 'c', long = "skip-crown", action = clap::ArgAction::SetTrue, help = "run crown after CRustS")]
     pub skip_crown: bool,
 }
+
+#[test]
+fn verify_cli() {
+    use clap::CommandFactory;
+    Cli::command().debug_assert()
+}
