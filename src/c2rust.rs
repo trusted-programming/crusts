@@ -1,3 +1,4 @@
+use crate::utils::command_exists;
 use crate::utils::is_file_with_ext;
 use jwalk::WalkDir;
 use log::info;
@@ -17,6 +18,10 @@ const BEAR: &str = "bear";
 const BEAR_ARGS: [&str; 2] = ["--", "make"];
 
 pub fn run() {
+    if !command_exists("c2rust") {
+        panic!("no c2rust command found")
+    }
+
     let cargo_toml_exists = std::path::Path::new("Cargo.toml").exists();
     let compile_commands_exists = std::path::Path::new("compile_commands.json").exists();
     let makefile_exists =
