@@ -9,9 +9,11 @@ use clap::Parser;
 fn main() {
     let cli = cli::Cli::parse();
 
-    c2rust::run();
+    if !cli.skip_c2rust {
+        c2rust::run();
+    }
 
-    if !cli.stop_refactoring {
+    if !cli.skip_txl_rules {
         crusts::run(cli.custom_txl);
     }
 
@@ -45,7 +47,8 @@ int main() {
         .ok();
         std :: fs :: write ("test1/Makefile", "main: main.c\n\tgcc -o main main.c\n\nclean::\n\trm -rf main compile_commands.json src Cargo.toml *.rs rust-toolchain rust-toolchain.toml Cargo.lock target").ok ();
         std::env::set_current_dir(dir).ok();
-        main();
+        c2rust::run();
+        crusts::run(None);
         std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).ok();
         let s = std::fs::read_to_string("test1/src/main.rs").unwrap();
         insta::assert_snapshot!(s, @r###"

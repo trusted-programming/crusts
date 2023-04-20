@@ -86,12 +86,7 @@ pub fn run(txl: Option<PathBuf>) {
         let exe_filename = filename.split(".").nth(0).unwrap();
         exe_file = format!("{}{}", exe_filename, ".x");
         //copy .x file to dedicated directory
-        let _cp_command = Command::new("cp")
-            .arg(&exe_file)
-            .arg(&path)
-            .stdout(Stdio::piped())
-            .spawn()
-            .expect("copying .x file failed");
+        std::fs::copy(&exe_file, &path.join(&exe_file)).expect("copying .x file failed");
         //go back to original folder
         let _dir = env::set_current_dir(&old_dir);
         //push the new .x file into the vector
