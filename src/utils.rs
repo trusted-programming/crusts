@@ -8,7 +8,7 @@ pub fn is_file_with_ext(p: &Path, file_ext: &str) -> bool {
 }
 
 pub fn command_exists(command: &str) -> bool {
-    match Command::new(command).arg("--version").status() {
+    match Command::new(command).arg("-h").status() {
         Ok(status) => status.success(),
         Err(_) => false,
     }

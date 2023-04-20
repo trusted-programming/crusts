@@ -21,14 +21,9 @@ fn main() {
 mod tests {
     use super::*;
     use serial_test::serial;
-    use std::path::Path;
-    use utils::command_exists;
+    use std::{env, path::Path};
 
     pub fn setup(test_name: &str) -> String {
-        // check prerequisites (crusts, c2rust, crown)
-        assert!(command_exists("crusts"));
-        assert!(command_exists("c2rust"));
-        assert!(command_exists("crown"));
         let tests_dir = Path::new("tmp");
         let test_name_dir = &tests_dir.join(test_name);
         if !tests_dir.exists() {
@@ -39,7 +34,6 @@ mod tests {
         }
         std::fs::create_dir_all(test_name_dir).ok();
         let dir_path_buf = std::fs::canonicalize(test_name_dir).unwrap();
-        std::env::set_current_dir(&dir_path_buf).ok();
         let dir = dir_path_buf.to_str().unwrap();
 
         dir.to_string()
