@@ -21,29 +21,16 @@ fn main() {
 mod tests {
     use super::*;
     use serial_test::serial;
-    use std::{env, path::Path};
-
-    pub fn setup(test_name: &str) -> String {
-        let tests_dir = Path::new("tmp");
-        let test_name_dir = &tests_dir.join(test_name);
-        if !tests_dir.exists() {
-            std::fs::create_dir_all(test_name_dir).ok();
-        }
-        if test_name_dir.exists() {
-            std::fs::remove_dir_all(test_name_dir).ok();
-        }
-        std::fs::create_dir_all(test_name_dir).ok();
-        let dir_path_buf = std::fs::canonicalize(test_name_dir).unwrap();
-        let dir = dir_path_buf.to_str().unwrap();
-
-        dir.to_string()
-    }
+    use std::env;
 
     #[test]
     #[serial]
     fn test_crusts() {
-        let dir_string = setup("test_crusts");
-        let dir = Path::new(&dir_string);
+        let dir = std::path::Path::new("test_crusts");
+        if dir.exists() {
+            std::fs::remove_dir_all(dir).unwrap();
+        }
+        std::fs::create_dir_all(dir).unwrap();
 
         std::fs::write(
             dir.join("main.c"),
@@ -52,15 +39,16 @@ mod tests {
 int main() {
     printf("Hello, world!\n");
     return 0;
-
+}
 "#,
         )
-        .ok();
-        std :: fs :: write (dir.join("Makefile"), "main: main.c\n\tgcc -o main main.c\n\nclean::\n\trm -rf main compile_commands.json src Cargo.toml *.rs rust-toolchain rust-toolchain.toml Cargo.lock target").ok ();
-        std::env::set_current_dir(dir).ok();
+        .unwrap();
+        std :: fs :: write (dir.join("Makefile"), "main: main.c\n\tgcc -o main main.c\n\nclean::\n\trm -rf main compile_commands.json src Cargo.toml *.rs rust-toolchain rust-toolchain.toml Cargo.lock target").unwrap ();
+        std::env::set_current_dir(dir).unwrap();
         c2rust::run();
         crusts::run(None);
-        std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).ok();
+        crown::run();
+        std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).unwrap();
         let s = std::fs::read_to_string(dir.join("src/main.rs")).unwrap();
         insta :: assert_snapshot! (s, @
 r###"
@@ -90,8 +78,11 @@ r###"
     #[test]
     #[serial]
     fn test_unsafe() {
-        let dir_string = setup("test_unsafe");
-        let dir = Path::new(&dir_string);
+        let dir = std::path::Path::new("test_unsafe");
+        if dir.exists() {
+            std::fs::remove_dir_all(dir).unwrap();
+        }
+        std::fs::create_dir_all(dir).unwrap();
 
         std::fs::write(
             dir.join("main.rs"),
@@ -116,10 +107,11 @@ r###"
     }
     "#,
         )
-        .ok();
-        std::env::set_current_dir(dir).ok();
+        .unwrap();
+        std::env::set_current_dir(dir).unwrap();
         crusts::run(None);
-        std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).ok();
+        crown::run();
+        std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).unwrap();
         if let Ok(s) = std::fs::read_to_string(dir.join("main.rs")) {
             insta :: assert_snapshot! (s, @
 r###"
@@ -135,8 +127,7 @@ r###"
                         (::core::mem::size_of::<*mut i32>() as u64)
                             .wrapping_mul(((*p).num_values + 1i32) as u64),
                     ) as *mut *mut i32;
-                    let ref mut fresh7 = *((*p).values).offset((*p).num_values as isize);
-                    *fresh7 = calloc(1, ::core::mem::size_of::<i32>() as u64) as *mut i32;
+                    *((*p).values).offset((*p).num_values as isize) = calloc(1, ::core::mem::size_of::<i32>() as u64) as *mut i32;
                     **((*p).values).offset((*p).num_values as isize) = val;
                     let fresh8 = (*p).num_values;
                     (*p).num_values = (*p).num_values + 1;
@@ -151,8 +142,12 @@ r###"
     #[test]
     #[serial]
     fn test_stdio() {
-        let dir_string = setup("test_stdio");
-        let dir = Path::new(&dir_string);
+        let dir = std::path::Path::new("test_stdio");
+        if dir.exists() {
+            std::fs::remove_dir_all(dir).unwrap();
+        }
+        std::fs::create_dir_all(dir).unwrap();
+
         std::fs::write(
             dir.join("main.c"),
             r#"
@@ -164,10 +159,12 @@ r###"
     }
     "#,
         )
-        .ok();
-        std::env::set_current_dir(dir).ok();
-        main();
-        std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).ok();
+        .unwrap();
+        std::env::set_current_dir(dir).unwrap();
+        c2rust::run();
+        // crusts::run(None);
+        // crown::run();
+        std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).unwrap();
         if let Ok(s) = std::fs::read_to_string(dir.join("src/main.rs")) {
             insta :: assert_snapshot! (s, @
 r###"

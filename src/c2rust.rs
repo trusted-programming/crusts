@@ -25,6 +25,7 @@ pub fn run() {
         std::path::Path::new("Makefile").exists() || std::path::Path::new("makefile").exists();
     let configure_exists = std::path::Path::new("configure").exists();
     let configure_ac_exists = std::path::Path::new("configure.ac").exists();
+
     if !cargo_toml_exists {
         if !compile_commands_exists {
             if !makefile_exists && !configure_exists && !configure_ac_exists {
