@@ -1,0 +1,14 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-o",
+      "main",
+      "main.c"
+    ],
+    "directory": "/home/c00834010/dev/crusts/tests/test_c2rust",
+    "file": "/home/c00834010/dev/crusts/tests/test_c2rust/main.c",
+    "output": "/home/c00834010/dev/crusts/tests/test_c2rust/main"
+  }
+]

@@ -3,7 +3,6 @@ use crate::utils::is_file_with_ext;
 use jwalk::WalkDir;
 use log::info;
 use std::process::{Command, Stdio};
-
 #[cfg(target_os = "macos")]
 const BEAR: &str = "bear";
 #[cfg(target_os = "macos")]
@@ -16,19 +15,16 @@ const BEAR_ARGS: [&str; 1] = ["make"];
 const BEAR: &str = "bear";
 #[cfg(target_os = "linux")]
 const BEAR_ARGS: [&str; 2] = ["--", "make"];
-
 pub fn run() {
     if !command_exists("c2rust") {
         panic!("no c2rust command found")
     }
-
     let cargo_toml_exists = std::path::Path::new("Cargo.toml").exists();
     let compile_commands_exists = std::path::Path::new("compile_commands.json").exists();
     let makefile_exists =
         std::path::Path::new("Makefile").exists() || std::path::Path::new("makefile").exists();
     let configure_exists = std::path::Path::new("configure").exists();
     let configure_ac_exists = std::path::Path::new("configure.ac").exists();
-
     if !cargo_toml_exists {
         if !compile_commands_exists {
             if !makefile_exists && !configure_exists && !configure_ac_exists {
@@ -71,7 +67,6 @@ fn create_makefile() {
 
 fn run_autoreconf() {
     info!("found configure.ac! running autoreconf");
-
     if let Ok(command) = Command::new("autoreconf")
         .args(["-fi"])
         .stdout(Stdio::piped())
@@ -94,7 +89,6 @@ fn run_configure() {
 
 fn run_bear_or_intercept_build() {
     info!("found makefile");
-
     if let Ok(bear_version) = Command::new(BEAR)
         .args(["--version"])
         .stdout(Stdio::piped())
@@ -165,11 +159,9 @@ fn run_c2rust_transpile() {
 
 #[cfg(test)]
 mod tests {
-    use std::path::Path;
-
     use super::*;
     use serial_test::serial;
-
+    use std::path::Path;
     #[test]
     #[serial]
     fn test_c2rust() {
@@ -182,10 +174,8 @@ mod tests {
             std::fs::remove_dir_all(c2rust_dir).ok();
         }
         std::fs::create_dir_all(c2rust_dir).ok();
-
         let dir_path_buf = std::fs::canonicalize(c2rust_dir).unwrap();
         let dir = dir_path_buf.as_path();
-
         std::fs::write(
             dir.join("main.c"),
             r#"
@@ -197,13 +187,12 @@ mod tests {
     "#,
         )
         .ok();
-
-        std::fs::write(dir.join("Makefile"), "main: main.c\n\tgcc -o main main.c\n\nclean::\n\trm -rf main compile_commands.json src Cargo.toml *.rs rust-toolchain rust-toolchain.toml Cargo.lock target").ok();
+        std :: fs :: write (dir.join ("Makefile"), "main: main.c\n\tgcc -o main main.c\n\nclean::\n\trm -rf main compile_commands.json src Cargo.toml *.rs rust-toolchain rust-toolchain.toml Cargo.lock target").ok ();
         std::env::set_current_dir(dir).ok();
         run();
         let s = std::fs::read_to_string(dir.join("src/main.rs")).unwrap();
-
-        insta::assert_snapshot!(s, @r###"
+        insta :: assert_snapshot! (s, @
+r###"
         #![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
         use ::c2rust_out::*;
         extern "C" {

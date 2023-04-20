@@ -3,20 +3,15 @@ mod cli;
 mod crown;
 mod crusts;
 mod utils;
-
 use clap::Parser;
-
 fn main() {
     let cli = cli::Cli::parse();
-
     if !cli.skip_c2rust {
         c2rust::run();
     }
-
     if !cli.skip_txl_rules {
         crusts::run(cli.custom_txl);
     }
-
     if !cli.skip_crown {
         crown::run();
     }
@@ -26,16 +21,38 @@ fn main() {
 mod tests {
     use super::*;
     use serial_test::serial;
+    use std::path::Path;
+    use utils::command_exists;
+
+    pub fn setup(test_name: &str) -> String {
+        // check prerequisites (crusts, c2rust, crown)
+        assert!(command_exists("crusts"));
+        assert!(command_exists("c2rust"));
+        assert!(command_exists("crown"));
+        let tests_dir = Path::new("tmp");
+        let test_name_dir = &tests_dir.join(test_name);
+        if !tests_dir.exists() {
+            std::fs::create_dir_all(test_name_dir).ok();
+        }
+        if test_name_dir.exists() {
+            std::fs::remove_dir_all(test_name_dir).ok();
+        }
+        std::fs::create_dir_all(test_name_dir).ok();
+        let dir_path_buf = std::fs::canonicalize(test_name_dir).unwrap();
+        std::env::set_current_dir(&dir_path_buf).ok();
+        let dir = dir_path_buf.to_str().unwrap();
+
+        dir.to_string()
+    }
+
     #[test]
     #[serial]
     fn test_crusts() {
-        let dir = std::path::Path::new("tests/test1");
-        if dir.exists() {
-            std::fs::remove_dir_all(dir).ok();
-        }
-        std::fs::create_dir_all(dir).ok();
+        let dir_string = setup("test_crusts");
+        let dir = Path::new(&dir_string);
+
         std::fs::write(
-            "test1/main.c",
+            dir.join("main.c"),
             r#"
 #include <stdio.h>
 int main() {
@@ -45,13 +62,14 @@ int main() {
 "#,
         )
         .ok();
-        std :: fs :: write ("test1/Makefile", "main: main.c\n\tgcc -o main main.c\n\nclean::\n\trm -rf main compile_commands.json src Cargo.toml *.rs rust-toolchain rust-toolchain.toml Cargo.lock target").ok ();
+        std :: fs :: write (dir.join("Makefile"), "main: main.c\n\tgcc -o main main.c\n\nclean::\n\trm -rf main compile_commands.json src Cargo.toml *.rs rust-toolchain rust-toolchain.toml Cargo.lock target").ok ();
         std::env::set_current_dir(dir).ok();
         c2rust::run();
         crusts::run(None);
         std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).ok();
-        let s = std::fs::read_to_string("test1/src/main.rs").unwrap();
-        insta::assert_snapshot!(s, @r###"
+        let s = std::fs::read_to_string(dir.join("src/main.rs")).unwrap();
+        insta :: assert_snapshot! (s, @
+r###"
         #![allow(
             dead_code,
             mutable_transmutes,
@@ -78,13 +96,11 @@ int main() {
     #[test]
     #[serial]
     fn test_unsafe() {
-        let dir = std::path::Path::new("tests/test1");
-        if dir.exists() {
-            std::fs::remove_dir_all(dir).ok();
-        }
-        std::fs::create_dir_all(dir).ok();
+        let dir_string = setup("test_unsafe");
+        let dir = Path::new(&dir_string);
+
         std::fs::write(
-            "test2/main.rs",
+            dir.join("main.rs"),
             r#"
     use libc;
     extern "C" {
@@ -110,9 +126,9 @@ int main() {
         std::env::set_current_dir(dir).ok();
         crusts::run(None);
         std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).ok();
-        if let Ok(s) = std::fs::read_to_string("test2/main.rs") {
+        if let Ok(s) = std::fs::read_to_string(dir.join("main.rs")) {
             insta :: assert_snapshot! (s, @
-            r###"
+r###"
             use libc;
             extern "C" {
                 fn realloc(_: *mut libc::c_void, _: u64) -> *mut libc::c_void;
@@ -134,20 +150,17 @@ int main() {
                 }
             }
             "###
-                        );
+            );
         }
     }
 
     #[test]
     #[serial]
     fn test_stdio() {
-        let dir = std::path::Path::new("tests/test1");
-        if dir.exists() {
-            std::fs::remove_dir_all(dir).ok();
-        }
-        std::fs::create_dir_all(dir).ok();
+        let dir_string = setup("test_stdio");
+        let dir = Path::new(&dir_string);
         std::fs::write(
-            "test3/main.c",
+            dir.join("main.c"),
             r#"
     #include <stdio.h>
     int main() {
@@ -161,8 +174,9 @@ int main() {
         std::env::set_current_dir(dir).ok();
         main();
         std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).ok();
-        if let Ok(s) = std::fs::read_to_string("test3/src/main.rs") {
-            insta :: assert_snapshot! (s, @ r###"
+        if let Ok(s) = std::fs::read_to_string(dir.join("src/main.rs")) {
+            insta :: assert_snapshot! (s, @
+r###"
             #![allow(
                 dead_code,
                 mutable_transmutes,
@@ -183,7 +197,8 @@ int main() {
             pub fn main() {
                 ::std::process::exit(main_0() as i32);
             }
-            "###);
+            "###
+            );
         }
     }
 }
