@@ -49,7 +49,7 @@ if [ $(uname -s) == "Darwin" ]; then
    cd -
    brew install bear
    export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
-   bash install_crown.sh
+   sh install_crown.sh
 
    cargo install crusts
 
@@ -60,7 +60,7 @@ elif [ $(uname -s) == "Linux" ]; then
    rustup override set nightly-2021-11-22-x86_64-unknown-linux-gnu
    rustup component add rustfmt --toolchain nightly-2021-11-22-x86_64-unknown-linux-gnu
    export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
-   bash install_crown.sh
+   sh install_crown.sh
 
    cargo install crusts
 
@@ -91,19 +91,14 @@ Cargo.toml build.rs lib.rs -- contains the `cargo build` configurations;
 
 ### Options
 
-* `-v` -- version information
-
-* `-c2rust` -- only run [c2rust](https://github.com/immunant/c2rust)
-
-* `-h` -- show help 
-
-* `-txl` -- implement customized txl rule
+use `crusts -h` to see all the option and what they do
 
 ## References
 * Michael Ling, Yijun Yu, Haitao Wu, Yuan Wang, James Cordy, Ahmed Hassan. "[In Rust We Trust: A transpiler from Unsafe C to Safer Rust](https://ieeexplore.ieee.org/document/9793767)", In: Proceedings of ICSE, 2022. 
 * Mehmet Emre, Ryan Schroeder, Kyle Dewey, and Ben Hardekopf. 2021. [Translating C to safer Rust](https://doi.org/10.1145/3485498). Proc. ACM Program. Lang. 5, OOPSLA, Article 121 (October 2021), 29 pages. ([code](https://zenodo.org/record/5442253#.Y61WJtXP3iB))
 * [TXL](https://github.com/CordyJ/OpenTxl)
 * [C2Rust](https://github.com/immunant/c2rust)
+* [Crown](https://github.com/KomaEc/crown)
 
 
 ## Update
