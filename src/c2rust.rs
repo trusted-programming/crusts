@@ -26,22 +26,20 @@ pub fn run() {
     let configure_exists = std::path::Path::new("configure").exists();
     let configure_ac_exists = std::path::Path::new("configure.ac").exists();
 
-    if !cargo_toml_exists {
-        if !compile_commands_exists {
-            if !makefile_exists && !configure_exists && !configure_ac_exists {
-                create_makefile();
-            }
-            if !makefile_exists && !configure_exists && configure_ac_exists {
-                run_autoreconf();
-            }
-            if !makefile_exists && configure_exists {
-                run_configure();
-            }
-            if makefile_exists {
-                run_bear_or_intercept_build();
-            }
-            run_c2rust_transpile()
+    if !cargo_toml_exists && !compile_commands_exists {
+        if !makefile_exists && !configure_exists && !configure_ac_exists {
+            create_makefile();
         }
+        if !makefile_exists && !configure_exists && configure_ac_exists {
+            run_autoreconf();
+        }
+        if !makefile_exists && configure_exists {
+            run_configure();
+        }
+        if makefile_exists {
+            run_bear_or_intercept_build();
+        }
+        run_c2rust_transpile()
     }
 }
 
@@ -108,31 +106,27 @@ fn run_bear_or_intercept_build() {
                         println!("{}", String::from_utf8_lossy(&output.stdout));
                     }
                 }
-            } else {
-                if let Ok(command) = Command::new(BEAR)
-                    .args(BEAR_ARGS)
-                    .stdout(Stdio::piped())
-                    .spawn()
-                {
-                    if let Ok(output) = command.wait_with_output() {
-                        println!("{}", String::from_utf8_lossy(&output.stdout));
-                    }
+            } else if let Ok(command) = Command::new(BEAR)
+                .args(BEAR_ARGS)
+                .stdout(Stdio::piped())
+                .spawn()
+            {
+                if let Ok(output) = command.wait_with_output() {
+                    println!("{}", String::from_utf8_lossy(&output.stdout));
                 }
             }
         }
-    } else {
-        if let Ok(command) = Command::new("intercept-build")
-            .args(["make"])
-            .stdout(Stdio::piped())
-            .spawn()
-        {
-            info!("running intercept-build");
-            if let Ok(output) = command.wait_with_output() {
-                println!("{}", String::from_utf8_lossy(&output.stdout));
-            }
-        } else {
-            panic!("Please install bear or scan-build\n");
+    } else if let Ok(command) = Command::new("intercept-build")
+        .args(["make"])
+        .stdout(Stdio::piped())
+        .spawn()
+    {
+        info!("running intercept-build");
+        if let Ok(output) = command.wait_with_output() {
+            println!("{}", String::from_utf8_lossy(&output.stdout));
         }
+    } else {
+        panic!("Please install bear or scan-build\n");
     }
 }
 

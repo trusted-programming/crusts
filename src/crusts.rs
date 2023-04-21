@@ -1,9 +1,7 @@
 use crate::utils::is_file_with_ext;
-use dirs;
 use flate2::read::GzDecoder;
 use jwalk::WalkDir;
 use log::{error, info};
-use reqwest;
 use std::{
     env,
     path::PathBuf,
@@ -83,7 +81,7 @@ pub fn run(txl: Option<PathBuf>) {
             .stdout(Stdio::piped())
             .output()
             .expect("failed txl command");
-        let exe_filename = filename.split(".").nth(0).unwrap();
+        let exe_filename = filename.split('.').next().unwrap();
         exe_file = format!("{}{}", exe_filename, ".x");
         //copy .x file to dedicated directory
         std::fs::copy(&exe_file, &path.join(&exe_file)).expect("copying .x file failed");
@@ -128,7 +126,7 @@ pub fn run(txl: Option<PathBuf>) {
                 let output = _rustfmt
                     .wait_with_output()
                     .expect("failed to write to stdout");
-                std::fs::write(&file, &output.stdout).expect("can't write to the file");
+                std::fs::write(file, output.stdout).expect("can't write to the file");
             }
         });
     }
