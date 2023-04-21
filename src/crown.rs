@@ -1,23 +1,26 @@
 use crate::utils::command_exists;
 use log::info;
-use std::process::Command;
+use std::process::{Command, Stdio};
+
 pub fn run() {
     if command_exists("crown") {
         info!("crown command found! Running...");
-        Command :: new ("crown").arg ("main.rs").arg ("preprocess").arg ("in-place").output ().expect ("failed to run crown main.rs preprocess in-place, please install crown if you haven't or check that main.rs is present",);
-        Command::new("crown")
-            .arg("main.rs")
-            .arg("explicit-addr")
-            .arg("in-place")
-            .output()
-            .expect("failed to run crown main.rs explicit-addr in-place");
-        Command::new("crown")
-            .arg("main.rs")
-            .arg("rewrite")
-            .output()
-            .expect("failed to run crown main.rs rewrite");
+        run_crown(&["main.rs", "preprocess", "in-place"]);
+        run_crown(&["main.rs", "explicit-addr", "in-place"]);
+        run_crown(&["main.rs", "rewrite"]);
         info!("crown command operations successfully completed");
     } else {
         info!("crown command not found, skipping...");
     }
+}
+
+fn run_crown(args: &[&str]) {
+    let mut command = Command::new("crown");
+    for arg in args {
+        command.arg(arg);
+    }
+    command
+        .stdout(Stdio::piped())
+        .spawn()
+        .expect(&format!("failed to run crown with arguments: {:?}", args));
 }
