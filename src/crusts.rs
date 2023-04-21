@@ -1,126 +1,115 @@
-use crate::utils::{is_file_with_ext, CONFIG};
+use crate::constants::{CONFIG, RULES};
+use crate::utils::{is_file_with_ext, run_command};
 use flate2::read::GzDecoder;
 use jwalk::WalkDir;
-use log::{error, info};
+use log::info;
 use std::{
     env,
-    path::PathBuf,
+    ffi::OsStr,
+    path::{Path, PathBuf},
     process::{Command, Stdio},
 };
 use tar::Archive;
 
 pub fn run(txl: Option<PathBuf>) {
-    let path = dirs::home_dir().unwrap().join(".cargo/bin");
-    let path_string = path.to_str().unwrap().to_string();
+    let path = dirs::home_dir()
+        .expect("Failed to get home directory")
+        .join(".cargo/bin");
+    let path_string = path
+        .to_str()
+        .expect("Failed to convert path to string")
+        .to_string();
 
     if !path.join("c/unsafe.x").exists() {
-        info!("unsafe.x not found, downloading all txl rules... ");
-        if let Ok(resp) = reqwest::blocking::get(CONFIG.url) {
-            if let Ok(bytes) = resp.bytes() {
-                let tar = GzDecoder::new(&bytes[..]);
-                let mut archive = Archive::new(tar);
-                archive.unpack(&path).unwrap();
-                info!("downloaded txl rules successfully");
-            } else {
-                error!("Couldn't download, please check your network connection.");
-                return;
-            }
-        } else {
-            error!("Couldn't download, please check your network connection.");
-            return;
-        }
+        download_and_extract_rules();
     }
 
-    let mut rules = vec![
-        "formalizeCode.x",
-        "varTypeNoBounds.x",
-        "null.x",
-        "array.x",
-        "fn.x",
-        "errnoLocation.x",
-        "atoi.x",
-        "time.x",
-        "const2mut.x",
-        "stdio.x",
-        "unsafe.x",
-    ];
-    let old_dir = env::current_dir().unwrap();
-    let exe_file;
-    if let Some(file_path) = txl {
-        let mut filename = String::new();
-        let mut filepath = String::new();
-        // Get file name without path
-        if let Some(file_name) = file_path.file_name() {
-            if let Some(name_str) = file_name.to_str() {
-                filename = name_str.to_string();
-            } else {
-                info!("File name is not valid UTF-8.");
-            }
-        }
+    let mut rules: Vec<String> = RULES.into_iter().map(|rule| rule.to_string()).collect();
 
-        // Get path without file name
-        if let Some(parent_path) = file_path.parent() {
-            if let Some(path_str) = parent_path.to_str() {
-                filepath = path_str.to_string();
-            } else {
-                info!("Parent path is not valid UTF-8.");
-            }
-        }
-        //store current directory
-        //jump to the directory where txl file is
-        env::set_current_dir(&filepath).unwrap();
-        let _txl_command = Command::new("txlc")
-            .arg(&filename)
-            .stdout(Stdio::piped())
-            .output()
-            .expect("failed txl command");
-        let exe_filename = filename.split('.').next().unwrap();
-        exe_file = format!("{}{}", exe_filename, ".x");
-        //copy .x file to dedicated directory
-        std::fs::copy(&exe_file, &path.join(&exe_file)).expect("copying .x file failed");
-        //go back to original folder
-        let _dir = env::set_current_dir(&old_dir);
-        //push the new .x file into the vector
-        rules.push(&exe_file);
+    if let Some(file_path) = txl {
+        let exe_file = process_txl_file(&file_path, &path);
+        rules.push(exe_file);
     }
 
     //build the name of .x file
-
     let var_path = format!(
         "{}/Rust:{}:{}",
         &path_string,
         &path_string,
-        std::env::var("PATH").unwrap()
+        std::env::var("PATH").expect("Failed to get PATH environment variable")
     );
     std::env::set_var("PATH", var_path);
+    apply_transformation_rules(&rules, &path_string);
+}
+
+fn download_and_extract_rules() {
+    info!("unsafe.x not found, downloading all txl rules... ");
+    let resp =
+        reqwest::blocking::get(CONFIG.url).expect("failed to get a response for the rules request");
+    let bytes = resp
+        .bytes()
+        .expect("failed to read response bytes for the rules");
+    let tar = GzDecoder::new(&bytes[..]);
+    let mut archive = Archive::new(tar);
+    let path = dirs::home_dir().unwrap().join(".cargo/bin");
+    archive.unpack(&path).expect("failed to unpack rules");
+    info!("downloaded txl rules successfully");
+}
+
+fn get_filename_and_filepath(file_path: &Path) -> (String, String) {
+    let filename = file_path
+        .file_name()
+        .and_then(OsStr::to_str)
+        .unwrap_or("")
+        .to_string();
+    let filepath = file_path
+        .parent()
+        .and_then(Path::to_str)
+        .unwrap_or("")
+        .to_string();
+    (filename, filepath)
+}
+
+fn apply_transformation_rules(rules: &Vec<String>, path_string: &str) {
     for r in rules {
         info!("applying {r}...");
-        WalkDir::new(".").sort(true).into_iter().for_each(|entry| {
-            if let Ok(e) = entry {
+        WalkDir::new(".")
+            .sort(true)
+            .into_iter()
+            .filter_map(Result::ok)
+            .filter(|e| is_file_with_ext(&e.path(), "rs"))
+            .for_each(|e| {
                 let path = e.path();
-                if !is_file_with_ext(&path, "rs") {
-                    return;
-                }
-                let file = &format!("{}", &path.into_os_string().to_string_lossy());
-                let _txl_command = Command::new(r)
-                    .args(vec![
-                        file.to_string(),
-                        "-".to_string(),
-                        format!("{}/Rust", &path_string),
-                    ])
+                let file = path.to_string_lossy().to_string();
+                let txl_command = Command::new(r)
+                    .args([&file, "-", &format!("{path_string}/Rust")])
                     .stdout(Stdio::piped())
                     .spawn()
                     .expect("failed txl command");
-                let _rustfmt = Command::new("rustfmt")
-                    .stdin(_txl_command.stdout.unwrap())
+                let rustfmt = Command::new("rustfmt")
+                    .stdin(txl_command.stdout.unwrap())
                     .stdout(Stdio::piped())
                     .spawn()
                     .expect("failed rustfmt command");
-                let output = _rustfmt
+                let output = rustfmt
                     .wait_with_output()
                     .expect("failed to write to stdout");
                 std::fs::write(file, output.stdout).expect("can't write to the file");
-            }
-        });
+            });
     }
+}
+
+fn process_txl_file(txl: &Path, path: &Path) -> String {
+    let old_dir = env::current_dir().unwrap();
+
+    let (filename, filepath) = get_filename_and_filepath(txl);
+
+    env::set_current_dir(filepath).unwrap();
+    run_command("txlc", &[&filename]);
+    let exe_filename = filename.split('.').next().unwrap();
+    let exe_file = format!("{}{}", exe_filename, ".x");
+    std::fs::copy(&exe_file, path.join(&exe_file)).unwrap();
+    env::set_current_dir(old_dir).unwrap();
+
+    exe_file
 }

@@ -1,6 +1,5 @@
 use crate::utils::{command_exists, run_command};
 use log::info;
-use std::process::{Command, Stdio};
 
 pub fn run() {
     if command_exists("crown") {

@@ -1,4 +1,5 @@
-use crate::utils::{command_exists, is_file_with_ext, path_exists, run_command, CONFIG};
+use crate::constants::CONFIG;
+use crate::utils::{command_exists, is_file_with_ext, path_exists, run_command};
 use jwalk::WalkDir;
 use log::info;
 use std::process::{Command, Stdio};
