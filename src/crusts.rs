@@ -1,4 +1,4 @@
-use crate::utils::is_file_with_ext;
+use crate::utils::{is_file_with_ext, CONFIG};
 use flate2::read::GzDecoder;
 use jwalk::WalkDir;
 use log::{error, info};
@@ -9,24 +9,17 @@ use std::{
 };
 use tar::Archive;
 
-#[cfg(target_os = "macos")]
-pub const URL: &str = "http://bertrust.s3.amazonaws.com/crusts-macosx.tar.gz";
-#[cfg(target_os = "linux")]
-pub const URL: &str = "http://bertrust.s3.amazonaws.com/crusts-linux.tar.gz";
-#[cfg(target_os = "windows")]
-pub const URL: &str = "http://bertrust.s3.amazonaws.com/crusts-windows.tar.gz";
-
 pub fn run(txl: Option<PathBuf>) {
     let path = dirs::home_dir().unwrap().join(".cargo/bin");
     let path_string = path.to_str().unwrap().to_string();
 
     if !path.join("c/unsafe.x").exists() {
         info!("unsafe.x not found, downloading all txl rules... ");
-        if let Ok(resp) = reqwest::blocking::get(URL) {
+        if let Ok(resp) = reqwest::blocking::get(CONFIG.url) {
             if let Ok(bytes) = resp.bytes() {
                 let tar = GzDecoder::new(&bytes[..]);
                 let mut archive = Archive::new(tar);
-                archive.unpack(&path).ok();
+                archive.unpack(&path).unwrap();
                 info!("downloaded txl rules successfully");
             } else {
                 error!("Couldn't download, please check your network connection.");
