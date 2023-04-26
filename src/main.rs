@@ -5,41 +5,45 @@ mod constants;
 mod crown;
 mod crusts;
 mod metrics;
-mod rustc;
 mod utils;
 
 use clap::Parser;
+
 fn main() {
     let cli = cli::Cli::parse();
     if !cli.skip_c2rust {
         c2rust::run();
         if cli.metrics {
-            metrics::run();
+            metrics::run("c2rust");
+        }
+    } else {
+        if cli.metrics {
+            metrics::run("c2rust");
         }
     }
 
     if !cli.skip_txl_rules {
         crusts::run(cli.custom_txl);
         if cli.metrics {
-            metrics::run();
+            metrics::run("txl");
         }
     }
     if !cli.skip_crown {
         crown::run();
         if cli.metrics {
-            metrics::run();
+            metrics::run("crown");
         }
     }
 
     if cli.auto_curs {
         auto_curs::run();
         if cli.metrics {
-            metrics::run();
+            metrics::run("auto_curs");
         }
-        rustc::run();
-        if cli.metrics {
-            metrics::run();
-        }
+    }
+
+    if cli.skip_c2rust && cli.skip_txl_rules && cli.skip_crown && !cli.auto_curs {
+        println!("Nothing to do, please use --help to see the options");
     }
 }
 
