@@ -4,6 +4,7 @@ use std::{
 };
 
 use log::info;
+use serde_json::Value;
 
 pub fn is_file_with_ext(p: &Path, file_ext: &str) -> bool {
     p.extension()
@@ -35,4 +36,24 @@ pub fn run_command(command_name: &str, args: &[&str]) {
         .and_then(|command| command.wait_with_output())
         .map(|output| info!("{output:?}"))
         .unwrap_or_else(|_| panic!("failed to run {command_name} with arguments: {args:?}"))
+}
+
+pub fn run_clippy_json_output() -> Value {
+    let output = Command::new("cargo")
+        .args(&["clippy", "--message-format=json"])
+        .output()
+        .expect("Failed to run cargo clippy");
+
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    serde_json::from_str(&stdout).expect("failed to convert json output string to Json value")
+}
+
+pub fn run_check_json_output() -> Value {
+    let output = Command::new("cargo")
+        .args(&["check", "--message-format=json"])
+        .output()
+        .expect("Failed to run cargo check");
+
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    serde_json::from_str(&stdout).expect("failed to convert json output string to Json value")
 }

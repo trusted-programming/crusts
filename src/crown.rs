@@ -2,6 +2,7 @@ use crate::utils::{command_exists, run_command};
 use log::info;
 
 pub fn run() {
+    
     if command_exists("crown") {
         info!("crown command found! Running...");
         run_command("crown", &["main.rs", "preprocess", "in-place"]);

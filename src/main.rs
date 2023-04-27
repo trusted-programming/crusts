@@ -43,7 +43,7 @@ fn main() {
     }
 
     if cli.skip_c2rust && cli.skip_txl_rules && cli.skip_crown && !cli.auto_curs {
-        println!("Nothing to do, please use --help to see the options");
+        metrics::run("metrics_only");
     }
 }
 
