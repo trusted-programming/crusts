@@ -1,7 +1,6 @@
 use crate::utils::run_clippy_json_output;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use std::env;
 use std::fs;
 use std::path::Path;
 use std::process::Command;
@@ -16,7 +15,7 @@ pub fn run(step: &str) {
     if !metrics_dir.exists() {
         fs::create_dir(metrics_dir).expect("Failed to create metrics directory");
     } else if !step_dir.exists() {
-        fs::create_dir(step_dir).expect(&format!("Failed to create {step} directory"));
+        fs::create_dir(&step_dir).expect(&format!("Failed to create {step} directory"));
     }
 
     fs_extra::dir::copy(
@@ -26,14 +25,21 @@ pub fn run(step: &str) {
     )
     .expect("failed to copy rust files to metrics");
 
-    let unsafe_percentage = calculate_safe_api_ratio();
-
     let clippy_warnings = run_clippy_json_output()
         .as_array()
         .unwrap()
         .iter()
         .filter(|msg| msg["message"]["level"].as_str().unwrap() == "warning")
         .count();
+    let mut file_path = step_dir.join("src");
+    if file_path.join("main.rs").exists() {
+        file_path = file_path.join("main.rs")
+    } else {
+        file_path = file_path.join("lib.rs")
+    }
+
+    let unsafe_percentage = calculate_safe_api_ratio(file_path.to_str().unwrap());
+
     let metrics = Metrics {
         unsafe_percentage,
         clippy_warnings,
@@ -41,6 +47,7 @@ pub fn run(step: &str) {
     metrics.write_to_file();
 }
 
+// TODO: add rust-analysis-tool for more metrics
 #[derive(Serialize, Deserialize)]
 struct Metrics {
     unsafe_percentage: f32,
@@ -55,14 +62,8 @@ impl Metrics {
     }
 }
 
-// TODO: use tree-sitter for this or rust sitter
-fn calculate_safe_api_ratio() -> f32 {
-    let path = env::current_dir()
-        .expect("Failed to get current directory")
-        .to_str()
-        .unwrap()
-        .to_string();
-
+// TODO: use tree-sitter for this or rust sitter or cargo geiger
+fn calculate_safe_api_ratio(path: &str) -> f32 {
     let unsafe_functions = Command::new("tree-grepper")
         .args(&[
             "-q",
@@ -91,7 +92,7 @@ fn calculate_safe_api_ratio() -> f32 {
     100.0 - unsafe_functions_count as f32 * 100.0 / total_functions_count as f32
 }
 
-fn run_cargo_check() -> Value {
+pub fn run_cargo_check() -> Value {
     let output = Command::new("cargo")
         .args(&["check", "--message-format=json"])
         .output()

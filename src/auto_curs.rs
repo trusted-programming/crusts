@@ -1,11 +1,12 @@
+use crate::utils::run_cargo_check_json_output;
+use quote::quote;
 use rust_hero::{
     query::{Invocation, QueryFormat},
     safe::SafeLanguageModel,
 };
 use std::fs;
 use std::io::{BufRead, BufReader, Write};
-
-use crate::utils::run_check_json_output;
+use syn::{self, parse_file, File};
 
 /// runs curs and removes all unsafe marked by curs that are considered safe
 /// after that runs cargo check and while it finds an error it will add the unsafe back for the function and check again
@@ -18,15 +19,52 @@ pub fn run() {
     for prediction in predictions {
         prediction.remove_unsafe();
     }
-    let errors = run_check_json_output()
+
+    for error in run_cargo_check_json_output()
         .as_array()
         .unwrap()
         .iter()
-        .filter(|msg| msg["message"]["level"].as_str().unwrap() == "warning")
-        .count();
-    let mut errors = vec![];
-    while errors.len() > 1 {}
-    unimplemented!()
+        .filter(|msg| msg["message"]["level"].as_str().unwrap() == "error")
+    {
+        // Get the function name and file name from the error message
+        let function_name = error["message"]["spans"][0]["label"].as_str().unwrap();
+        let file_name = error["message"]["spans"][0]["file_name"].as_str().unwrap();
+
+        // Add the unsafe keyword to the function using the `add_unsafe_keyword` function from some_crate_name
+        add_unsafe_keyword(file_name, function_name);
+    }
+}
+
+// TODO: improve efficiency of this by doing all the function names at the same time
+fn add_unsafe_keyword(file_name: &str, function_name: &str) {
+    // Read the contents of the file into a string
+    let contents = fs::read_to_string(file_name).expect("failed to read file");
+
+    // Parse the file into a syntax tree
+    let syn_file: File = parse_file(&contents).expect("failed to parse file");
+
+    // Find the function declaration and add the `unsafe` keyword
+    let mut items = Vec::new();
+    for item in &syn_file.items {
+        if let syn::Item::Fn(ref function) = item {
+            if function.sig.ident.to_string() == function_name {
+                let mut new_function: syn::ItemFn = function.clone();
+                new_function.sig.unsafety = Some(syn::token::Unsafe::default());
+                items.push(syn::Item::Fn(new_function));
+            } else {
+                items.push(item.clone());
+            }
+        } else {
+            items.push(item.clone());
+        }
+    }
+
+    // Generate the modified code and write it back to the file
+    let new_contents = quote! {
+        #(#items)*
+    }
+    .to_string();
+    fs::write(file_name, new_contents).expect("failed to write to file");
 }
 
 struct Prediction {

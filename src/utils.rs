@@ -48,7 +48,7 @@ pub fn run_clippy_json_output() -> Value {
     serde_json::from_str(&stdout).expect("failed to convert json output string to Json value")
 }
 
-pub fn run_check_json_output() -> Value {
+pub fn run_cargo_check_json_output() -> Value {
     let output = Command::new("cargo")
         .args(&["check", "--message-format=json"])
         .output()
