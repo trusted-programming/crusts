@@ -9,23 +9,21 @@ pub fn run() {
         panic!("no c2rust command found")
     }
 
-    let cargo_toml_exists = path_exists("Cargo.toml");
-    let compile_commands_exists = path_exists("compile_commands.json");
-    let makefile_exists = path_exists("Makefile") || path_exists("makefile");
-    let configure_exists = path_exists("configure");
-    let configure_ac_exists = path_exists("configure.ac");
-
-    if !cargo_toml_exists && !compile_commands_exists {
-        if !makefile_exists && !configure_exists && !configure_ac_exists {
+    if !path_exists("Cargo.toml") && !path_exists("compile_commands.json") {
+        if !path_exists("Makefile")
+            || path_exists("makefile") && !path_exists("configure") && !path_exists("configure.ac")
+        {
             create_makefile();
         }
-        if !makefile_exists && !configure_exists && configure_ac_exists {
+        if !path_exists("Makefile")
+            || path_exists("makefile") && !path_exists("configure") && path_exists("configure.ac")
+        {
             run_command("autoreconf", &["-fi"]);
         }
-        if !makefile_exists && configure_exists {
+        if !path_exists("Makefile") || path_exists("makefile") && path_exists("configure") {
             run_command("./configure", &[]);
         }
-        if makefile_exists {
+        if path_exists("Makefile") || path_exists("makefile") {
             run_bear_or_intercept_build();
         }
         run_c2rust_transpile()
@@ -62,7 +60,7 @@ fn create_makefile() {
 }
 
 fn run_bear_or_intercept_build() {
-    info!("found makefile");
+    info!("found makefile, running bear or intercept build");
     let run_bear_command = |bear_args: &[&str]| {
         Command::new(CONFIG.bear)
             .args(bear_args)

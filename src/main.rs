@@ -6,10 +6,16 @@ mod crown;
 mod crusts;
 mod metrics;
 mod utils;
-
 use clap::Parser;
+use log::info;
+use std::env;
 
 fn main() {
+    env::set_var("RUST_LOG", "info");
+
+    env_logger::init();
+    info!("starting up");
+
     let cli = cli::Cli::parse();
     if !cli.skip_c2rust {
         c2rust::run();
@@ -19,7 +25,6 @@ fn main() {
     } else if cli.metrics {
         metrics::run("c2rust");
     }
-
     if !cli.skip_txl_rules {
         crusts::run(cli.custom_txl);
         if cli.metrics {
@@ -32,14 +37,12 @@ fn main() {
             metrics::run("crown");
         }
     }
-
     if cli.auto_curs {
         auto_curs::run();
         if cli.metrics {
             metrics::run("auto_curs");
         }
     }
-
     if cli.skip_c2rust && cli.skip_txl_rules && cli.skip_crown && !cli.auto_curs {
         metrics::run("metrics_only");
     }
@@ -50,7 +53,6 @@ mod tests {
     use super::*;
     use serial_test::serial;
     use std::env;
-
     #[test]
     #[serial]
     fn test_crusts() {
@@ -59,7 +61,6 @@ mod tests {
             std::fs::remove_dir_all(dir).unwrap();
         }
         std::fs::create_dir_all(dir).unwrap();
-
         std::fs::write(
             dir.join("main.c"),
             r#"
@@ -71,7 +72,7 @@ int main() {
 "#,
         )
         .unwrap();
-        std :: fs :: write (dir.join("Makefile"), "main: main.c\n\tgcc -o main main.c\n\nclean::\n\trm -rf main compile_commands.json src Cargo.toml *.rs rust-toolchain rust-toolchain.toml Cargo.lock target").unwrap ();
+        std :: fs :: write (dir.join ("Makefile"), "main: main.c\n\tgcc -o main main.c\n\nclean::\n\trm -rf main compile_commands.json src Cargo.toml *.rs rust-toolchain rust-toolchain.toml Cargo.lock target").unwrap ();
         std::env::set_current_dir(dir).unwrap();
         c2rust::run();
         crusts::run(None);
@@ -111,7 +112,6 @@ r###"
             std::fs::remove_dir_all(dir).unwrap();
         }
         std::fs::create_dir_all(dir).unwrap();
-
         std::fs::write(
             dir.join("main.rs"),
             r#"
@@ -175,7 +175,6 @@ r###"
             std::fs::remove_dir_all(dir).unwrap();
         }
         std::fs::create_dir_all(dir).unwrap();
-
         std::fs::write(
             dir.join("main.c"),
             r#"
@@ -190,8 +189,6 @@ r###"
         .unwrap();
         std::env::set_current_dir(dir).unwrap();
         c2rust::run();
-        // crusts::run(None);
-        // crown::run();
         std::env::set_current_dir(std::env::current_dir().unwrap().parent().unwrap()).unwrap();
         if let Ok(s) = std::fs::read_to_string(dir.join("src/main.rs")) {
             insta :: assert_snapshot! (s, @
