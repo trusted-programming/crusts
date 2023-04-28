@@ -38,9 +38,13 @@ pub fn run(step: &str) {
         file_path = file_path.join("lib.rs")
     }
 
-    let unsafe_percentage = calculate_safe_api_ratio(file_path.to_str().unwrap());
-
+    let (unsafe_functions_count, total_functions_count) =
+        calculate_number_of_unsafe_function_and_safe(file_path.to_str().unwrap());
+    let unsafe_percentage =
+        100.0 - unsafe_functions_count as f32 * 100.0 / total_functions_count as f32;
     let metrics = Metrics {
+        unsafe_functions_count,
+        total_functions_count,
         unsafe_percentage,
         clippy_warnings,
     };
@@ -50,6 +54,8 @@ pub fn run(step: &str) {
 // TODO: add rust-analysis-tool for more metrics
 #[derive(Serialize, Deserialize)]
 struct Metrics {
+    total_functions_count: usize,
+    unsafe_functions_count: usize,
     unsafe_percentage: f32,
     clippy_warnings: usize,
 }
@@ -63,7 +69,7 @@ impl Metrics {
 }
 
 // TODO: use tree-sitter for this or rust sitter or cargo geiger
-fn calculate_safe_api_ratio(path: &str) -> f32 {
+fn calculate_number_of_unsafe_function_and_safe(path: &str) -> (usize, usize) {
     let unsafe_functions = Command::new("tree-grepper")
         .args(&[
             "-q",
@@ -89,7 +95,7 @@ fn calculate_safe_api_ratio(path: &str) -> f32 {
         .filter(|line| line.contains(":f:"))
         .count();
 
-    100.0 - unsafe_functions_count as f32 * 100.0 / total_functions_count as f32
+    (unsafe_functions_count, total_functions_count)
 }
 
 pub fn run_cargo_check() -> Value {
