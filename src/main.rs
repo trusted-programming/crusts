@@ -16,10 +16,8 @@ fn main() {
         if cli.metrics {
             metrics::run("c2rust");
         }
-    } else {
-        if cli.metrics {
-            metrics::run("c2rust");
-        }
+    } else if cli.metrics {
+        metrics::run("c2rust");
     }
 
     if !cli.skip_txl_rules {

@@ -47,7 +47,7 @@ fn add_unsafe_keyword(file_name: &str, function_name: &str) {
     let mut items = Vec::new();
     for item in &syn_file.items {
         if let syn::Item::Fn(ref function) = item {
-            if function.sig.ident.to_string() == function_name {
+            if function.sig.ident == function_name {
                 let mut new_function: syn::ItemFn = function.clone();
                 new_function.sig.unsafety = Some(syn::token::Unsafe::default());
                 items.push(syn::Item::Fn(new_function));
@@ -92,13 +92,14 @@ impl Prediction {
         let reader = BufReader::new(file);
         let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
 
-        if self.line > 0 && self.line <= lines.len() {
-            if lines[self.line][self.col..].contains("unsafe") {
-                lines[self.line] = lines[self.line].replacen("unsafe", "", 1);
-                let mut file = fs::File::create(&self.file_path).expect("Failed to create file");
-                for line in lines {
-                    writeln!(file, "{}", line).expect("Failed to write to file");
-                }
+        if self.line > 0
+            && self.line <= lines.len()
+            && lines[self.line][self.col..].contains("unsafe")
+        {
+            lines[self.line] = lines[self.line].replacen("unsafe", "", 1);
+            let mut file = fs::File::create(&self.file_path).expect("Failed to create file");
+            for line in lines {
+                writeln!(file, "{}", line).expect("Failed to write to file");
             }
         }
     }
@@ -110,34 +111,13 @@ fn unsafe_detection(file_path: &str) -> Vec<String> {
     if let Invocation::DoQuery(query_opts) = invocation {
         let safe_model = SafeLanguageModel::new(query_opts).unwrap();
         if let QueryFormat::Classes = safe_model.get_opt().format {
-            let output = safe_model
+            safe_model
                 .predict()
-                .expect("couldn't perform the prediction");
-            output
+                .expect("couldn't perform the prediction")
         } else {
             panic!("Unsupported {:?}", safe_model.get_opt().format);
         }
     } else {
         panic!("Unsupported invocation");
     }
-}
-
-fn add_unsafe_to_lines(file_path: &str, line_numbers: Vec<usize>) -> std::io::Result<()> {
-    let file = fs::File::open(file_path)?;
-    let reader = BufReader::new(file);
-
-    let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
-
-    for line_number in line_numbers {
-        if let Some(line) = lines.get_mut(line_number - 1) {
-            *line = format!("unsafe {}", line);
-        }
-    }
-
-    let mut file = fs::File::create(file_path)?;
-    for line in lines {
-        writeln!(file, "{}", line)?;
-    }
-
-    Ok(())
 }

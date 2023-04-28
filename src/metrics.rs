@@ -1,6 +1,5 @@
 use crate::utils::run_clippy_json_output;
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 use std::fs;
 use std::path::Path;
 use std::process::Command;
@@ -15,7 +14,7 @@ pub fn run(step: &str) {
     if !metrics_dir.exists() {
         fs::create_dir(metrics_dir).expect("Failed to create metrics directory");
     } else if !step_dir.exists() {
-        fs::create_dir(&step_dir).expect(&format!("Failed to create {step} directory"));
+        fs::create_dir(&step_dir).unwrap_or_else(|_| panic!("Failed to create {step} directory"));
     }
 
     fs_extra::dir::copy(
@@ -71,11 +70,11 @@ impl Metrics {
 // TODO: use tree-sitter for this or rust sitter or cargo geiger
 fn calculate_number_of_unsafe_function_and_safe(path: &str) -> (usize, usize) {
     let unsafe_functions = Command::new("tree-grepper")
-        .args(&[
+        .args([
             "-q",
             "rust",
             r#"((function_item (function_modifiers) @_m)@f (#match? @_m "unsafe"))"#,
-            &path,
+            path,
         ])
         .output()
         .expect("Failed to run tree-grepper")
@@ -86,7 +85,7 @@ fn calculate_number_of_unsafe_function_and_safe(path: &str) -> (usize, usize) {
         .count();
 
     let total_functions = Command::new("tree-grepper")
-        .args(&["-q", "rust", r#"((function_item)@f)"#, &path])
+        .args(["-q", "rust", r#"((function_item)@f)"#, path])
         .output()
         .expect("Failed to run tree-grepper")
         .stdout;
@@ -96,15 +95,4 @@ fn calculate_number_of_unsafe_function_and_safe(path: &str) -> (usize, usize) {
         .count();
 
     (unsafe_functions_count, total_functions_count)
-}
-
-pub fn run_cargo_check() -> Value {
-    let output = Command::new("cargo")
-        .args(&["check", "--message-format=json"])
-        .output()
-        .expect("Failed to run cargo check");
-
-    let stdout = String::from_utf8_lossy(&output.stdout);
-
-    serde_json::from_str(&stdout).unwrap()
 }
