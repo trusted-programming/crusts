@@ -1,14 +1,19 @@
 use crate::utils::run_clippy_json_output;
+use fs_extra::dir::CopyOptions;
+use fs_extra::file;
+use log::info;
 use serde::{Deserialize, Serialize};
-use std::fs;
 use std::path::Path;
 use std::process::Command;
+use std::{env, fs};
 
 /// this does tree things:
 /// - store files
 /// - get unsafe % and write to metrics.json
 /// - get clippy warnings number to metrics.json
 pub fn run(step: &str) {
+    info!("STARTING METRICS COLLECTIONS");
+    let current_dir = env::current_dir().expect("Failed to get current directory");
     let metrics_dir = Path::new("metrics");
     let step_dir = metrics_dir.join(step);
     if !metrics_dir.exists() {
@@ -17,8 +22,15 @@ pub fn run(step: &str) {
         fs::create_dir(&step_dir).unwrap_or_else(|_| panic!("Failed to create {step} directory"));
     }
 
+    let mut options = CopyOptions::new();
+    options.overwrite = true;
+    info!(
+        "copying {} to {}",
+        current_dir.to_str().unwrap(),
+        step_dir.to_str().unwrap()
+    );
     fs_extra::dir::copy(
-        ".",
+        current_dir,
         format!("metrics/{step}"),
         &fs_extra::dir::CopyOptions::new(),
     )
@@ -30,12 +42,14 @@ pub fn run(step: &str) {
         .iter()
         .filter(|msg| msg["message"]["level"].as_str().unwrap() == "warning")
         .count();
+    info!("found {clippy_warnings} clippy_warnings");
     let mut file_path = step_dir.join("src");
     if file_path.join("main.rs").exists() {
         file_path = file_path.join("main.rs")
     } else {
         file_path = file_path.join("lib.rs")
     }
+    info!("found file_path: {}", file_path.to_str().unwrap());
 
     let (unsafe_functions_count, total_functions_count) =
         calculate_number_of_unsafe_function_and_safe(file_path.to_str().unwrap());
@@ -47,6 +61,7 @@ pub fn run(step: &str) {
         unsafe_percentage,
         clippy_warnings,
     };
+    info!("writing metrics to file");
     metrics.write_to_file();
 }
 
@@ -69,6 +84,7 @@ impl Metrics {
 
 // TODO: use tree-sitter for this or rust sitter or cargo geiger
 fn calculate_number_of_unsafe_function_and_safe(path: &str) -> (usize, usize) {
+    info!("calculating unsafe functions and safe functions numbers");
     let unsafe_functions = Command::new("tree-grepper")
         .args([
             "-q",

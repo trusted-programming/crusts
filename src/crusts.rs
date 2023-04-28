@@ -12,6 +12,7 @@ use std::{
 use tar::Archive;
 
 pub fn run(txl: Option<PathBuf>) {
+    info!("STARTING TXL RULES APP");
     let path = dirs::home_dir()
         .expect("Failed to get home directory")
         .join(".cargo/bin");

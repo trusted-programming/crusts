@@ -1,4 +1,5 @@
 use crate::utils::run_cargo_check_json_output;
+use log::info;
 use quote::quote;
 use rust_hero::{
     query::{Invocation, QueryFormat},
@@ -11,6 +12,7 @@ use syn::{self, parse_file, File};
 /// runs curs and removes all unsafe marked by curs that are considered safe
 /// after that runs cargo check and while it finds an error it will add the unsafe back for the function and check again
 pub fn run() {
+    info!("Starting Auto Curs");
     let predictions: Vec<Prediction> = unsafe_detection(".")
         .iter()
         .map(|s| Prediction::from_str(s))
@@ -37,6 +39,8 @@ pub fn run() {
 
 // TODO: improve efficiency of this by doing all the function names at the same time
 fn add_unsafe_keyword(file_name: &str, function_name: &str) {
+    info!("Adding unsafe keyword for file_name:{file_name} function_name:{function_name}");
+
     // Read the contents of the file into a string
     let contents = fs::read_to_string(file_name).expect("failed to read file");
 
@@ -67,6 +71,7 @@ fn add_unsafe_keyword(file_name: &str, function_name: &str) {
     fs::write(file_name, new_contents).expect("failed to write to file");
 }
 
+// FIXME: need to check if true or false otherwise it's useless
 struct Prediction {
     pub file_path: String,
     pub line: usize,
@@ -88,6 +93,7 @@ impl Prediction {
     }
 
     fn remove_unsafe(&self) {
+        info!("removing unsafe according to curs prediction");
         let file = fs::File::open(&self.file_path).expect("Failed to open file");
         let reader = BufReader::new(file);
         let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
@@ -106,6 +112,7 @@ impl Prediction {
 }
 
 fn unsafe_detection(file_path: &str) -> Vec<String> {
+    info!("running curs for unsafe detection");
     let args = vec!["rust_hero".to_string(), file_path.to_string()];
     let invocation = Invocation::from_args(args).unwrap();
     if let Invocation::DoQuery(query_opts) = invocation {

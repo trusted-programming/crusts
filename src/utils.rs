@@ -39,6 +39,7 @@ pub fn run_command(command_name: &str, args: &[&str]) {
 }
 
 pub fn run_clippy_json_output() -> Value {
+    info!("running clippy");
     let output = Command::new("cargo")
         .args(["clippy", "--message-format=json"])
         .output()
@@ -49,6 +50,7 @@ pub fn run_clippy_json_output() -> Value {
 }
 
 pub fn run_cargo_check_json_output() -> Value {
+    info!("running cargo check");
     let output = Command::new("cargo")
         .args(["check", "--message-format=json"])
         .output()
