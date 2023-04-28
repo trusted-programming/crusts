@@ -1,6 +1,5 @@
 use crate::utils::run_clippy_json_output;
 use fs_extra::dir::CopyOptions;
-use fs_extra::file;
 use log::info;
 use serde::{Deserialize, Serialize};
 use std::path::Path;
@@ -14,11 +13,12 @@ use std::{env, fs};
 pub fn run(step: &str) {
     info!("STARTING METRICS COLLECTIONS");
     let current_dir = env::current_dir().expect("Failed to get current directory");
-    let metrics_dir = Path::new("metrics");
+    let metrics_dir = current_dir.join("metrics");
     let step_dir = metrics_dir.join(step);
     if !metrics_dir.exists() {
-        fs::create_dir(metrics_dir).expect("Failed to create metrics directory");
-    } else if !step_dir.exists() {
+        fs::create_dir(&metrics_dir).expect("Failed to create metrics directory");
+    }
+    if !step_dir.exists() {
         fs::create_dir(&step_dir).unwrap_or_else(|_| panic!("Failed to create {step} directory"));
     }
 
