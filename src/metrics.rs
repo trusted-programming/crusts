@@ -1,5 +1,6 @@
-use crate::utils::run_clippy_json_output;
+use crate::utils::{is_file_with_ext, run_clippy_json_output};
 use fs_extra::dir::CopyOptions;
+use jwalk::WalkDir;
 use log::info;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
@@ -13,8 +14,7 @@ use std::{env, fs};
 pub fn run(step: &str) {
     info!("STARTING METRICS COLLECTIONS");
     let current_dir = env::current_dir().expect("Failed to get current directory");
-    let parent = current_dir.parent().unwrap();
-    let metrics_dir = parent.join("metrics");
+    let metrics_dir = current_dir.join("metrics");
     let step_dir = metrics_dir.join(step);
     if !metrics_dir.exists() {
         fs::create_dir(&metrics_dir).expect("Failed to create metrics directory");
@@ -36,16 +36,21 @@ pub fn run(step: &str) {
     let clippy_warnings_count = run_clippy_json_output().len();
 
     info!("found {clippy_warnings_count} clippy_warnings");
-    let mut file_path = step_dir.join(current_dir.file_name().unwrap()).join("src");
-    if file_path.join("main.rs").exists() {
-        file_path = file_path.join("main.rs")
-    } else {
-        file_path = file_path.join("lib.rs")
-    }
-    info!("found file_path: {}", file_path.to_str().unwrap());
-
-    let (unsafe_functions_count, total_functions_count) =
-        calculate_number_of_unsafe_function_and_safe(file_path.to_str().unwrap());
+    let mut unsafe_functions_count = 0;
+    let mut total_functions_count = 0;
+    WalkDir::new(".")
+        .sort(true)
+        .into_iter()
+        .filter_map(Result::ok)
+        .filter(|e| is_file_with_ext(&e.path(), "rs"))
+        .for_each(|e| {
+            let path = e.path();
+            info!("found file_path: {}", path.to_str().unwrap());
+            let (unsafe_functions, total_functions) =
+                calculate_number_of_unsafe_function_and_safe(path.to_str().unwrap());
+            unsafe_functions_count += unsafe_functions;
+            total_functions_count += total_functions;
+        });
     let unsafe_percentage =
         100.0 - unsafe_functions_count as f32 * 100.0 / total_functions_count as f32;
     let metrics = Metrics {
