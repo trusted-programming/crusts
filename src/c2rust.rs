@@ -53,7 +53,7 @@ fn create_makefile() {
     std::fs::write(
         "Makefile",
         format!(
-            "main: {obj}\n\tgcc -o main {obj}\n\n.c.o: \n\tgcc -c $<\n\n.cpp.o: \n\tg++ -c $<\n\nclean::\n\trm -rf Makefile main c2rust crusts compile_commands.json Cargo.lock target",
+            "main: {obj}\n\tgcc -o main {obj}\n\n.c.o: \n\tgcc -c $<\n\n.cpp.o: \n\tg++ -c $<\n\nclean::\n\t	rm -rf Makefile main c2rust crusts compile_commands.json Cargo.lock target src build.rs Cargo.lock Cargo.toml lib.rs main.o rust-toolchain.toml ../metrics",
         ),
     )
     .expect("failed to write Makefile");

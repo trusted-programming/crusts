@@ -2,7 +2,7 @@ use crate::utils::run_clippy_json_output;
 use fs_extra::dir::CopyOptions;
 use log::info;
 use serde::{Deserialize, Serialize};
-use std::path::Path;
+use std::path::PathBuf;
 use std::process::Command;
 use std::{env, fs};
 
@@ -13,7 +13,8 @@ use std::{env, fs};
 pub fn run(step: &str) {
     info!("STARTING METRICS COLLECTIONS");
     let current_dir = env::current_dir().expect("Failed to get current directory");
-    let metrics_dir = current_dir.join("metrics");
+    let parent = current_dir.parent().unwrap();
+    let metrics_dir = parent.join("metrics");
     let step_dir = metrics_dir.join(step);
     if !metrics_dir.exists() {
         fs::create_dir(&metrics_dir).expect("Failed to create metrics directory");
@@ -29,21 +30,13 @@ pub fn run(step: &str) {
         current_dir.to_str().unwrap(),
         step_dir.to_str().unwrap()
     );
-    fs_extra::dir::copy(
-        current_dir,
-        format!("metrics/{step}"),
-        &fs_extra::dir::CopyOptions::new(),
-    )
-    .expect("failed to copy rust files to metrics");
+    fs_extra::dir::copy(&current_dir, &step_dir, &fs_extra::dir::CopyOptions::new())
+        .expect("failed to copy rust files to metrics");
 
-    let clippy_warnings = run_clippy_json_output()
-        .as_array()
-        .unwrap()
-        .iter()
-        .filter(|msg| msg["message"]["level"].as_str().unwrap() == "warning")
-        .count();
-    info!("found {clippy_warnings} clippy_warnings");
-    let mut file_path = step_dir.join("src");
+    let clippy_warnings_count = run_clippy_json_output().len();
+
+    info!("found {clippy_warnings_count} clippy_warnings");
+    let mut file_path = step_dir.join(current_dir.file_name().unwrap()).join("src");
     if file_path.join("main.rs").exists() {
         file_path = file_path.join("main.rs")
     } else {
@@ -56,10 +49,11 @@ pub fn run(step: &str) {
     let unsafe_percentage =
         100.0 - unsafe_functions_count as f32 * 100.0 / total_functions_count as f32;
     let metrics = Metrics {
+        step_dir: step_dir,
         unsafe_functions_count,
         total_functions_count,
         unsafe_percentage,
-        clippy_warnings,
+        clippy_warnings_count,
     };
     info!("writing metrics to file");
     metrics.write_to_file();
@@ -68,15 +62,16 @@ pub fn run(step: &str) {
 // TODO: add rust-analysis-tool for more metrics
 #[derive(Serialize, Deserialize)]
 struct Metrics {
+    step_dir: PathBuf,
     total_functions_count: usize,
     unsafe_functions_count: usize,
     unsafe_percentage: f32,
-    clippy_warnings: usize,
+    clippy_warnings_count: usize,
 }
 
 impl Metrics {
     fn write_to_file(&self) {
-        let metrics_file = Path::new("metrics").join("metrics.json");
+        let metrics_file = self.step_dir.join("metrics.json");
         let json = serde_json::to_string_pretty(self).unwrap();
         fs::write(metrics_file, json).expect("Failed to write metrics to file");
     }

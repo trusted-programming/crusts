@@ -38,15 +38,26 @@ pub fn run_command(command_name: &str, args: &[&str]) {
         .unwrap_or_else(|_| panic!("failed to run {command_name} with arguments: {args:?}"))
 }
 
-pub fn run_clippy_json_output() -> Value {
+pub fn run_clippy_json_output() -> Vec<Value> {
     info!("running clippy");
     let output = Command::new("cargo")
         .args(["clippy", "--message-format=json"])
         .output()
         .expect("Failed to run cargo clippy");
 
-    let stdout = String::from_utf8_lossy(&output.stdout);
-    serde_json::from_str(&stdout).expect("failed to convert json output string to Json value")
+    let stdout = String::from_utf8_lossy(&output.stdout).to_string();
+    let mut json_values: Vec<Value> = Vec::new();
+
+    for line in stdout.lines() {
+        let trimmed = line.trim();
+        if !trimmed.is_empty() {
+            let value: Value = serde_json::from_str(trimmed).unwrap();
+            if !value.is_array() {
+                json_values.push(value);
+            }
+        }
+    }
+    json_values
 }
 
 pub fn run_cargo_check_json_output() -> Value {

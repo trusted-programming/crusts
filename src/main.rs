@@ -15,6 +15,7 @@ fn main() {
 
     env_logger::init();
     info!("starting up");
+    metrics::run("original");
 
     let cli = cli::Cli::parse();
     if !cli.skip_c2rust {
@@ -22,8 +23,6 @@ fn main() {
         if cli.metrics {
             metrics::run("c2rust");
         }
-    } else if cli.metrics {
-        metrics::run("c2rust");
     }
     if !cli.skip_txl_rules {
         crusts::run(cli.custom_txl);
