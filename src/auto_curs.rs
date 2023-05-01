@@ -13,6 +13,7 @@ use syn::{self, parse_file, File};
 /// after that runs cargo check and while it finds an error it will add the unsafe back for the function and check again
 pub fn run() {
     info!("Starting Auto Curs");
+
     let predictions: Vec<Prediction> = unsafe_detection(".")
         .iter()
         .map(|s| Prediction::from_str(s))

@@ -16,7 +16,10 @@ fn main() {
     let cli = cli::Cli::parse();
 
     info!("starting up");
-    metrics::run("original");
+    if cli.metrics {
+        metrics::run("original");
+    }
+
     if !cli.skip_c2rust {
         c2rust::run();
         if cli.metrics {
@@ -40,9 +43,6 @@ fn main() {
         if cli.metrics {
             metrics::run("auto_curs");
         }
-    }
-    if cli.skip_c2rust && cli.skip_txl_rules && cli.skip_crown && !cli.auto_curs {
-        metrics::run("metrics_only");
     }
 }
 
