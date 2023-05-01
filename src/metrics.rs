@@ -14,7 +14,15 @@ use std::{env, fs};
 pub fn run(step: &str) {
     info!("STARTING METRICS COLLECTIONS");
     let current_dir = env::current_dir().expect("Failed to get current directory");
-    let metrics_dir = current_dir.join("metrics");
+    let current_dir_name = current_dir
+        .file_name()
+        .expect("Failed to get current directory name")
+        .to_str()
+        .expect("Failed to convert current directory name to string");
+    let parent = current_dir
+        .parent()
+        .expect("Failed to get parent directory");
+    let metrics_dir = parent.join(format!("metrics_{current_dir_name}"));
     let step_dir = metrics_dir.join(step);
     if !metrics_dir.exists() {
         fs::create_dir(&metrics_dir).expect("Failed to create metrics directory");
