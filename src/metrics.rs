@@ -51,13 +51,13 @@ pub fn run(step: &str) {
             unsafe_functions_count += unsafe_functions;
             total_functions_count += total_functions;
         });
-    let unsafe_percentage =
+    let safe_percentage =
         100.0 - unsafe_functions_count as f32 * 100.0 / total_functions_count as f32;
     let metrics = Metrics {
         step_dir: step_dir,
         unsafe_functions_count,
         total_functions_count,
-        unsafe_percentage,
+        safe_percentage,
         clippy_warnings_count,
     };
     info!("writing metrics to file");
@@ -70,7 +70,7 @@ struct Metrics {
     step_dir: PathBuf,
     total_functions_count: usize,
     unsafe_functions_count: usize,
-    unsafe_percentage: f32,
+    safe_percentage: f32,
     clippy_warnings_count: usize,
 }
 
