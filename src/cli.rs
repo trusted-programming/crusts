@@ -20,6 +20,7 @@ pub struct Cli {
     #[arg (short = 'a', long = "auto_curs", action = clap :: ArgAction :: SetTrue, help = "run auto_curs which will remove all unsafe based on curs suggestions and the cargo check will check which unsafe is compiling and readd the non compiling ones")]
     pub auto_curs: bool,
 }
+
 #[test]
 fn verify_cli() {
     use clap::CommandFactory;

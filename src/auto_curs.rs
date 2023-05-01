@@ -18,18 +18,20 @@ pub fn run() {
         .collect();
 
     for prediction in predictions {
-        prediction.remove_unsafe();
+        if prediction.safe {
+            prediction.remove_unsafe();
+        }
     }
 
-    for error in run_cargo_check_json_output().iter() {
-        // Get the function name and file name from the error message
-        info!("{}",error["message"]);
-        let file_path = error["message"]["src_path"].as_str().unwrap();
-        let line_start = error["message"]["spans"][0]["line_start"].as_u64().unwrap() as usize;
-        let line_end = error["message"]["spans"][0]["line_start"].as_u64().unwrap() as usize;
-
-        // Add the unsafe keyword to the function using the `add_unsafe_keyword` function from some_crate_name
-         add_unsafe_keyword(file_path, line_start, line_end);
+    for compiler_message in run_cargo_check_json_output().iter() {
+        let file_path = compiler_message.target.src_path.as_str();
+        for diagnostic_span in &compiler_message.message.spans {
+            add_unsafe_keyword(
+                file_path,
+                diagnostic_span.line_start,
+                diagnostic_span.line_end,
+            );
+        }
     }
 }
 
@@ -51,6 +53,7 @@ fn add_unsafe_keyword(file_path: &str, line_start: usize, line_end: usize) {
     file.write_all(output.as_bytes()).unwrap();
 }
 
+#[derive(Debug)]
 // FIXME: need to check if true or false otherwise it's useless
 struct Prediction {
     pub file_path: String,
@@ -71,26 +74,24 @@ impl Prediction {
             file_path,
             line,
             col,
-            safe
+            safe,
         }
     }
 
     fn remove_unsafe(&self) {
-        if !self.safe {
-            info!("removing unsafe according to curs prediction");
-            let file = fs::File::open(&self.file_path).expect("Failed to open file");
-            let reader = BufReader::new(file);
-            let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
-    
-            if self.line > 0
-                && self.line <= lines.len()
-                && lines[self.line][self.col..].contains("unsafe")
-            {
-                lines[self.line] = lines[self.line].replacen("unsafe", "", 1);
-                let mut file = fs::File::create(&self.file_path).expect("Failed to create file");
-                for line in lines {
-                    writeln!(file, "{}", line).expect("Failed to write to file");
-                }
+        info!("removing unsafe according to curs prediction: {self:?}");
+        let file = fs::File::open(&self.file_path).expect("Failed to open file");
+        let reader = BufReader::new(file);
+        let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
+
+        if self.line > 0
+            && self.line <= lines.len()
+            && lines[self.line][self.col..].contains("unsafe")
+        {
+            lines[self.line] = lines[self.line].replacen("unsafe", "", 1);
+            let mut file = fs::File::create(&self.file_path).expect("Failed to create file");
+            for line in lines {
+                writeln!(file, "{}", line).expect("Failed to write to file");
             }
         }
     }

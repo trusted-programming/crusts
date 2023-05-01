@@ -1,3 +1,7 @@
+use cargo_metadata::{
+    diagnostic::{DiagnosticLevel, DiagnosticSpan},
+    CompilerMessage, Message,
+};
 use std::{
     path::Path,
     process::{Command, Stdio},
@@ -69,34 +73,34 @@ pub fn run_clippy_json_output() -> Vec<Value> {
 }
 
 // TODO: for clippy and cargo check, serialize to a struct instead of a vector of values
-pub fn run_cargo_check_json_output() -> Vec<Value> {
+pub fn run_cargo_check_json_output() -> Vec<CompilerMessage> {
     info!("running cargo check");
-    let output = Command::new("cargo")
-        .args(["check", "--message-format=json"])
-        .output()
-        .expect("Failed to run cargo check");
+    let mut command = Command::new("cargo")
+        .args([
+            "+nightly",
+            "check",
+            "--message-format=json-render-diagnostics",
+        ])
+        .stdout(Stdio::piped())
+        .spawn()
+        .unwrap();
+    let reader = std::io::BufReader::new(command.stdout.take().unwrap());
 
-    let stdout = String::from_utf8_lossy(&output.stdout);
-
-    let mut json_values: Vec<Value> = Vec::new();
-
-    for line in stdout.lines() {
-        let trimmed = line.trim();
-
-        if !trimmed.is_empty() && line.contains("compiler-message") {
-            let value: Value = serde_json::from_str(trimmed).unwrap();
-
-            if let Some(reason) = value.get("reason") {
-                if reason == "compiler-message" && value["message"]["spans"].as_array().unwrap().len() == 1 {
-                    json_values.push(value);
-                }
+    let mut compiler_messages: Vec<CompilerMessage> = Vec::new();
+    for message in cargo_metadata::Message::parse_stream(reader) {
+        if let Ok(msg) = message {
+            if let Message::CompilerMessage(compiler_message) = msg {
+                compiler_messages.push(compiler_message);
             }
         }
     }
+
+    let output = command.wait().expect("Couldn't get cargo's exit status");
+
     // FIXME: this is a hack to delete the target folder, should be ignored during copy instead of delete
     if Path::new("target").exists() {
         std::fs::remove_dir_all("target").expect("failed to delete target folder folder");
     }
 
-    json_values
+    compiler_messages
 }
