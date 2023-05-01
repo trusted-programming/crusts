@@ -10,7 +10,7 @@ pub struct Cli {
     #[arg (short = 'c', long = "skip_crown", action = clap :: ArgAction :: SetTrue, help = "skip running crown")]
     pub skip_crown: bool,
     #[arg(
-        short = 'a',
+        short = 'x',
         long = "add_txl",
         help = "run customized txl rule after crusts completed"
     )]

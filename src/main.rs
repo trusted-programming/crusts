@@ -12,12 +12,11 @@ use std::env;
 
 fn main() {
     env::set_var("RUST_LOG", "info");
-
     env_logger::init();
+    let cli = cli::Cli::parse();
+
     info!("starting up");
     metrics::run("original");
-
-    let cli = cli::Cli::parse();
     if !cli.skip_c2rust {
         c2rust::run();
         if cli.metrics {

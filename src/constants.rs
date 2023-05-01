@@ -26,7 +26,7 @@ pub static CONFIG: PlatformConfig = PlatformConfig {
     url: "http://bertrust.s3.amazonaws.com/crusts-linux.tar.gz",
 };
 
-pub const RULES: [&str; 11] = [
+pub const RULES: [&str; 10] = [
     "formalizeCode.x",
     "varTypeNoBounds.x",
     "null.x",
@@ -37,5 +37,5 @@ pub const RULES: [&str; 11] = [
     "time.x",
     "const2mut.x",
     "stdio.x",
-    "unsafe.x",
+    // "unsafe.x",
 ];

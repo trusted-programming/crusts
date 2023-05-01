@@ -22,17 +22,23 @@ pub fn run(step: &str) {
     let parent = current_dir
         .parent()
         .expect("Failed to get parent directory");
-    let metrics_dir = parent.join(format!("metrics_{current_dir_name}"));
-    let step_dir = metrics_dir.join(step);
+    let metrics_dir = parent.join("metrics");
     if !metrics_dir.exists() {
         fs::create_dir(&metrics_dir).expect("Failed to create metrics directory");
     }
+    let metrics_proj_dir = metrics_dir.join(current_dir_name);
+    if !metrics_proj_dir.exists() {
+        fs::create_dir(&metrics_proj_dir).expect("Failed to create metrics directory");
+    }
+    let step_dir = metrics_proj_dir.join(step);
     if !step_dir.exists() {
         fs::create_dir(&step_dir).unwrap_or_else(|_| panic!("Failed to create {step} directory"));
     }
 
     let mut options = CopyOptions::new();
     options.overwrite = true;
+
+    // TODO: stop copying target the target folder
     info!(
         "copying {} to {}",
         current_dir.to_str().unwrap(),
