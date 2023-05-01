@@ -39,15 +39,13 @@ pub fn run(step: &str) {
 
     info!("found {clippy_warnings_count} clippy_warnings");
 
-    let mut options = CopyOptions::new();
-    options.overwrite = true;
     // TODO: stop copying target the target folder
     info!(
         "copying {} to {}",
         current_dir.to_str().unwrap(),
         step_dir.to_str().unwrap()
     );
-    fs_extra::dir::copy(&current_dir, &step_dir, &fs_extra::dir::CopyOptions::new())
+    fs_extra::dir::copy(&current_dir, &step_dir, &CopyOptions::new().overwrite(true))
         .expect("failed to copy rust files to metrics");
 
     let mut unsafe_functions_count = 0;

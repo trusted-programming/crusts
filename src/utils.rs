@@ -52,19 +52,24 @@ pub fn run_clippy_json_output() -> Vec<Value> {
         let trimmed = line.trim();
         if !trimmed.is_empty() {
             let value: Value = serde_json::from_str(trimmed).unwrap();
-            if !value.is_array() {
-                json_values.push(value);
+
+            if let Some(reason) = value.get("reason") {
+                if reason == "compiler-message" {
+                    json_values.push(value);
+                }
             }
         }
     }
-
     // FIXME: this is a hack to delete the target folder, should be ignored during copy instead of delete
-    std::fs::remove_dir_all("target").expect("failed to delete target folder folder");
+    if Path::new("target").exists() {
+        std::fs::remove_dir_all("target").expect("failed to delete target folder folder");
+    }
 
     json_values
 }
 
-pub fn run_cargo_check_json_output() -> Value {
+// TODO: for clippy and cargo check, serialize to a struct instead of a vector of values
+pub fn run_cargo_check_json_output() -> Vec<Value> {
     info!("running cargo check");
     let output = Command::new("cargo")
         .args(["check", "--message-format=json"])
@@ -72,5 +77,26 @@ pub fn run_cargo_check_json_output() -> Value {
         .expect("Failed to run cargo check");
 
     let stdout = String::from_utf8_lossy(&output.stdout);
-    serde_json::from_str(&stdout).expect("failed to convert json output string to Json value")
+
+    let mut json_values: Vec<Value> = Vec::new();
+
+    for line in stdout.lines() {
+        let trimmed = line.trim();
+
+        if !trimmed.is_empty() && line.contains("compiler-message") {
+            let value: Value = serde_json::from_str(trimmed).unwrap();
+
+            if let Some(reason) = value.get("reason") {
+                if reason == "compiler-message" && value["message"]["spans"].as_array().unwrap().len() == 1 {
+                    json_values.push(value);
+                }
+            }
+        }
+    }
+    // FIXME: this is a hack to delete the target folder, should be ignored during copy instead of delete
+    if Path::new("target").exists() {
+        std::fs::remove_dir_all("target").expect("failed to delete target folder folder");
+    }
+
+    json_values
 }
