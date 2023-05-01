@@ -57,6 +57,10 @@ pub fn run_clippy_json_output() -> Vec<Value> {
             }
         }
     }
+
+    // FIXME: this is a hack to delete the target folder, should be ignored during copy instead of delete
+    std::fs::remove_dir_all("target").expect("failed to delete target folder folder");
+
     json_values
 }
 

@@ -35,9 +35,12 @@ pub fn run(step: &str) {
         fs::create_dir(&step_dir).unwrap_or_else(|_| panic!("Failed to create {step} directory"));
     }
 
+    let clippy_warnings_count = run_clippy_json_output().len();
+
+    info!("found {clippy_warnings_count} clippy_warnings");
+
     let mut options = CopyOptions::new();
     options.overwrite = true;
-
     // TODO: stop copying target the target folder
     info!(
         "copying {} to {}",
@@ -47,9 +50,6 @@ pub fn run(step: &str) {
     fs_extra::dir::copy(&current_dir, &step_dir, &fs_extra::dir::CopyOptions::new())
         .expect("failed to copy rust files to metrics");
 
-    let clippy_warnings_count = run_clippy_json_output().len();
-
-    info!("found {clippy_warnings_count} clippy_warnings");
     let mut unsafe_functions_count = 0;
     let mut total_functions_count = 0;
     WalkDir::new(".")
