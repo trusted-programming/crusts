@@ -95,7 +95,7 @@ impl Metrics {
     }
 }
 
-// TODO: use tree-sitter for this or rust sitter or cargo geiger
+// TODO: use tree-sitter for this or rust sitter or cargo geiger, maybe using syn and quote
 fn calculate_number_of_unsafe_function_and_safe(path: &str) -> (usize, usize) {
     info!("calculating unsafe functions and safe functions numbers");
     let unsafe_functions = Command::new("tree-grepper")

@@ -1,7 +1,4 @@
-use cargo_metadata::{
-    diagnostic::{DiagnosticLevel, DiagnosticSpan},
-    CompilerMessage, Message,
-};
+use cargo_metadata::{CompilerMessage, Message};
 use std::{
     path::Path,
     process::{Command, Stdio},
@@ -95,7 +92,7 @@ pub fn run_cargo_check_json_output() -> Vec<CompilerMessage> {
         }
     }
 
-    let output = command.wait().expect("Couldn't get cargo's exit status");
+    let _output = command.wait().expect("Couldn't get cargo's exit status");
 
     // FIXME: this is a hack to delete the target folder, should be ignored during copy instead of delete
     if Path::new("target").exists() {
