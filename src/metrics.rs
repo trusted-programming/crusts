@@ -7,6 +7,7 @@ use std::path::PathBuf;
 use std::process::Command;
 use std::{env, fs};
 
+// TODO: METRICS ALL IN A SINGLE JSON FILE, APPEND IF FILE ALREADY EXISTS
 /// this does tree things:
 /// - store files
 /// - get unsafe % and write to metrics.json
