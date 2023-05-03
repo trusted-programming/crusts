@@ -26,22 +26,25 @@ pub fn run() {
                 .iter()
                 .map(|s| Prediction::from_str(s))
                 .collect();
-
+            let mut removed_unsafe = false;
             for prediction in predictions {
-                info!("prediction: {:?}", prediction);
                 if prediction.safe {
-                    prediction.remove_unsafe();
+                    info!("safe functions found");
+                    removed_unsafe = removed_unsafe || prediction.remove_unsafe();
+                } else {
+                    info!("curs found a function but it is unsafe");
                 }
             }
-
-            for compiler_message in run_cargo_check_json_output().iter() {
-                let file_path = compiler_message.target.src_path.as_str();
-                for diagnostic_span in &compiler_message.message.spans {
-                    add_unsafe_keyword(
-                        file_path,
-                        diagnostic_span.line_start,
-                        diagnostic_span.line_end,
-                    );
+            if removed_unsafe {
+                for compiler_message in run_cargo_check_json_output().iter() {
+                    let file_path = compiler_message.target.src_path.as_str();
+                    for diagnostic_span in &compiler_message.message.spans {
+                        add_unsafe_keyword(
+                            file_path,
+                            diagnostic_span.line_start,
+                            diagnostic_span.line_end,
+                        );
+                    }
                 }
             }
         });
@@ -90,8 +93,7 @@ impl Prediction {
         }
     }
 
-    fn remove_unsafe(&self) {
-        info!("removing unsafe according to curs prediction: {self:?}");
+    fn remove_unsafe(&self) -> bool {
         let file = fs::File::open(&self.file_path).expect("Failed to open file");
         let reader = BufReader::new(file);
         let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
@@ -101,11 +103,14 @@ impl Prediction {
             && lines[self.line][self.col..].contains("unsafe")
         {
             lines[self.line] = lines[self.line].replacen("unsafe", "", 1);
-            info!("removed unsafe successfully");
             let mut file = fs::File::create(&self.file_path).expect("Failed to create file");
             for line in lines {
                 writeln!(file, "{}", line).expect("Failed to write to file");
             }
+            return true;
+        } else {
+            info!("function is already safe");
+            return false;
         }
     }
 }

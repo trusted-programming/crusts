@@ -1,3 +1,5 @@
+use log::LevelFilter;
+
 #[derive(Debug, Copy, Clone)]
 pub struct PlatformConfig {
     pub bear: &'static str,
@@ -39,3 +41,4 @@ pub const RULES: [&str; 11] = [
     "stdio.x",
     "unsafe.x",
 ];
+pub const VERBOSITY: LevelFilter = LevelFilter::Trace;

@@ -7,14 +7,17 @@ mod crusts;
 mod metrics;
 mod utils;
 use clap::Parser;
-use log::info;
-use std::env;
+use constants::VERBOSITY;
+use humantime;
+use log::{debug, info, trace, LevelFilter};
+use std::{io, time::SystemTime};
 
 fn main() {
-    env::set_var("RUST_LOG", "info");
-    env_logger::init();
-    let cli = cli::Cli::parse();
+    setup_logging(VERBOSITY).expect("failed to initialize logging.");
 
+    let cli = cli::Cli::parse();
+    debug!("DEBUG output enabled.");
+    trace!("TRACE output enabled.");
     info!("starting up");
     if cli.metrics {
         metrics::run("original");
@@ -44,6 +47,27 @@ fn main() {
             metrics::run("auto_curs");
         }
     }
+}
+
+fn setup_logging(verbosity: LevelFilter) -> Result<(), fern::InitError> {
+    let base_config = fern::Dispatch::new().level(verbosity);
+
+    let stdout_config = fern::Dispatch::new()
+        .format(|out, message, record| {
+            out.finish(format_args!(
+                "[{} {} {}] {}",
+                humantime::format_rfc3339_seconds(SystemTime::now()),
+                record.level(),
+                record.target(),
+                message
+            ))
+        })
+        .chain(io::stdout())
+        .chain(fern::log_file("program.log")?);
+
+    base_config.chain(stdout_config).apply()?;
+
+    Ok(())
 }
 
 #[cfg(test)]
