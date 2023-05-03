@@ -8,9 +8,11 @@ use rust_hero::{
 use std::fs;
 use std::io::{BufRead, BufReader, Write};
 
+// FIXME: ignore build.rs files
+// FIXME: improve performance by running curs only on unsafe functions
+
 /// runs curs and removes all unsafe marked by curs that are considered safe
 /// after that runs cargo check and while it finds an error it will add the unsafe back for the function and check again
-/// FIXME: ignore build.rs files
 pub fn run() {
     info!("Starting Auto Curs");
     WalkDir::new(".")
@@ -28,7 +30,7 @@ pub fn run() {
                 .collect();
             let mut removed_unsafe = false;
             for prediction in predictions {
-                if prediction.safe {
+                if prediction.safe && prediction.contains_unsafe_keyword() {
                     removed_unsafe = removed_unsafe || prediction.remove_unsafe();
                 }
             }
@@ -47,7 +49,7 @@ pub fn run() {
         });
 }
 
-// TODO: improve efficiency of this by doing all the function names at the same time
+// FIXME: improve efficiency of this by doing all the function names at the same time
 fn add_unsafe_keyword(file_path: &str, line_start: usize, line_end: usize) {
     info!("Adding unsafe keyword for file_path:{file_path} line_start:{line_start} line_end:{line_end}");
 
@@ -66,7 +68,6 @@ fn add_unsafe_keyword(file_path: &str, line_start: usize, line_end: usize) {
 }
 
 #[derive(Debug)]
-// FIXME: need to check if true or false otherwise it's useless
 struct Prediction {
     pub file_path: String,
     pub line: usize,
@@ -108,6 +109,14 @@ impl Prediction {
         } else {
             return false;
         }
+    }
+
+    // FIXME: this does not seem efficient
+    fn contains_unsafe_keyword(&self) -> bool {
+        let file = fs::File::open(&self.file_path).expect("Failed to open file");
+        let reader = BufReader::new(file);
+        let lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
+        lines[self.line][self.col..].contains("unsafe")
     }
 }
 
