@@ -1,4 +1,5 @@
-use crate::utils::run_cargo_check_json_output;
+use crate::utils::{is_file_with_ext, run_cargo_check_json_output};
+use jwalk::WalkDir;
 use log::info;
 use rust_hero::{
     query::{Invocation, QueryFormat},
@@ -9,30 +10,41 @@ use std::io::{BufRead, BufReader, Write};
 
 /// runs curs and removes all unsafe marked by curs that are considered safe
 /// after that runs cargo check and while it finds an error it will add the unsafe back for the function and check again
+/// FIXME: ignore build.rs files
 pub fn run() {
     info!("Starting Auto Curs");
+    WalkDir::new(".")
+        .sort(true)
+        .into_iter()
+        .filter_map(Result::ok)
+        .filter(|e| is_file_with_ext(&e.path(), "rs"))
+        .for_each(|e: jwalk::DirEntry<((), ())>| {
+            let path = e.path();
+            let file = path.to_string_lossy().to_string();
 
-    let predictions: Vec<Prediction> = unsafe_detection("src/main.rs")
-        .iter()
-        .map(|s| Prediction::from_str(s))
-        .collect();
+            let predictions: Vec<Prediction> = unsafe_detection(&file)
+                .iter()
+                .map(|s| Prediction::from_str(s))
+                .collect();
 
-    for prediction in predictions {
-        if prediction.safe {
-            prediction.remove_unsafe();
-        }
-    }
+            for prediction in predictions {
+                info!("prediction: {:?}", prediction);
+                if prediction.safe {
+                    prediction.remove_unsafe();
+                }
+            }
 
-    for compiler_message in run_cargo_check_json_output().iter() {
-        let file_path = compiler_message.target.src_path.as_str();
-        for diagnostic_span in &compiler_message.message.spans {
-            add_unsafe_keyword(
-                file_path,
-                diagnostic_span.line_start,
-                diagnostic_span.line_end,
-            );
-        }
-    }
+            for compiler_message in run_cargo_check_json_output().iter() {
+                let file_path = compiler_message.target.src_path.as_str();
+                for diagnostic_span in &compiler_message.message.spans {
+                    add_unsafe_keyword(
+                        file_path,
+                        diagnostic_span.line_start,
+                        diagnostic_span.line_end,
+                    );
+                }
+            }
+        });
 }
 
 // TODO: improve efficiency of this by doing all the function names at the same time
@@ -89,6 +101,7 @@ impl Prediction {
             && lines[self.line][self.col..].contains("unsafe")
         {
             lines[self.line] = lines[self.line].replacen("unsafe", "", 1);
+            info!("removed unsafe successfully");
             let mut file = fs::File::create(&self.file_path).expect("Failed to create file");
             for line in lines {
                 writeln!(file, "{}", line).expect("Failed to write to file");
