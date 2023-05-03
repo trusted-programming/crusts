@@ -29,10 +29,7 @@ pub fn run() {
             let mut removed_unsafe = false;
             for prediction in predictions {
                 if prediction.safe {
-                    info!("safe functions found");
                     removed_unsafe = removed_unsafe || prediction.remove_unsafe();
-                } else {
-                    info!("curs found a function but it is unsafe");
                 }
             }
             if removed_unsafe {
@@ -97,26 +94,25 @@ impl Prediction {
         let file = fs::File::open(&self.file_path).expect("Failed to open file");
         let reader = BufReader::new(file);
         let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
-
-        if self.line > 0
-            && self.line <= lines.len()
-            && lines[self.line][self.col..].contains("unsafe")
-        {
+        if lines[self.line][self.col..].contains("unsafe") {
             lines[self.line] = lines[self.line].replacen("unsafe", "", 1);
             let mut file = fs::File::create(&self.file_path).expect("Failed to create file");
             for line in lines {
                 writeln!(file, "{}", line).expect("Failed to write to file");
             }
+            info!(
+                "removed unsafe from file: {}, line {}, col {}",
+                self.file_path, self.line, self.col
+            );
             return true;
         } else {
-            info!("function is already safe");
             return false;
         }
     }
 }
 
 fn unsafe_detection(file_path: &str) -> Vec<String> {
-    info!("running curs for unsafe detection");
+    info!("running curs for unsafe detection file path: {file_path}");
     let args = vec!["rust_hero".to_string(), file_path.to_string()];
     let invocation = Invocation::from_args(args).unwrap();
     if let Invocation::DoQuery(query_opts) = invocation {

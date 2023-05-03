@@ -41,4 +41,4 @@ pub const RULES: [&str; 11] = [
     "stdio.x",
     "unsafe.x",
 ];
-pub const VERBOSITY: LevelFilter = LevelFilter::Trace;
+pub const VERBOSITY: LevelFilter = LevelFilter::Info;
