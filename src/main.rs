@@ -10,12 +10,13 @@ use clap::Parser;
 use constants::VERBOSITY;
 use humantime;
 use log::{debug, info, trace, LevelFilter};
-use std::{io, time::SystemTime};
+use std::{env, fs, io, path::Path, time::SystemTime};
 
+// TODO: extract the walk so doesn't have to be run on each step
 fn main() {
-    setup_logging(VERBOSITY).expect("failed to initialize logging.");
-
     let cli = cli::Cli::parse();
+    setup_logging(VERBOSITY, cli.metrics).expect("failed to initialize logging.");
+
     debug!("DEBUG output enabled.");
     trace!("TRACE output enabled.");
     info!("starting up");
@@ -49,10 +50,9 @@ fn main() {
     }
 }
 
-fn setup_logging(verbosity: LevelFilter) -> Result<(), fern::InitError> {
-    let base_config = fern::Dispatch::new().level(verbosity);
-
-    let stdout_config = fern::Dispatch::new()
+fn setup_logging(verbosity: LevelFilter, metrics: bool) -> Result<(), fern::InitError> {
+    let mut config = fern::Dispatch::new()
+        .level(verbosity)
         .format(|out, message, record| {
             out.finish(format_args!(
                 "[{} {} {}] {}",
@@ -62,11 +62,30 @@ fn setup_logging(verbosity: LevelFilter) -> Result<(), fern::InitError> {
                 message
             ))
         })
-        .chain(io::stdout())
-        .chain(fern::log_file("program.log")?);
+        .chain(io::stdout());
 
-    base_config.chain(stdout_config).apply()?;
-
+    if metrics {
+        let current_dir = env::current_dir().expect("Failed to get current directory");
+        let current_dir_name = current_dir
+            .file_name()
+            .expect("Failed to get current directory name")
+            .to_str()
+            .expect("Failed to convert current directory name to string");
+        let parent = current_dir
+            .parent()
+            .expect("Failed to get parent directory");
+        let metrics_dir = parent.join("metrics");
+        if !metrics_dir.exists() {
+            fs::create_dir(&metrics_dir).expect("Failed to create metrics directory");
+        }
+        let metrics_proj_dir = metrics_dir.join(current_dir_name);
+        if !metrics_proj_dir.exists() {
+            fs::create_dir(&metrics_proj_dir).expect("Failed to create metrics directory");
+        }
+        let log_file_path = metrics_proj_dir.join("program.log");
+        config = config.chain(fern::log_file(log_file_path)?);
+    }
+    config.apply()?;
     Ok(())
 }
 

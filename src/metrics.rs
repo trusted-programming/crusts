@@ -8,6 +8,7 @@ use std::process::Command;
 use std::{env, fs};
 
 // TODO: METRICS ALL IN A SINGLE JSON FILE, APPEND IF FILE ALREADY EXISTS
+// TODO: metrics inside the project folder, ignore target and metrics folders when copying
 /// this does tree things:
 /// - store files
 /// - get unsafe % and write to metrics.json
@@ -97,7 +98,6 @@ impl Metrics {
 
 // TODO: use tree-sitter for this or rust sitter or cargo geiger, maybe using syn and quote
 fn calculate_number_of_unsafe_function_and_safe(path: &str) -> (usize, usize) {
-    info!("calculating unsafe functions and safe functions numbers");
     let unsafe_functions = Command::new("tree-grepper")
         .args([
             "-q",
@@ -122,6 +122,7 @@ fn calculate_number_of_unsafe_function_and_safe(path: &str) -> (usize, usize) {
         .lines()
         .filter(|line| line.contains(":f:"))
         .count();
+    info!("found: {unsafe_functions_count} unsafe functions; {total_functions_count} safe functions numbers");
 
     (unsafe_functions_count, total_functions_count)
 }
