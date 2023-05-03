@@ -6,8 +6,11 @@ use rust_hero::{
     query::{Invocation, QueryFormat},
     safe::SafeLanguageModel,
 };
-use std::fs;
-use std::io::{BufRead, BufReader, Write};
+use std::{collections::HashMap, fs};
+use std::{
+    fs::canonicalize,
+    io::{BufRead, BufReader, Write},
+};
 
 // FIXME: ignore build.rs files
 
@@ -28,22 +31,58 @@ pub fn run() {
                 .iter()
                 .map(|s| Prediction::from_str(s))
                 .collect();
-            let mut removed_unsafe = false;
+
+            let mut removed_prediction = HashMap::new();
+
             for prediction in predictions {
                 if prediction.prediction && !prediction.actual {
-                    removed_unsafe = removed_unsafe || prediction.remove_unsafe();
+                    let removed = prediction.remove_unsafe();
+                    if removed {
+                        removed_prediction
+                            .entry(canonicalize(&prediction.file_path).unwrap())
+                            .or_insert_with(Vec::new)
+                            .push(prediction.clone());
+                    }
                 }
             }
-            if removed_unsafe {
+            if removed_prediction.len() > 0 {
                 for compiler_message in run_cargo_check_json_output()
                     .iter()
                     .filter(|m| m.message.level == DiagnosticLevel::Error)
                 {
                     for diagnostic_span in &compiler_message.message.spans {
+                        let mut file_name = (&diagnostic_span).file_name.to_string();
+                        info!("{}", compiler_message);
+
+                        info!("file_name: {}", file_name);
+                        if file_name.starts_with("/rustc") {
+                            let expansion =
+                                diagnostic_span.to_owned().expansion.expect("expected some");
+
+                            file_name = expansion.span.file_name.to_string();
+                        }
+                        let canonical_path = canonicalize(&file_name).unwrap();
+                        info!("canonical_path: {}", canonical_path.to_string_lossy());
+                        info!("removed_prediction: {:?}", removed_prediction.keys());
+                        let entries = removed_prediction
+                            .get(&canonical_path)
+                            .expect("something went wrong prediction removal not found");
+                        let mut diff = (usize::MAX, None);
+
+                        for entry in entries {
+                            if entry.line > diagnostic_span.line_start {
+                                continue;
+                            }
+                            let new_diff = diagnostic_span.line_start - entry.line;
+                            if new_diff < diff.0 {
+                                diff = (new_diff, Some(entry));
+                            }
+                        }
+
                         add_unsafe_keyword(
-                            &diagnostic_span.file_name,
-                            diagnostic_span.line_start,
-                            diagnostic_span.line_end,
+                            diff.1.unwrap().file_path.as_str(),
+                            diff.1.unwrap().line,
+                            diff.1.unwrap().col,
                         );
                     }
                 }
@@ -52,24 +91,24 @@ pub fn run() {
 }
 
 // FIXME: improve efficiency of this by doing all the function names at the same time
-fn add_unsafe_keyword(file_path: &str, line_start: usize, line_end: usize) {
-    info!("Adding unsafe keyword for file_path:{file_path} line_start:{line_start} line_end:{line_end}");
+fn add_unsafe_keyword(file_path: &str, line: usize, col: usize) {
+    info!("Adding unsafe keyword for file_path:{file_path} line:{line} col:{col}");
 
     let file = fs::File::open(file_path).unwrap();
     let reader = BufReader::new(file);
 
     let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
-    let code_to_wrap = lines[line_start - 1].clone();
-
-    lines[line_start - 1] = format!("unsafe {{\n    {}", code_to_wrap);
-    lines.insert(line_end, String::from("}"));
+    if lines[line].contains("unsafe") {
+        return;
+    }
+    lines[line].insert_str(col, " unsafe ");
 
     let output = lines.join("\n");
     let mut file = fs::File::create(file_path).unwrap();
     file.write_all(output.as_bytes()).unwrap();
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Prediction {
     pub file_path: String,
     pub line: usize,
