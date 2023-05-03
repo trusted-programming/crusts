@@ -10,7 +10,7 @@ use clap::Parser;
 use constants::VERBOSITY;
 use humantime;
 use log::{debug, info, trace, LevelFilter};
-use std::{env, fs, io, path::Path, time::SystemTime};
+use std::{env, fs, io, time::SystemTime};
 
 // TODO: extract the walk so doesn't have to be run on each step
 fn main() {

@@ -73,16 +73,11 @@ pub fn run_clippy_json_output() -> Vec<Value> {
 pub fn run_cargo_check_json_output() -> Vec<CompilerMessage> {
     info!("running cargo check");
     let mut command = Command::new("cargo")
-        .args([
-            "+nightly",
-            "check",
-            "--message-format=json-render-diagnostics",
-        ])
+        .args(["+nightly", "check", "--message-format=json"])
         .stdout(Stdio::piped())
         .spawn()
         .unwrap();
     let reader = std::io::BufReader::new(command.stdout.take().unwrap());
-
     let mut compiler_messages: Vec<CompilerMessage> = Vec::new();
     for message in cargo_metadata::Message::parse_stream(reader) {
         if let Ok(msg) = message {

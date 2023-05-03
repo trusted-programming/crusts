@@ -1,4 +1,5 @@
 use crate::utils::{is_file_with_ext, run_cargo_check_json_output};
+use cargo_metadata::diagnostic::DiagnosticLevel;
 use jwalk::WalkDir;
 use log::info;
 use rust_hero::{
@@ -9,7 +10,6 @@ use std::fs;
 use std::io::{BufRead, BufReader, Write};
 
 // FIXME: ignore build.rs files
-// FIXME: improve performance by running curs only on unsafe functions
 
 /// runs curs and removes all unsafe marked by curs that are considered safe
 /// after that runs cargo check and while it finds an error it will add the unsafe back for the function and check again
@@ -30,16 +30,18 @@ pub fn run() {
                 .collect();
             let mut removed_unsafe = false;
             for prediction in predictions {
-                if prediction.safe && prediction.contains_unsafe_keyword() {
+                if prediction.prediction && !prediction.actual {
                     removed_unsafe = removed_unsafe || prediction.remove_unsafe();
                 }
             }
             if removed_unsafe {
-                for compiler_message in run_cargo_check_json_output().iter() {
-                    let file_path = compiler_message.target.src_path.as_str();
+                for compiler_message in run_cargo_check_json_output()
+                    .iter()
+                    .filter(|m| m.message.level == DiagnosticLevel::Error)
+                {
                     for diagnostic_span in &compiler_message.message.spans {
                         add_unsafe_keyword(
-                            file_path,
+                            &diagnostic_span.file_name,
                             diagnostic_span.line_start,
                             diagnostic_span.line_end,
                         );
@@ -72,7 +74,8 @@ struct Prediction {
     pub file_path: String,
     pub line: usize,
     pub col: usize,
-    pub safe: bool,
+    pub prediction: bool,
+    pub actual: bool,
 }
 
 impl Prediction {
@@ -81,13 +84,17 @@ impl Prediction {
         let file_path = split.next().unwrap().to_string();
         let line = split.next().unwrap().parse::<usize>().unwrap() - 1;
         let col = split.next().unwrap().parse::<usize>().unwrap() - 1;
-        let safe = split.last().unwrap().parse::<bool>().unwrap();
+        let _end_line = split.next().unwrap();
+        let _end_col = split.next().unwrap();
+        let prediction = !split.next().unwrap().contains("Unsafe");
+        let actual = split.next().unwrap().parse::<bool>().unwrap();
 
         Self {
             file_path,
             line,
             col,
-            safe,
+            prediction,
+            actual,
         }
     }
 
@@ -109,14 +116,6 @@ impl Prediction {
         } else {
             return false;
         }
-    }
-
-    // FIXME: this does not seem efficient
-    fn contains_unsafe_keyword(&self) -> bool {
-        let file = fs::File::open(&self.file_path).expect("Failed to open file");
-        let reader = BufReader::new(file);
-        let lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
-        lines[self.line][self.col..].contains("unsafe")
     }
 }
 
