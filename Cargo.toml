@@ -30,3 +30,6 @@ serde_json = "1.0"
 rust_hero = { path = "../curs" }
 cargo_metadata = "0.15.4"
 fern = { version = "0.6.2", features = ["colored"] }
+
+[dev-dependencies]
+tempfile = "3.5"

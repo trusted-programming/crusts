@@ -171,3 +171,65 @@ fn readd_required_unsafe_keywords(file: &str, removed_predictions: &[(usize, Str
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::io::{Read, Seek, Write};
+    use tempfile::NamedTempFile;
+
+    #[test]
+    fn test_add_unsafe_keyword() {
+        // Create a temporary file with some content
+        let mut temp_file = NamedTempFile::new().unwrap();
+        writeln!(temp_file, "fn some_function() {{}}").unwrap();
+
+        // Run add_unsafe_keyword on the temporary file
+        let file_path = temp_file.path().to_str().unwrap();
+        add_unsafe_keyword(file_path, "unsafe fn some_function() {{}}".to_string(), 0);
+
+        // Read the modified content of the temporary file
+        let mut modified_content = String::new();
+        temp_file.seek(std::io::SeekFrom::Start(0)).unwrap();
+        temp_file.read_to_string(&mut modified_content).unwrap();
+
+        // Verify if the unsafe keyword was added correctly
+        assert_eq!(modified_content, "unsafe fn some_function() {{}}");
+    }
+
+    // Test case 1: Add unsafe keyword to a function that doesn't have it
+    #[test]
+    fn test_add_unsafe_keyword_no_unsafe() {
+        let mut temp_file = NamedTempFile::new().unwrap();
+        writeln!(temp_file, "fn some_function() {{}}").unwrap();
+
+        let file_path = temp_file.path().to_str().unwrap();
+        add_unsafe_keyword(file_path, "unsafe fn some_function() {{}}".to_string(), 0);
+
+        let mut modified_content = String::new();
+        temp_file.seek(std::io::SeekFrom::Start(0)).unwrap();
+        temp_file.read_to_string(&mut modified_content).unwrap();
+
+        assert_eq!(modified_content, "unsafe fn some_function() {{}}");
+    }
+
+    // Test case 2: Don't modify a function that already has the unsafe keyword
+    #[test]
+    fn test_add_unsafe_keyword_already_unsafe() {
+        let mut temp_file = NamedTempFile::new().unwrap();
+        writeln!(temp_file, "unsafe fn another_function() {{}}").unwrap();
+
+        let file_path = temp_file.path().to_str().unwrap();
+        add_unsafe_keyword(
+            file_path,
+            "unsafe fn another_function() {{}}".to_string(),
+            0,
+        );
+
+        let mut modified_content = String::new();
+        temp_file.seek(std::io::SeekFrom::Start(0)).unwrap();
+        temp_file.read_to_string(&mut modified_content).unwrap();
+
+        assert_eq!(modified_content, "unsafe fn another_function() {}\n");
+    }
+}
