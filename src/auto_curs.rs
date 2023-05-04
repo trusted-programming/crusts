@@ -37,11 +37,11 @@ pub fn run() {
             for prediction in predictions {
                 if prediction.prediction && !prediction.actual {
                     let removed = prediction.remove_unsafe();
-                    if removed {
+                    if removed.is_some() {
                         removed_prediction
                             .entry(canonicalize(&prediction.file_path).unwrap())
                             .or_insert_with(Vec::new)
-                            .push(prediction.clone());
+                            .push(removed.unwrap());
                     }
                 }
             }
@@ -52,7 +52,6 @@ pub fn run() {
                 {
                     for diagnostic_span in &compiler_message.message.spans {
                         let mut file_name = (&diagnostic_span).file_name.to_string();
-                        info!("{}", compiler_message);
 
                         info!("file_name: {}", file_name);
                         if file_name.starts_with("/rustc") {
@@ -70,19 +69,19 @@ pub fn run() {
                         let mut diff = (usize::MAX, None);
 
                         for entry in entries {
-                            if entry.line > diagnostic_span.line_start {
+                            if entry.0 > diagnostic_span.line_start {
                                 continue;
                             }
-                            let new_diff = diagnostic_span.line_start - entry.line;
+                            let new_diff = diagnostic_span.line_start - entry.0;
                             if new_diff < diff.0 {
                                 diff = (new_diff, Some(entry));
                             }
                         }
 
                         add_unsafe_keyword(
-                            diff.1.unwrap().file_path.as_str(),
-                            diff.1.unwrap().line,
-                            diff.1.unwrap().col,
+                            canonical_path.to_str().unwrap(),
+                            diff.1.unwrap().1.to_string(),
+                            diff.1.unwrap().0,
                         );
                     }
                 }
@@ -91,17 +90,17 @@ pub fn run() {
 }
 
 // FIXME: improve efficiency of this by doing all the function names at the same time
-fn add_unsafe_keyword(file_path: &str, line: usize, col: usize) {
-    info!("Adding unsafe keyword for file_path:{file_path} line:{line} col:{col}");
+fn add_unsafe_keyword(file_path: &str, line: String, line_number: usize) {
+    info!("Adding unsafe keyword for file_path:{file_path} line:{line} line_number:{line_number}");
 
     let file = fs::File::open(file_path).unwrap();
     let reader = BufReader::new(file);
 
     let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
-    if lines[line].contains("unsafe") {
+    if lines[line_number].contains("unsafe") {
         return;
     }
-    lines[line].insert_str(col, " unsafe ");
+    lines[line_number] = line;
 
     let output = lines.join("\n");
     let mut file = fs::File::create(file_path).unwrap();
@@ -137,10 +136,11 @@ impl Prediction {
         }
     }
 
-    fn remove_unsafe(&self) -> bool {
+    fn remove_unsafe(&self) -> Option<(usize, String)> {
         let file = fs::File::open(&self.file_path).expect("Failed to open file");
         let reader = BufReader::new(file);
         let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
+        let to_be_removed = lines[self.line][self.col..].to_owned();
         if lines[self.line][self.col..].contains("unsafe") {
             lines[self.line] = lines[self.line].replacen("unsafe", "", 1);
             let mut file = fs::File::create(&self.file_path).expect("Failed to create file");
@@ -151,10 +151,9 @@ impl Prediction {
                 "removed unsafe from file: {}, line {}, col {}",
                 self.file_path, self.line, self.col
             );
-            return true;
-        } else {
-            return false;
+            return Some((self.line, to_be_removed));
         }
+        None
     }
 }
 
