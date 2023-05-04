@@ -7,19 +7,9 @@ use log::info;
 pub fn run() {
     if command_exists("crown") {
         info!("crown command found! Running...");
-        run_command("bash", &["/home/c00834010/dev/crown/run.sh"]);
-        // run_command(
-        //     "/home/c00834010/dev/crown/target/release/crown",
-        //     &["src/avl.rs", "preprocess", "in-place"],
-        // );
-        // run_command(
-        //     "/home/c00834010/dev/crown/target/release/crown",
-        //     &["src/avl.rs", "explicit-addr", "in-place"],
-        // );
-        // run_command(
-        //     "/home/c00834010/dev/crown/target/release/crown",
-        //     &["src/avl.rs", "rewrite"],
-        // );
+        run_command("crown", &["src/avl.rs", "preprocess", "in-place"]);
+        run_command("crown", &["src/avl.rs", "explicit-addr", "in-place"]);
+        run_command("crown", &["src/avl.rs", "rewrite"]);
         info!("crown command operations successfully completed");
     } else {
         info!("crown command not found, skipping...");
