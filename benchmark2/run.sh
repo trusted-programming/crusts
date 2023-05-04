@@ -1,3 +1,3 @@
 for d in */; do
-  (cd "$d" && crusts -r -c -m)
+  (cd "$d" && rm -rf target)
 done
