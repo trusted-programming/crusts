@@ -24,7 +24,6 @@ where
         .for_each(|e: DirEntry<((), ())>| {
             let path = e.path();
             let file = path.to_string_lossy().to_string();
-            info!("working on {}", path.file_name().unwrap().to_str().unwrap());
             func(file);
         });
 }
@@ -91,6 +90,7 @@ pub fn run_cargo_check_json_output() -> Vec<CompilerMessage> {
     let mut command = Command::new("cargo")
         .args(["+nightly", "check", "--message-format=json"])
         .stdout(Stdio::piped())
+        .stderr(Stdio::null())
         .spawn()
         .unwrap();
     let reader = std::io::BufReader::new(command.stdout.take().unwrap());

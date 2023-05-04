@@ -8,6 +8,7 @@ mod metrics;
 mod utils;
 use clap::Parser;
 use constants::VERBOSITY;
+use fern::colors::{Color, ColoredLevelConfig};
 use log::{debug, info, trace, LevelFilter};
 use std::{env, fs, io};
 
@@ -50,15 +51,34 @@ fn main() {
 }
 
 fn setup_logging(verbosity: LevelFilter, metrics: bool) -> Result<(), fern::InitError> {
+    // configure colors for the whole line
+    let colors_line = ColoredLevelConfig::new()
+        .error(Color::Red)
+        .warn(Color::Yellow)
+        // we actually don't need to specify the color for debug and info, they are white by default
+        .info(Color::White)
+        .debug(Color::White)
+        // depending on the terminals color scheme, this is the same as the background color
+        .trace(Color::BrightBlack);
+
+    // configure colors for the name of the level.
+    // since almost all of them are the same as the color for the whole line, we
+    // just clone `colors_line` and overwrite our changes
+    let colors_level = colors_line.info(Color::Green);
+
     let mut config = fern::Dispatch::new()
         .level(verbosity)
-        .format(|out, message, record| {
+        .format(move |out, message, record| {
             out.finish(format_args!(
-                "[{} {}] {}",
-                record.level(),
-                record.target(),
-                message
-            ))
+                "{color_line}[ {level} {target} {color_line}] {message}\x1B[0m",
+                color_line = format_args!(
+                    "\x1B[{}m",
+                    colors_line.get_color(&record.level()).to_fg_str()
+                ),
+                target = record.target(),
+                level = colors_level.color(record.level()),
+                message = message,
+            ));
         })
         .chain(io::stdout());
 

@@ -38,7 +38,7 @@ fn remove_unsafe_predictions(predictions: Vec<Prediction>) -> Vec<(usize, String
 
 // FIXME: improve efficiency of this by doing all the function names at the same time
 fn add_unsafe_keyword(file_path: &str, line: String, line_number: usize) {
-    info!("Adding unsafe keyword for at line:{line}");
+    info!("Adding unsafe keyword for at line number:{line_number}");
 
     let file = fs::File::open(file_path).unwrap();
     let reader = BufReader::new(file);
