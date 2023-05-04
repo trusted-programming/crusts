@@ -1,0 +1,955 @@
+[2023-05-04T08:37:21Z INFO crusts] starting up
+[2023-05-04T08:37:21Z INFO crusts::metrics] STARTING METRICS COLLECTIONS
+[2023-05-04T08:37:21Z INFO crusts::utils] running clippy
+[2023-05-04T08:37:59Z INFO crusts::metrics] found 114 clippy_warnings
+[2023-05-04T08:37:59Z INFO crusts::metrics] copying /home/c00834010/dev/crusts/benchmark2/brotli to /home/c00834010/dev/crusts/benchmark2/metrics/brotli/original
+[2023-05-04T08:37:59Z INFO crusts::metrics] found file_path: ./build.rs
+[2023-05-04T08:37:59Z INFO crusts::metrics] found: 0 unsafe functions; 2 safe functions numbers
+[2023-05-04T08:37:59Z INFO crusts::metrics] found file_path: ./lib.rs
+[2023-05-04T08:37:59Z INFO crusts::metrics] found: 0 unsafe functions; 0 safe functions numbers
+[2023-05-04T08:37:59Z INFO crusts::metrics] found file_path: ./src/common/constants.rs
+[2023-05-04T08:37:59Z INFO crusts::metrics] found: 0 unsafe functions; 0 safe functions numbers
+[2023-05-04T08:37:59Z INFO crusts::metrics] found file_path: ./src/common/context.rs
+[2023-05-04T08:38:00Z INFO crusts::metrics] found: 0 unsafe functions; 0 safe functions numbers
+[2023-05-04T08:38:00Z INFO crusts::metrics] found file_path: ./src/common/dictionary.rs
+[2023-05-04T08:38:02Z INFO crusts::metrics] found: 2 unsafe functions; 2 safe functions numbers
+[2023-05-04T08:38:02Z INFO crusts::metrics] found file_path: ./src/common/platform.rs
+[2023-05-04T08:38:02Z INFO crusts::metrics] found: 2 unsafe functions; 2 safe functions numbers
+[2023-05-04T08:38:02Z INFO crusts::metrics] found file_path: ./src/common/transform.rs
+[2023-05-04T08:38:02Z INFO crusts::metrics] found: 5 unsafe functions; 5 safe functions numbers
+[2023-05-04T08:38:02Z INFO crusts::metrics] found file_path: ./src/dec/bit_reader.rs
+[2023-05-04T08:38:02Z INFO crusts::metrics] found: 12 unsafe functions; 12 safe functions numbers
+[2023-05-04T08:38:02Z INFO crusts::metrics] found file_path: ./src/dec/decode.rs
+[2023-05-04T08:38:02Z INFO crusts::metrics] found: 94 unsafe functions; 94 safe functions numbers
+[2023-05-04T08:38:02Z INFO crusts::metrics] found file_path: ./src/dec/huffman.rs
+[2023-05-04T08:38:03Z INFO crusts::metrics] found: 7 unsafe functions; 7 safe functions numbers
+[2023-05-04T08:38:03Z INFO crusts::metrics] found file_path: ./src/dec/state.rs
+[2023-05-04T08:38:03Z INFO crusts::metrics] found: 5 unsafe functions; 5 safe functions numbers
+[2023-05-04T08:38:03Z INFO crusts::metrics] found file_path: ./src/enc/backward_references.rs
+[2023-05-04T08:38:03Z INFO crusts::metrics] found: 143 unsafe functions; 143 safe functions numbers
+[2023-05-04T08:38:03Z INFO crusts::metrics] found file_path: ./src/enc/backward_references_hq.rs
+[2023-05-04T08:38:03Z INFO crusts::metrics] found: 63 unsafe functions; 63 safe functions numbers
+[2023-05-04T08:38:03Z INFO crusts::metrics] found file_path: ./src/enc/bit_cost.rs
+[2023-05-04T08:38:03Z INFO crusts::metrics] found: 10 unsafe functions; 10 safe functions numbers
+[2023-05-04T08:38:03Z INFO crusts::metrics] found file_path: ./src/enc/block_splitter.rs
+[2023-05-04T08:38:03Z INFO crusts::metrics] found: 53 unsafe functions; 53 safe functions numbers
+[2023-05-04T08:38:03Z INFO crusts::metrics] found file_path: ./src/enc/brotli_bit_stream.rs
+[2023-05-04T08:38:03Z INFO crusts::metrics] found: 66 unsafe functions; 66 safe functions numbers
+[2023-05-04T08:38:03Z INFO crusts::metrics] found file_path: ./src/enc/cluster.rs
+[2023-05-04T08:38:03Z INFO crusts::metrics] found: 29 unsafe functions; 29 safe functions numbers
+[2023-05-04T08:38:03Z INFO crusts::metrics] found file_path: ./src/enc/command.rs
+[2023-05-04T08:38:03Z INFO crusts::metrics] found: 0 unsafe functions; 0 safe functions numbers
+[2023-05-04T08:38:03Z INFO crusts::metrics] found file_path: ./src/enc/compress_fragment.rs
+[2023-05-04T08:38:03Z INFO crusts::metrics] found: 32 unsafe functions; 32 safe functions numbers
+[2023-05-04T08:38:03Z INFO crusts::metrics] found file_path: ./src/enc/compress_fragment_two_pass.rs
+[2023-05-04T08:38:04Z INFO crusts::metrics] found: 36 unsafe functions; 36 safe functions numbers
+[2023-05-04T08:38:04Z INFO crusts::metrics] found file_path: ./src/enc/dictionary_hash.rs
+[2023-05-04T08:38:05Z INFO crusts::metrics] found: 0 unsafe functions; 0 safe functions numbers
+[2023-05-04T08:38:05Z INFO crusts::metrics] found file_path: ./src/enc/encode.rs
+[2023-05-04T08:38:05Z INFO crusts::metrics] found: 192 unsafe functions; 192 safe functions numbers
+[2023-05-04T08:38:05Z INFO crusts::metrics] found file_path: ./src/enc/encoder_dict.rs
+[2023-05-04T08:38:09Z INFO crusts::metrics] found: 1 unsafe functions; 1 safe functions numbers
+[2023-05-04T08:38:09Z INFO crusts::metrics] found file_path: ./src/enc/entropy_encode.rs
+[2023-05-04T08:38:09Z INFO crusts::metrics] found: 13 unsafe functions; 13 safe functions numbers
+[2023-05-04T08:38:09Z INFO crusts::metrics] found file_path: ./src/enc/fast_log.rs
+[2023-05-04T08:38:09Z INFO crusts::metrics] found: 0 unsafe functions; 0 safe functions numbers
+[2023-05-04T08:38:09Z INFO crusts::metrics] found file_path: ./src/enc/histogram.rs
+[2023-05-04T08:38:09Z INFO crusts::metrics] found: 8 unsafe functions; 8 safe functions numbers
+[2023-05-04T08:38:09Z INFO crusts::metrics] found file_path: ./src/enc/literal_cost.rs
+[2023-05-04T08:38:09Z INFO crusts::metrics] found: 6 unsafe functions; 6 safe functions numbers
+[2023-05-04T08:38:09Z INFO crusts::metrics] found file_path: ./src/enc/memory.rs
+[2023-05-04T08:38:09Z INFO crusts::metrics] found: 4 unsafe functions; 4 safe functions numbers
+[2023-05-04T08:38:09Z INFO crusts::metrics] found file_path: ./src/enc/metablock.rs
+[2023-05-04T08:38:09Z INFO crusts::metrics] found: 42 unsafe functions; 42 safe functions numbers
+[2023-05-04T08:38:09Z INFO crusts::metrics] found file_path: ./src/enc/static_dict.rs
+[2023-05-04T08:38:09Z INFO crusts::metrics] found: 11 unsafe functions; 11 safe functions numbers
+[2023-05-04T08:38:09Z INFO crusts::metrics] found file_path: ./src/enc/utf8_util.rs
+[2023-05-04T08:38:09Z INFO crusts::metrics] found: 2 unsafe functions; 2 safe functions numbers
+[2023-05-04T08:38:09Z INFO crusts::metrics] found file_path: ./src/tools/brotli.rs
+[2023-05-04T08:38:09Z INFO crusts::metrics] found: 28 unsafe functions; 28 safe functions numbers
+[2023-05-04T08:38:09Z INFO crusts::metrics] writing metrics to file
+[2023-05-04T08:38:09Z INFO crusts::auto_curs] Starting Auto Curs
+[2023-05-04T08:38:09Z INFO crusts::auto_curs] running curs for unsafe detection file path: ./build.rs
+[2023-05-04T08:38:12Z INFO crusts::auto_curs] running curs for unsafe detection file path: ./lib.rs
+[2023-05-04T08:38:13Z INFO crusts::auto_curs] running curs for unsafe detection file path: ./src/common/constants.rs
+[2023-05-04T08:38:14Z INFO crusts::auto_curs] running curs for unsafe detection file path: ./src/common/context.rs
+[2023-05-04T08:38:14Z INFO crusts::auto_curs] running curs for unsafe detection file path: ./src/common/dictionary.rs
+[2023-05-04T08:38:17Z INFO crusts::auto_curs] removed unsafe from file: ./src/common/dictionary.rs, line 122878, col 0
+[2023-05-04T08:38:17Z INFO crusts::auto_curs] removed unsafe from file: ./src/common/dictionary.rs, line 122882, col 0
+[2023-05-04T08:38:17Z INFO crusts::utils] running cargo check
+[2023-05-04T08:38:51Z INFO crusts::auto_curs] file_name: src/common/dictionary.rs
+[2023-05-04T08:38:51Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/dictionary.rs
+[2023-05-04T08:38:51Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/dictionary.rs"]
+[2023-05-04T08:38:51Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/dictionary.rs line:pub unsafe extern "C" fn BrotliGetDictionary() -> *const BrotliDictionary { line_number:122878
+[2023-05-04T08:38:51Z INFO crusts::auto_curs] running curs for unsafe detection file path: ./src/common/platform.rs
+[2023-05-04T08:38:52Z INFO crusts::auto_curs] removed unsafe from file: ./src/common/platform.rs, line 7, col 0
+[2023-05-04T08:38:52Z INFO crusts::auto_curs] removed unsafe from file: ./src/common/platform.rs, line 14, col 0
+[2023-05-04T08:38:52Z INFO crusts::utils] running cargo check
+[2023-05-04T08:39:26Z INFO crusts::auto_curs] file_name: src/common/platform.rs
+[2023-05-04T08:39:26Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/platform.rs
+[2023-05-04T08:39:26Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/platform.rs"]
+[2023-05-04T08:39:26Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/platform.rs line:pub unsafe extern "C" fn BrotliDefaultAllocFunc( line_number:7
+[2023-05-04T08:39:26Z INFO crusts::auto_curs] file_name: src/common/platform.rs
+[2023-05-04T08:39:26Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/platform.rs
+[2023-05-04T08:39:26Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/platform.rs"]
+[2023-05-04T08:39:26Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/platform.rs line:pub unsafe extern "C" fn BrotliDefaultFreeFunc( line_number:14
+[2023-05-04T08:39:26Z INFO crusts::auto_curs] running curs for unsafe detection file path: ./src/common/transform.rs
+[2023-05-04T08:39:27Z INFO crusts::auto_curs] removed unsafe from file: ./src/common/transform.rs, line 480, col 0
+[2023-05-04T08:39:27Z INFO crusts::auto_curs] removed unsafe from file: ./src/common/transform.rs, line 483, col 0
+[2023-05-04T08:39:27Z INFO crusts::auto_curs] removed unsafe from file: ./src/common/transform.rs, line 502, col 0
+[2023-05-04T08:39:27Z INFO crusts::auto_curs] removed unsafe from file: ./src/common/transform.rs, line 641, col 0
+[2023-05-04T08:39:27Z INFO crusts::auto_curs] removed unsafe from file: ./src/common/transform.rs, line 755, col 0
+[2023-05-04T08:39:27Z INFO crusts::utils] running cargo check
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliGetTransforms() -> *const BrotliTransforms { line_number:480
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn ToUpperCase(mut p: *mut uint8_t) -> libc::c_int { line_number:483
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn Shift( line_number:502
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:pub unsafe extern "C" fn BrotliTransformDictionaryWord( line_number:641
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn run_static_initializers() { line_number:755
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn run_static_initializers() { line_number:755
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn run_static_initializers() { line_number:755
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] file_name: src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs"]
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/common/transform.rs line:unsafe extern "C" fn run_static_initializers() { line_number:755
+[2023-05-04T08:40:01Z INFO crusts::auto_curs] running curs for unsafe detection file path: ./src/dec/bit_reader.rs
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 25, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 36, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 40, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 45, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 54, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 68, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 79, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 85, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 102, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 146, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 153, col 0
+[2023-05-04T08:40:02Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/bit_reader.rs, line 176, col 0
+[2023-05-04T08:40:02Z INFO crusts::utils] running cargo check
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderSaveState( line_number:25
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderSaveState( line_number:25
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderSaveState( line_number:25
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderSaveState( line_number:25
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderSaveState( line_number:25
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderSaveState( line_number:25
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderSaveState( line_number:25
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderSaveState( line_number:25
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderSaveState( line_number:25
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliGetBitsUnmasked(br: *mut BrotliBitReader) -> uint64_t { line_number:36
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliGetBitsUnmasked(br: *mut BrotliBitReader) -> uint64_t { line_number:36
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliDropBits(br: *mut BrotliBitReader, mut n_bits: uint32_t) { line_number:40
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliDropBits(br: *mut BrotliBitReader, mut n_bits: uint32_t) { line_number:40
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliTakeBits( line_number:45
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderRestoreState( line_number:68
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderRestoreState( line_number:68
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderRestoreState( line_number:68
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderRestoreState( line_number:68
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderRestoreState( line_number:68
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderRestoreState( line_number:68
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderRestoreState( line_number:68
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderRestoreState( line_number:68
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliBitReaderRestoreState( line_number:68
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliGetAvailableBits(mut br: *const BrotliBitReader) -> uint32_t { line_number:79
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BrotliPullByte(br: *mut BrotliBitReader) -> libc::c_int { line_number:85
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:unsafe extern "C" fn BitMask(mut n: uint32_t) -> uint32_t { line_number:102
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:pub unsafe extern "C" fn BrotliInitBitReader(br: *mut BrotliBitReader) { line_number:146
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:pub unsafe extern "C" fn BrotliInitBitReader(br: *mut BrotliBitReader) { line_number:146
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:pub unsafe extern "C" fn BrotliWarmupBitReader(br: *mut BrotliBitReader) -> libc::c_int { line_number:153
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs"]
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] Adding unsafe keyword for file_path:/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs line:pub unsafe extern "C" fn BrotliSafeReadBits32Slow( line_number:176
+[2023-05-04T08:40:36Z INFO crusts::auto_curs] running curs for unsafe detection file path: ./src/dec/decode.rs
+[2023-05-04T08:40:38Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 376, col 0
+[2023-05-04T08:40:38Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 380, col 0
+[2023-05-04T08:40:38Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 384, col 0
+[2023-05-04T08:40:38Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 455, col 0
+[2023-05-04T08:40:39Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 463, col 0
+[2023-05-04T08:40:39Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 474, col 0
+[2023-05-04T08:40:39Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 485, col 0
+[2023-05-04T08:40:39Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 491, col 0
+[2023-05-04T08:40:39Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 500, col 0
+[2023-05-04T08:40:39Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 507, col 0
+[2023-05-04T08:40:39Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 565, col 0
+[2023-05-04T08:40:39Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 569, col 0
+[2023-05-04T08:40:39Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 586, col 0
+[2023-05-04T08:40:40Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 590, col 0
+[2023-05-04T08:40:40Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 595, col 0
+[2023-05-04T08:40:40Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 603, col 0
+[2023-05-04T08:40:40Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 617, col 0
+[2023-05-04T08:40:40Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 622, col 0
+[2023-05-04T08:40:40Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 642, col 0
+[2023-05-04T08:40:40Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 651, col 0
+[2023-05-04T08:40:40Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 675, col 0
+[2023-05-04T08:40:40Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 699, col 0
+[2023-05-04T08:40:41Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 713, col 0
+[2023-05-04T08:40:41Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 731, col 0
+[2023-05-04T08:40:41Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 747, col 0
+[2023-05-04T08:40:41Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 8570, col 0
+[2023-05-04T08:40:41Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 8601, col 0
+[2023-05-04T08:40:41Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 8635, col 0
+[2023-05-04T08:40:41Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 8649, col 0
+[2023-05-04T08:40:41Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 8661, col 0
+[2023-05-04T08:40:41Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 8701, col 0
+[2023-05-04T08:40:42Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 8715, col 0
+[2023-05-04T08:40:42Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 8774, col 0
+[2023-05-04T08:40:42Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 8982, col 0
+[2023-05-04T08:40:42Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9001, col 0
+[2023-05-04T08:40:42Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9008, col 0
+[2023-05-04T08:40:42Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9048, col 0
+[2023-05-04T08:40:42Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9063, col 0
+[2023-05-04T08:40:42Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9078, col 0
+[2023-05-04T08:40:42Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9102, col 0
+[2023-05-04T08:40:43Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9110, col 0
+[2023-05-04T08:40:43Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9155, col 0
+[2023-05-04T08:40:43Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9181, col 0
+[2023-05-04T08:40:43Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9247, col 0
+[2023-05-04T08:40:43Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9325, col 0
+[2023-05-04T08:40:43Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9393, col 0
+[2023-05-04T08:40:43Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9445, col 0
+[2023-05-04T08:40:43Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9628, col 0
+[2023-05-04T08:40:43Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9640, col 0
+[2023-05-04T08:40:44Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9669, col 0
+[2023-05-04T08:40:44Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9725, col 0
+[2023-05-04T08:40:44Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9760, col 0
+[2023-05-04T08:40:44Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9932, col 0
+[2023-05-04T08:40:44Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 9997, col 0
+[2023-05-04T08:40:44Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10046, col 0
+[2023-05-04T08:40:44Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10071, col 0
+[2023-05-04T08:40:44Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10082, col 0
+[2023-05-04T08:40:44Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10086, col 0
+[2023-05-04T08:40:45Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10092, col 0
+[2023-05-04T08:40:45Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10105, col 0
+[2023-05-04T08:40:45Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10109, col 0
+[2023-05-04T08:40:45Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10115, col 0
+[2023-05-04T08:40:45Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10133, col 0
+[2023-05-04T08:40:45Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10137, col 0
+[2023-05-04T08:40:45Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10142, col 0
+[2023-05-04T08:40:45Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10157, col 0
+[2023-05-04T08:40:45Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10217, col 0
+[2023-05-04T08:40:46Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10228, col 0
+[2023-05-04T08:40:46Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10276, col 0
+[2023-05-04T08:40:46Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10343, col 0
+[2023-05-04T08:40:46Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10374, col 0
+[2023-05-04T08:40:46Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10391, col 0
+[2023-05-04T08:40:46Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10420, col 0
+[2023-05-04T08:40:46Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10433, col 0
+[2023-05-04T08:40:46Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10445, col 0
+[2023-05-04T08:40:46Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10481, col 0
+[2023-05-04T08:40:47Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10532, col 0
+[2023-05-04T08:40:47Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10539, col 0
+[2023-05-04T08:40:47Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10546, col 0
+[2023-05-04T08:40:47Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10607, col 0
+[2023-05-04T08:40:47Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10615, col 0
+[2023-05-04T08:40:47Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10623, col 0
+[2023-05-04T08:40:47Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 10634, col 0
+[2023-05-04T08:40:47Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 11085, col 0
+[2023-05-04T08:40:47Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 11091, col 0
+[2023-05-04T08:40:48Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 11097, col 0
+[2023-05-04T08:40:48Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 11240, col 0
+[2023-05-04T08:40:48Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 11962, col 0
+[2023-05-04T08:40:48Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 11977, col 0
+[2023-05-04T08:40:48Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 12015, col 0
+[2023-05-04T08:40:48Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 12028, col 0
+[2023-05-04T08:40:48Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 12040, col 0
+[2023-05-04T08:40:48Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 12046, col 0
+[2023-05-04T08:40:48Z INFO crusts::auto_curs] removed unsafe from file: ./src/dec/decode.rs, line 12083, col 0
+[2023-05-04T08:40:48Z INFO crusts::utils] running cargo check
+[2023-05-04T08:41:23Z INFO crusts::auto_curs] file_name: src/dec/bit_reader.rs
+[2023-05-04T08:41:23Z INFO crusts::auto_curs] canonical_path: /home/c00834010/dev/crusts/benchmark2/brotli/src/dec/bit_reader.rs
+[2023-05-04T08:41:23Z INFO crusts::auto_curs] removed_prediction: ["/home/c00834010/dev/crusts/benchmark2/brotli/src/dec/decode.rs"]

@@ -1,0 +1,7 @@
+{
+  "step_dir": "/home/c00834010/dev/crusts/benchmark2/metrics/brotli/original",
+  "total_functions_count": 868,
+  "unsafe_functions_count": 866,
+  "safe_percentage": 0.23041534,
+  "clippy_warnings_count": 114
+}

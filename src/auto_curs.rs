@@ -6,7 +6,7 @@ use rust_hero::{
     query::{Invocation, QueryFormat},
     safe::SafeLanguageModel,
 };
-use std::{collections::HashMap, fs};
+use std::fs;
 use std::{
     fs::canonicalize,
     io::{BufRead, BufReader, Write},
@@ -27,25 +27,19 @@ pub fn run() {
             let path = e.path();
             let file = path.to_string_lossy().to_string();
 
-            let predictions: Vec<Prediction> = unsafe_detection(&file)
-                .iter()
-                .map(|s| Prediction::from_str(s))
-                .collect();
-
-            let mut removed_prediction = HashMap::new();
+            let predictions = unsafe_detection(&file);
+            let mut removed_predictions = Vec::new();
 
             for prediction in predictions {
                 if prediction.prediction && !prediction.actual {
                     let removed = prediction.remove_unsafe();
-                    if removed.is_some() {
-                        removed_prediction
-                            .entry(canonicalize(&prediction.file_path).unwrap())
-                            .or_insert_with(Vec::new)
-                            .push(removed.unwrap());
+                    if let Some(r) = removed {
+                        removed_predictions.push(r);
                     }
                 }
             }
-            if removed_prediction.len() > 0 {
+
+            if removed_predictions.len() > 0 {
                 for compiler_message in run_cargo_check_json_output()
                     .iter()
                     .filter(|m| m.message.level == DiagnosticLevel::Error)
@@ -61,28 +55,27 @@ pub fn run() {
                             file_name = expansion.span.file_name.to_string();
                         }
                         let canonical_path = canonicalize(&file_name).unwrap();
-                        info!("canonical_path: {}", canonical_path.to_string_lossy());
-                        info!("removed_prediction: {:?}", removed_prediction.keys());
-                        let entries = removed_prediction
-                            .get(&canonical_path)
-                            .expect("something went wrong prediction removal not found");
-                        let mut diff = (usize::MAX, None);
+                        let file_path_canonical = canonicalize(&file).unwrap();
+                        if canonical_path.to_str().unwrap() == file_path_canonical.to_str().unwrap()
+                        {
+                            let mut diff = (usize::MAX, None);
 
-                        for entry in entries {
-                            if entry.0 > diagnostic_span.line_start {
-                                continue;
+                            for removed_prediction in &removed_predictions {
+                                if removed_prediction.0 > diagnostic_span.line_start {
+                                    continue;
+                                }
+                                let new_diff = diagnostic_span.line_start - removed_prediction.0;
+                                if new_diff < diff.0 {
+                                    diff = (new_diff, Some(removed_prediction));
+                                }
                             }
-                            let new_diff = diagnostic_span.line_start - entry.0;
-                            if new_diff < diff.0 {
-                                diff = (new_diff, Some(entry));
-                            }
+
+                            add_unsafe_keyword(
+                                canonical_path.to_str().unwrap(),
+                                diff.1.unwrap().1.to_string(),
+                                diff.1.unwrap().0,
+                            );
                         }
-
-                        add_unsafe_keyword(
-                            canonical_path.to_str().unwrap(),
-                            diff.1.unwrap().1.to_string(),
-                            diff.1.unwrap().0,
-                        );
                     }
                 }
             }
@@ -157,7 +150,7 @@ impl Prediction {
     }
 }
 
-fn unsafe_detection(file_path: &str) -> Vec<String> {
+fn unsafe_detection(file_path: &str) -> Vec<Prediction> {
     info!("running curs for unsafe detection file path: {file_path}");
     let args = vec!["rust_hero".to_string(), file_path.to_string()];
     let invocation = Invocation::from_args(args).unwrap();
@@ -167,6 +160,9 @@ fn unsafe_detection(file_path: &str) -> Vec<String> {
             safe_model
                 .predict()
                 .expect("couldn't perform the prediction")
+                .iter()
+                .map(|s| Prediction::from_str(s))
+                .collect()
         } else {
             panic!("Unsupported {:?}", safe_model.get_opt().format);
         }
