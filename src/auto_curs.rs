@@ -38,7 +38,7 @@ pub fn run() {
                     }
                 }
             }
-
+            let mut readded_lines = Vec::new();
             if removed_predictions.len() > 0 {
                 for compiler_message in run_cargo_check_json_output()
                     .iter()
@@ -47,7 +47,6 @@ pub fn run() {
                     for diagnostic_span in &compiler_message.message.spans {
                         let mut file_name = (&diagnostic_span).file_name.to_string();
 
-                        info!("file_name: {}", file_name);
                         if file_name.starts_with("/rustc") {
                             let expansion =
                                 diagnostic_span.to_owned().expansion.expect("expected some");
@@ -69,12 +68,14 @@ pub fn run() {
                                     diff = (new_diff, Some(removed_prediction));
                                 }
                             }
-
-                            add_unsafe_keyword(
-                                canonical_path.to_str().unwrap(),
-                                diff.1.unwrap().1.to_string(),
-                                diff.1.unwrap().0,
-                            );
+                            if !readded_lines.contains(&diff.1.unwrap().0) {
+                                readded_lines.push(diff.1.unwrap().0);
+                                add_unsafe_keyword(
+                                    canonical_path.to_str().unwrap(),
+                                    diff.1.unwrap().1.to_string(),
+                                    diff.1.unwrap().0,
+                                );
+                            }
                         }
                     }
                 }
