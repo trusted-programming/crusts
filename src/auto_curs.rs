@@ -1,11 +1,11 @@
-use crate::utils::{is_file_with_ext, run_cargo_check_json_output};
+use crate::utils::{process_files_with_ext, run_cargo_check_json_output};
 use cargo_metadata::diagnostic::DiagnosticLevel;
-use jwalk::WalkDir;
 use log::info;
 use rust_hero::{
     query::{Invocation, QueryFormat},
     safe::SafeLanguageModel,
 };
+use std::collections::HashSet;
 use std::fs;
 use std::{
     fs::canonicalize,
@@ -18,74 +18,27 @@ use std::{
 /// after that runs cargo check and while it finds an error it will add the unsafe back for the function and check again
 pub fn run() {
     info!("Starting Auto Curs");
-    WalkDir::new(".")
-        .sort(true)
+    process_files_with_ext("rs", |file| {
+        let predictions = unsafe_detection(&file);
+        let removed_predictions = remove_unsafe_predictions(predictions);
+
+        if !removed_predictions.is_empty() {
+            readd_required_unsafe_keywords(&file, &removed_predictions);
+        }
+    });
+}
+
+fn remove_unsafe_predictions(predictions: Vec<Prediction>) -> Vec<(usize, String)> {
+    predictions
         .into_iter()
-        .filter_map(Result::ok)
-        .filter(|e| is_file_with_ext(&e.path(), "rs"))
-        .for_each(|e: jwalk::DirEntry<((), ())>| {
-            let path = e.path();
-            let file = path.to_string_lossy().to_string();
-
-            let predictions = unsafe_detection(&file);
-            let mut removed_predictions = Vec::new();
-
-            for prediction in predictions {
-                if prediction.prediction && !prediction.actual {
-                    let removed = prediction.remove_unsafe();
-                    if let Some(r) = removed {
-                        removed_predictions.push(r);
-                    }
-                }
-            }
-            let mut readded_lines = Vec::new();
-            if removed_predictions.len() > 0 {
-                for compiler_message in run_cargo_check_json_output()
-                    .iter()
-                    .filter(|m| m.message.level == DiagnosticLevel::Error)
-                {
-                    for diagnostic_span in &compiler_message.message.spans {
-                        let mut file_name = (&diagnostic_span).file_name.to_string();
-
-                        if file_name.starts_with("/rustc") {
-                            let expansion =
-                                diagnostic_span.to_owned().expansion.expect("expected some");
-
-                            file_name = expansion.span.file_name.to_string();
-                        }
-                        let canonical_path = canonicalize(&file_name).unwrap();
-                        let file_path_canonical = canonicalize(&file).unwrap();
-                        if canonical_path.to_str().unwrap() == file_path_canonical.to_str().unwrap()
-                        {
-                            let mut diff = (usize::MAX, None);
-
-                            for removed_prediction in &removed_predictions {
-                                if removed_prediction.0 > diagnostic_span.line_start {
-                                    continue;
-                                }
-                                let new_diff = diagnostic_span.line_start - removed_prediction.0;
-                                if new_diff < diff.0 {
-                                    diff = (new_diff, Some(removed_prediction));
-                                }
-                            }
-                            if !readded_lines.contains(&diff.1.unwrap().0) {
-                                readded_lines.push(diff.1.unwrap().0);
-                                add_unsafe_keyword(
-                                    canonical_path.to_str().unwrap(),
-                                    diff.1.unwrap().1.to_string(),
-                                    diff.1.unwrap().0,
-                                );
-                            }
-                        }
-                    }
-                }
-            }
-        });
+        .filter(|p| p.prediction && !p.actual)
+        .filter_map(|p| p.remove_unsafe())
+        .collect()
 }
 
 // FIXME: improve efficiency of this by doing all the function names at the same time
 fn add_unsafe_keyword(file_path: &str, line: String, line_number: usize) {
-    info!("Adding unsafe keyword for file_path:{file_path} line:{line} line_number:{line_number}");
+    info!("Adding unsafe keyword for at line:{line}");
 
     let file = fs::File::open(file_path).unwrap();
     let reader = BufReader::new(file);
@@ -112,14 +65,12 @@ struct Prediction {
 
 impl Prediction {
     fn from_str(s: &str) -> Self {
-        let mut split = s.split(',');
-        let file_path = split.next().unwrap().to_string();
-        let line = split.next().unwrap().parse::<usize>().unwrap() - 1;
-        let col = split.next().unwrap().parse::<usize>().unwrap() - 1;
-        let _end_line = split.next().unwrap();
-        let _end_col = split.next().unwrap();
-        let prediction = !split.next().unwrap().contains("Unsafe");
-        let actual = split.next().unwrap().parse::<bool>().unwrap();
+        let parts: Vec<&str> = s.split(',').collect();
+        let file_path = parts[0].to_string();
+        let line = parts[1].parse::<usize>().unwrap() - 1;
+        let col = parts[2].parse::<usize>().unwrap() - 1;
+        let prediction = !parts[5].contains("Unsafe");
+        let actual = parts[6].parse::<bool>().unwrap();
 
         Self {
             file_path,
@@ -135,18 +86,22 @@ impl Prediction {
         let reader = BufReader::new(file);
         let mut lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
         let to_be_removed = lines[self.line][self.col..].to_owned();
+
         if lines[self.line][self.col..].contains("unsafe") {
             lines[self.line] = lines[self.line].replacen("unsafe", "", 1);
+
             let mut file = fs::File::create(&self.file_path).expect("Failed to create file");
-            for line in lines {
+            for line in &lines {
                 writeln!(file, "{}", line).expect("Failed to write to file");
             }
+
             info!(
                 "removed unsafe from file: {}, line {}, col {}",
                 self.file_path, self.line, self.col
             );
             return Some((self.line, to_be_removed));
         }
+
         None
     }
 }
@@ -169,5 +124,50 @@ fn unsafe_detection(file_path: &str) -> Vec<Prediction> {
         }
     } else {
         panic!("Unsupported invocation");
+    }
+}
+
+fn readd_required_unsafe_keywords(file: &str, removed_predictions: &[(usize, String)]) {
+    let mut readded_lines = HashSet::new();
+
+    let error_spans = run_cargo_check_json_output()
+        .into_iter()
+        .filter(|m| m.message.level == DiagnosticLevel::Error)
+        .flat_map(|compiler_message| compiler_message.message.spans);
+
+    for diagnostic_span in error_spans {
+        let file_name = if diagnostic_span.file_name.starts_with("/rustc") {
+            diagnostic_span
+                .expansion
+                .as_ref()
+                .expect("expected some")
+                .span
+                .file_name
+                .to_string()
+        } else {
+            diagnostic_span.file_name.to_string()
+        };
+
+        let canonical_path = canonicalize(&file_name).unwrap();
+        let file_path_canonical = canonicalize(&file).unwrap();
+
+        if canonical_path != file_path_canonical {
+            continue;
+        }
+
+        let closest_removed_prediction = removed_predictions
+            .iter()
+            .filter(|(line, _)| *line <= diagnostic_span.line_start)
+            .min_by_key(|(line, _)| diagnostic_span.line_start - line);
+
+        if let Some((line, removed_text)) = closest_removed_prediction {
+            if readded_lines.insert(*line) {
+                add_unsafe_keyword(
+                    canonical_path.to_str().unwrap(),
+                    removed_text.to_string(),
+                    *line,
+                );
+            }
+        }
     }
 }

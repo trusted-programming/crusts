@@ -1,7 +1,6 @@
 use crate::constants::{CONFIG, RULES};
-use crate::utils::{is_file_with_ext, run_command};
+use crate::utils::{process_files_with_ext, run_command};
 use flate2::read::GzDecoder;
-use jwalk::WalkDir;
 use log::info;
 use std::{
     env,
@@ -21,11 +20,13 @@ pub fn run(txl: Option<PathBuf>) {
         .expect("Failed to convert path to string")
         .to_string();
 
-    if !path.join("c/unsafe.x").exists() {
+    let mut rules: Vec<String> = RULES.into_iter().map(|rule| rule.to_string()).collect();
+    let c_folder = path.join("c");
+    let all_rules_exist = rules.iter().all(|rule| c_folder.join(rule).exists());
+
+    if !all_rules_exist {
         download_and_extract_rules();
     }
-
-    let mut rules: Vec<String> = RULES.into_iter().map(|rule| rule.to_string()).collect();
 
     if let Some(file_path) = txl {
         let exe_file = process_txl_file(&file_path, &path);
@@ -74,29 +75,22 @@ fn get_filename_and_filepath(file_path: &Path) -> (String, String) {
 fn apply_transformation_rules(rules: &Vec<String>, path_string: &str) {
     for r in rules {
         info!("applying {r}...");
-        WalkDir::new(".")
-            .sort(true)
-            .into_iter()
-            .filter_map(Result::ok)
-            .filter(|e| is_file_with_ext(&e.path(), "rs"))
-            .for_each(|e| {
-                let path = e.path();
-                let file = path.to_string_lossy().to_string();
-                let txl_command = Command::new(r)
-                    .args([&file, "-", &format!("{path_string}/Rust")])
-                    .stdout(Stdio::piped())
-                    .spawn()
-                    .expect("failed txl command");
-                let rustfmt = Command::new("rustfmt")
-                    .stdin(txl_command.stdout.unwrap())
-                    .stdout(Stdio::piped())
-                    .spawn()
-                    .expect("failed rustfmt command");
-                let output = rustfmt
-                    .wait_with_output()
-                    .expect("failed to write to stdout");
-                std::fs::write(file, output.stdout).expect("can't write to the file");
-            });
+        process_files_with_ext("rs", |file| {
+            let txl_command = Command::new(r)
+                .args([&file, "-", &format!("{path_string}/Rust")])
+                .stdout(Stdio::piped())
+                .spawn()
+                .expect("failed txl command");
+            let rustfmt = Command::new("rustfmt")
+                .stdin(txl_command.stdout.unwrap())
+                .stdout(Stdio::piped())
+                .spawn()
+                .expect("failed rustfmt command");
+            let output = rustfmt
+                .wait_with_output()
+                .expect("failed to write to stdout");
+            std::fs::write(file.to_string(), output.stdout).expect("can't write to the file");
+        });
     }
 }
 

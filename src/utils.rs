@@ -1,4 +1,5 @@
 use cargo_metadata::{CompilerMessage, Message};
+use jwalk::{DirEntry, WalkDir};
 use std::{
     path::Path,
     process::{Command, Stdio},
@@ -7,10 +8,25 @@ use std::{
 use log::info;
 use serde_json::Value;
 
-pub fn is_file_with_ext(p: &Path, file_ext: &str) -> bool {
-    p.extension()
-        .and_then(|ext| ext.to_str())
-        .map_or(false, |ext_str| ext_str == file_ext)
+pub fn is_file_with_ext(path: &Path, ext: &str) -> bool {
+    path.is_file() && path.extension().map_or(false, |e| e == ext)
+}
+
+pub fn process_files_with_ext<F>(ext: &str, mut func: F)
+where
+    F: FnMut(String),
+{
+    WalkDir::new(".")
+        .sort(true)
+        .into_iter()
+        .filter_map(Result::ok)
+        .filter(|e| is_file_with_ext(&e.path(), ext))
+        .for_each(|e: DirEntry<((), ())>| {
+            let path = e.path();
+            let file = path.to_string_lossy().to_string();
+            info!("working on {}", path.file_name().unwrap().to_str().unwrap());
+            func(file);
+        });
 }
 
 pub fn command_exists(command: &str) -> bool {

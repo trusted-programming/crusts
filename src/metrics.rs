@@ -1,6 +1,5 @@
-use crate::utils::{is_file_with_ext, run_clippy_json_output};
+use crate::utils::{process_files_with_ext, run_clippy_json_output};
 use fs_extra::dir::CopyOptions;
-use jwalk::WalkDir;
 use log::info;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
@@ -52,19 +51,13 @@ pub fn run(step: &str) {
 
     let mut unsafe_functions_count = 0;
     let mut total_functions_count = 0;
-    WalkDir::new(".")
-        .sort(true)
-        .into_iter()
-        .filter_map(Result::ok)
-        .filter(|e| is_file_with_ext(&e.path(), "rs"))
-        .for_each(|e| {
-            let path = e.path();
-            info!("found file_path: {}", path.to_str().unwrap());
-            let (unsafe_functions, total_functions) =
-                calculate_number_of_unsafe_function_and_safe(path.to_str().unwrap());
-            unsafe_functions_count += unsafe_functions;
-            total_functions_count += total_functions;
-        });
+    process_files_with_ext("rs", |file| {
+        info!("found file_path: {}", file);
+        let (unsafe_functions, total_functions) =
+            calculate_number_of_unsafe_function_and_safe(&file);
+        unsafe_functions_count += unsafe_functions;
+        total_functions_count += total_functions;
+    });
     let safe_percentage =
         100.0 - unsafe_functions_count as f32 * 100.0 / total_functions_count as f32;
     let metrics = Metrics {
