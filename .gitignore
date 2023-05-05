@@ -1,7 +1,8 @@
-/target
 Cargo.lock
 src/txl
 src/.main.rs.pending-snap
 .env
 tmp
 test*
+**metrics
+**target
