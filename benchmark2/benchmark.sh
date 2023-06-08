@@ -1,5 +1,5 @@
 #!/bin/sh
 
 for d in */; do
-  (cd "$d" && crusts -r && cargo +nightly check)
+  (cd "$d/i" && crusts && cargo +nightly check)
 done
