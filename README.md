@@ -1,7 +1,7 @@
 # CRustS - Transpiling Unsafe C code to Safer Rust
 
 ```
-Michael Ling, Yijun Yu, Haitao Wu, Yuan Wang, James R. Cordy, Ahmed E. Hassan
+Michael Ling, Yijun Yu, Haitao Wu, Yuan Wang, James R. Cordy, Ahmed E. Hassan, Luca Carlig
 Trustworthiness Software Engineering & Open Source Lab
 Huawei Technologies, Inc.
 ```

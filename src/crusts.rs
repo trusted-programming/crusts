@@ -89,7 +89,7 @@ fn apply_transformation_rules(rules: &Vec<String>, path_string: &str) {
             let output = rustfmt
                 .wait_with_output()
                 .expect("failed to write to stdout");
-            std::fs::write(file.to_string(), output.stdout).expect("can't write to the file");
+            std::fs::write(file, output.stdout).expect("can't write to the file");
         });
     }
 }

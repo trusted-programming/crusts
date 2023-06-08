@@ -61,7 +61,7 @@ pub fn run(step: &str) {
     let safe_percentage =
         100.0 - unsafe_functions_count as f32 * 100.0 / total_functions_count as f32;
     let metrics = Metrics {
-        step_dir: step_dir,
+        step_dir,
         unsafe_functions_count,
         total_functions_count,
         safe_percentage,

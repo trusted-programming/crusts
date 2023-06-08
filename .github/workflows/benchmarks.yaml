@@ -1,0 +1,26 @@
+name: Benchmarks
+
+on:
+  push:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build_and_test:
+    name: CrustS - latest
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: update nightly and setup as default
+        run: rustup update nightly && rustup default nightly
+
+      - name: install CrustS
+        run: cargo install --path .
+
+      - name: run crusts in all dir and cargo check
+        working-directory: ./benchmark2
+        run: |
+          sh benchmark.sh

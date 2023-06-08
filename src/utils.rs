@@ -1,4 +1,4 @@
-use cargo_metadata::{CompilerMessage, Message};
+// use cargo_metadata::{CompilerMessage, Message};
 use jwalk::{DirEntry, WalkDir};
 use std::{
     path::Path,
@@ -85,30 +85,30 @@ pub fn run_clippy_json_output() -> Vec<Value> {
 }
 
 // TODO: for clippy and cargo check, serialize to a struct instead of a vector of values
-pub fn run_cargo_check_json_output() -> Vec<CompilerMessage> {
-    info!("running cargo check");
-    let mut command = Command::new("cargo")
-        .args(["+nightly", "check", "--message-format=json"])
-        .stdout(Stdio::piped())
-        .stderr(Stdio::null())
-        .spawn()
-        .unwrap();
-    let reader = std::io::BufReader::new(command.stdout.take().unwrap());
-    let mut compiler_messages: Vec<CompilerMessage> = Vec::new();
-    for message in cargo_metadata::Message::parse_stream(reader) {
-        if let Ok(msg) = message {
-            if let Message::CompilerMessage(compiler_message) = msg {
-                compiler_messages.push(compiler_message);
-            }
-        }
-    }
+// pub fn run_cargo_check_json_output() -> Vec<CompilerMessage> {
+//     info!("running cargo check");
+//     let mut command = Command::new("cargo")
+//         .args(["+nightly", "check", "--message-format=json"])
+//         .stdout(Stdio::piped())
+//         .stderr(Stdio::null())
+//         .spawn()
+//         .unwrap();
+//     let reader = std::io::BufReader::new(command.stdout.take().unwrap());
+//     let mut compiler_messages: Vec<CompilerMessage> = Vec::new();
+//     for message in cargo_metadata::Message::parse_stream(reader) {
+//         if let Ok(msg) = message {
+//             if let Message::CompilerMessage(compiler_message) = msg {
+//                 compiler_messages.push(compiler_message);
+//             }
+//         }
+//     }
 
-    let _output = command.wait().expect("Couldn't get cargo's exit status");
+//     let _output = command.wait().expect("Couldn't get cargo's exit status");
 
-    // FIXME: this is a hack to delete the target folder, should be ignored during copy instead of delete
-    if Path::new("target").exists() {
-        std::fs::remove_dir_all("target").expect("failed to delete target folder folder");
-    }
+//     // FIXME: this is a hack to delete the target folder, should be ignored during copy instead of delete
+//     if Path::new("target").exists() {
+//         std::fs::remove_dir_all("target").expect("failed to delete target folder folder");
+//     }
 
-    compiler_messages
-}
+//     compiler_messages
+// }
