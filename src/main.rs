@@ -1,11 +1,12 @@
-mod auto_curs;
+// mod auto_curs;
 mod c2rust;
 mod cli;
 mod constants;
-mod crown;
+// mod crown;
 mod crusts;
 mod metrics;
 mod utils;
+
 use clap::Parser;
 use constants::VERBOSITY;
 use fern::colors::{Color, ColoredLevelConfig};
@@ -36,18 +37,18 @@ fn main() {
             metrics::run("txl");
         }
     }
-    if !cli.skip_crown {
-        crown::run();
-        if cli.metrics {
-            metrics::run("crown");
-        }
-    }
-    if cli.auto_curs {
-        auto_curs::run();
-        if cli.metrics {
-            metrics::run("auto_curs");
-        }
-    }
+    // if !cli.skip_crown {
+    //     crown::run();
+    //     if cli.metrics {
+    //         metrics::run("crown");
+    //     }
+    // }
+    // if cli.auto_curs {
+    //     auto_curs::run();
+    //     if cli.metrics {
+    //         metrics::run("auto_curs");
+    //     }
+    // }
 }
 
 fn setup_logging(verbosity: LevelFilter, metrics: bool) -> Result<(), fern::InitError> {
