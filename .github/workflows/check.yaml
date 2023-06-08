@@ -1,14 +1,10 @@
-permissions:
-  contents: read
-on:
-  push:
-    branches:
-      - "**"
+name: Check
+on: [push]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
-name: check
+
 jobs:
   fmt:
     runs-on: ubuntu-latest
