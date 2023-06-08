@@ -17,7 +17,11 @@ jobs:
         run: rustup update nightly && rustup default nightly
 
       - name: install CrustS
-        run: cargo install --path .
+        run: |
+        cargo install --path .
+        export PATH=$PATH:~/.cargo/bin
+      
+
 
       - name: BENCHMARK 1
         working-directory: ./benchmark1
@@ -34,8 +38,10 @@ jobs:
         run: rustup update nightly && rustup default nightly
 
       - name: install CrustS
-        run: cargo install --path .
-
+        run: |
+        cargo install --path .
+        export PATH=$PATH:~/.cargo/bin
+        
       - name: BENCHMARK 2
         working-directory: ./benchmark2
         run: sh benchmark.sh
