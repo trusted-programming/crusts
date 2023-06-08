@@ -18,8 +18,8 @@ jobs:
 
       - name: install CrustS
         run: |
-        cargo install --path .
-        export PATH=$PATH:~/.cargo/bin
+          cargo install --path .
+          export PATH=$PATH:~/.cargo/bin
       
 
 
@@ -39,9 +39,9 @@ jobs:
 
       - name: install CrustS
         run: |
-        cargo install --path .
-        export PATH=$PATH:~/.cargo/bin
-        
+          cargo install --path .
+          export PATH=$PATH:~/.cargo/bin
+
       - name: BENCHMARK 2
         working-directory: ./benchmark2
         run: sh benchmark.sh
