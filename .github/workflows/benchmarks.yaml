@@ -7,7 +7,7 @@ concurrency:
 
 jobs:
   benchmark1:
-    name: CrustS - latest
+    name: benchmark1
     runs-on: ubuntu-latest
 
     steps:
@@ -16,19 +16,20 @@ jobs:
       - name: update nightly and setup as default
         run: rustup update nightly && rustup default nightly
 
+      - name: install c2rust
+        run: cargo install c2rust
+
       - name: install CrustS
         run: |
           cargo install --path .
           export PATH=$PATH:~/.cargo/bin
-      
-
 
       - name: BENCHMARK 1
         working-directory: ./benchmark1
         run: sh benchmark.sh
 
   benchmark2:
-    name: CrustS - latest
+    name: benchmark2
     runs-on: ubuntu-latest
 
     steps:
@@ -36,6 +37,9 @@ jobs:
 
       - name: update nightly and setup as default
         run: rustup update nightly && rustup default nightly
+
+      - name: install c2rust
+        run: cargo install c2rust
 
       - name: install CrustS
         run: |
