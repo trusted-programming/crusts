@@ -40,5 +40,5 @@ jobs:
           components: clippy
       - name: cargo clippy
         uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        # with:
+        #   token:
