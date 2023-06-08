@@ -9,6 +9,7 @@ authors = [
     "Yuan Wang <yuan.wang@huawei.com>",
     "James R. Cordy <cordy@cs.queensu.ca>",
     "Ahmed E. Hassan <hassan@queensu.ca>",
+    "Luca Carlig <luca.carlig@huawei.com"
 ]
 description = "CRustS - From Unsafe C to safer Rust"
 repository = "https://github.com/trusted-programming/crusts"
