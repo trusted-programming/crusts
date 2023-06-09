@@ -15,11 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install rust toolchains
+      - name: Install rust nightly-2021-11-22 toolchain
         uses: dtolnay/rust-toolchain@master
         with:
           components: rustfmt
-          toolchain: stable,nightly,nightly-2021-11-22
+          toolchain: nightly-2021-11-22
+
+      - name: Install rust nightly toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rustfmt
 
       - name: install prerequisites for c2rust
         run: sudo apt install build-essential llvm libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
@@ -45,11 +50,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install rust toolchains
+
+      - name: Install rust nightly-2021-11-22 toolchain
         uses: dtolnay/rust-toolchain@master
         with:
           components: rustfmt
-          toolchain: stable,nightly,nightly-2021-11-22
+          toolchain: nightly-2021-11-22
+
+      - name: Install rust nightly toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rustfmt
 
       - name: install prerequisites for c2rust
         run: sudo apt install build-essential llvm libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
