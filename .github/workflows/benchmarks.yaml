@@ -6,8 +6,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  benchmark1:
-    name: benchmark1
+  one:
+    name: one
     runs-on: ubuntu-latest
 
     steps:
@@ -15,6 +15,9 @@ jobs:
 
       - name: update nightly and setup as default
         run: rustup update nightly && rustup default nightly
+
+      - name: install prerequisites for c2rust
+        run: sudo apt install build-essential llvm clang libclang-dev cmake libssl-dev pkg-config python3 git
 
       - name: install c2rust
         run: cargo install c2rust
@@ -28,8 +31,8 @@ jobs:
         working-directory: ./benchmark1
         run: sh benchmark.sh
 
-  benchmark2:
-    name: benchmark2
+  two:
+    name: two
     runs-on: ubuntu-latest
 
     steps:
@@ -37,6 +40,9 @@ jobs:
 
       - name: update nightly and setup as default
         run: rustup update nightly && rustup default nightly
+
+      - name: install prerequisites for c2rust
+        run: sudo apt install build-essential llvm clang libclang-dev cmake libssl-dev pkg-config python3 git
 
       - name: install c2rust
         run: cargo install c2rust
