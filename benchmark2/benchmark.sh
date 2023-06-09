@@ -1,17 +1,19 @@
 #!/bin/sh
 
-count=0
-counter=0
+sucess_count=0
+failed_count=0
+total_count=0
 
 for d in */; do
   (cd "$d" && crusts && cargo +nightly check)
-  counter=$((counter + 1))
+  total_count=$((total_count + 1))
   if [[ $? -eq 0 ]]; then
-    count=$((count + 1))
+    sucess_count=$((sucess_count + 1))
+    else
+    failed_count=$((failed_count + 1))
   fi
-  echo "Total $counter times"
-  echo "Failed $count times" 
 done
 
-echo "Total $counter times"
-echo "Failed $count times"
+echo "Total $total_count times"
+echo "Successfull $sucess_count times"
+echo "Failed $failed_count times"
