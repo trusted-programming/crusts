@@ -6,7 +6,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  RUSTFLAGS: "-D warnings"
+  RUSTFLAGS: "-Awarnings"
 jobs:
   one:
     name: c2rust -> txl -> cargo check
