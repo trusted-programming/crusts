@@ -4,6 +4,7 @@ mod cli;
 mod constants;
 // mod crown;
 mod crusts;
+mod inlay_hints;
 mod metrics;
 mod utils;
 
@@ -35,6 +36,13 @@ fn main() {
         crusts::run(cli.custom_txl);
         if cli.metrics {
             metrics::run("txl");
+        }
+    }
+
+    if !cli.skip_inlay_hints {
+        inlay_hints::run();
+        if cli.metrics {
+            metrics::run("inlay_hints");
         }
     }
     // if !cli.skip_crown {

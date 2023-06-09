@@ -9,6 +9,8 @@ pub struct Cli {
     pub skip_txl_rules: bool,
     #[arg (short = 'c', long = "skip_crown", action = clap :: ArgAction :: SetTrue, help = "skip running crown")]
     pub skip_crown: bool,
+    #[arg (short = 'i', long = "skip_inlay_hints", action = clap :: ArgAction :: SetTrue, help = "skip running inlay hints")]
+    pub skip_inlay_hints: bool,
     #[arg(
         short = 'x',
         long = "add_txl",
