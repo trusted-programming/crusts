@@ -7,7 +7,7 @@ concurrency:
 
 jobs:
   one:
-    name: one
+    name: c2rust -> txl -> cargo check
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +36,7 @@ jobs:
         run: sh benchmark.sh
 
   two:
-    name: two
+    name: txl -> cargo check
     runs-on: ubuntu-latest
 
     steps:
