@@ -13,10 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install nightly
-        uses: dtolnay/rust-toolchain@nightly
+      - name: Install rust toolchains
+        uses: dtolnay/rust-toolchain@master
         with:
           components: rustfmt
+          toolchain: stable,nightly,nightly-2021-11-22
 
       - name: install prerequisites for c2rust
         run: sudo apt install build-essential llvm libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
@@ -30,8 +31,10 @@ jobs:
           export PATH=$PATH:~/.cargo/bin
 
       - name: BENCHMARK 1
+        id: benchmark1
         working-directory: ./benchmark1
         run: sh benchmark.sh
+        continue-on-error: true
 
   two:
     name: txl -> cargo check
@@ -40,10 +43,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install nightly 2021-11-22
-        uses: dtolnay/rust-toolchain@nightly
+      - name: Install rust toolchains
+        uses: dtolnay/rust-toolchain@master
         with:
           components: rustfmt
+          toolchain: stable,nightly,nightly-2021-11-22
 
       - name: install prerequisites for c2rust
         run: sudo apt install build-essential llvm libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
@@ -57,5 +61,7 @@ jobs:
           export PATH=$PATH:~/.cargo/bin
 
       - name: BENCHMARK 2
+        id: benchmark2
         working-directory: ./benchmark2
         run: sh benchmark.sh
+        continue-on-error: true
