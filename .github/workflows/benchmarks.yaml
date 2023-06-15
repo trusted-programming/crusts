@@ -40,6 +40,11 @@ jobs:
           cargo install --path .
           export PATH=$PATH:~/.cargo/bin
 
+      - name: copy TXL transactions
+        run: |
+          mkdir ~/.cargo/bin/Rust/
+          cp -r txl_rules/* ~/.cargo/bin/Rust/
+
       - name: BENCHMARK 1
         id: benchmark1
         working-directory: ./benchmark1
@@ -73,8 +78,13 @@ jobs:
 
       - name: install CrustS
         run: |
-          cargo install --path .
-          export PATH=$PATH:~/.cargo/bin
+            cargo install --path .
+            export PATH=$PATH:~/.cargo/bin
+
+      - name: copy TXL transactions
+        run: |
+            mkdir ~/.cargo/bin/Rust/
+            cp -r txl_rules/* ~/.cargo/bin/Rust/
 
       - name: BENCHMARK 2
         id: benchmark2

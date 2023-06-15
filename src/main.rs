@@ -39,18 +39,19 @@ fn main() {
         }
     }
 
-    if !cli.skip_inlay_hints {
+    if cli.inlay_hints {
         inlay_hints::run();
         if cli.metrics {
             metrics::run("inlay_hints");
         }
     }
-    // if !cli.skip_crown {
+    // if !cli.crown {
     //     crown::run();
     //     if cli.metrics {
     //         metrics::run("crown");
     //     }
     // }
+
     // if cli.auto_curs {
     //     auto_curs::run();
     //     if cli.metrics {
