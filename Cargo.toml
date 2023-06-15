@@ -9,7 +9,7 @@ authors = [
     "Yuan Wang <yuan.wang@huawei.com>",
     "James R. Cordy <cordy@cs.queensu.ca>",
     "Ahmed E. Hassan <hassan@queensu.ca>",
-    "Luca Carlig <luca.carlig@huawei.com"
+    "Luca Carlig <luca.carlig@huawei.com",
 ]
 description = "CRustS - From Unsafe C to safer Rust"
 repository = "https://github.com/trusted-programming/crusts"
@@ -29,8 +29,8 @@ fs_extra = "1.3"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 # rust_hero = { path = "../curs" }
-cargo_metadata = "0.15.4"
-fern = { version = "0.6.2", features = ["colored"] }
+cargo_metadata = "0.15"
+fern = { version = "0.6", features = ["colored"] }
 
 [dev-dependencies]
-tempfile = "3.5"
+tempfile = "3.6"
