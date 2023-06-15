@@ -21,11 +21,13 @@ pub fn run(txl: Option<PathBuf>) {
         .to_string();
 
     let mut rules: Vec<String> = RULES.into_iter().map(|rule| rule.to_string()).collect();
-    let c_folder = path.join("c");
-    let all_rules_exist = rules.iter().all(|rule| c_folder.join(rule).exists());
+    let rules_folder = path.join("Rust/");
+    let all_rules_exist = rules.iter().all(|rule| rules_folder.join(rule).exists());
 
     if !all_rules_exist {
         download_and_extract_rules();
+    } else {
+        info!("TXL rules found locally");
     }
 
     if let Some(file_path) = txl {
@@ -45,7 +47,7 @@ pub fn run(txl: Option<PathBuf>) {
 }
 
 fn download_and_extract_rules() {
-    info!("unsafe.x not found, downloading all txl rules... ");
+    info!("TXL rules not found locally, downloading all TXL rules... ");
     let resp =
         reqwest::blocking::get(CONFIG.url).expect("failed to get a response for the rules request");
     let bytes = resp
