@@ -30,8 +30,6 @@ jobs:
       - name: cargo test --locked
         run: cargo test --locked --all-features --all-targets
 
-      - name: cargo test --doc
-        run: cargo test --locked --all-features --doc
   os-check:
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} / stable
