@@ -45,48 +45,8 @@ jobs:
           mkdir ~/.cargo/bin/Rust/
           cp -r txl_rules/* ~/.cargo/bin/Rust/
 
-      - name: BENCHMARK 1
-        id: benchmark1
-        working-directory: ./benchmark1
-        run: sh benchmark.sh
-        continue-on-error: true
-
-  two:
-    name: txl -> cargo check
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install rust nightly-2021-11-22 toolchain
-        uses: dtolnay/rust-toolchain@master
-        with:
-          components: rustfmt
-          toolchain: nightly-2021-11-22
-
-      - name: Install rust nightly toolchain
-        uses: dtolnay/rust-toolchain@nightly
-        with:
-          components: rustfmt
-
-      - name: install prerequisites for c2rust
-        run: sudo apt install build-essential llvm libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
-
-      - name: install c2rust
-        run: cargo install c2rust
-
-      - name: install CrustS
-        run: |
-            cargo install --path .
-            export PATH=$PATH:~/.cargo/bin
-
-      - name: copy TXL transactions
-        run: |
-            mkdir ~/.cargo/bin/Rust/
-            cp -r txl_rules/* ~/.cargo/bin/Rust/
-
-      - name: BENCHMARK 2
-        id: benchmark2
-        working-directory: ./benchmark2
+      - name: BENCHMARK
+        id: benchmark
+        working-directory: ./benchmark
         run: sh benchmark.sh
         continue-on-error: true
