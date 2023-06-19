@@ -21,7 +21,16 @@ fn main() {
 
     debug!("DEBUG output enabled.");
     trace!("TRACE output enabled.");
-    info!("starting up");
+    info!(
+        "starting up {}",
+        env::current_dir()
+            .ok()
+            .expect("failed to get current dir")
+            .file_name()
+            .expect("failed to get current dir")
+            .to_string_lossy()
+            .to_string()
+    );
     if cli.metrics {
         metrics::run("original");
     }

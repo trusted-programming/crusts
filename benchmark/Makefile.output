@@ -1,8 +1,0 @@
-all: target/debug/main
-	@./target/debug/main
-
-target/debug/main: ../i/main.c
-	@cp ../i/main.c .
-	@crusts > t1.log
-	@cargo build > t2.log
-	@rm -f main.c # t1.log t2.log
