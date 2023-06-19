@@ -1,2 +1,2 @@
 # remove form language github count to all files and directories in the directory
-ano-dir/** benchmark
+benchmark/**  linguist-vendored
