@@ -58,7 +58,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-
       - name: Install rust nightly-2021-11-22 toolchain
         uses: dtolnay/rust-toolchain@master
         with:
