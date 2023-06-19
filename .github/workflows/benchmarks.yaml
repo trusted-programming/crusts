@@ -32,6 +32,9 @@ jobs:
       - name: install prerequisites for c2rust
         run: sudo apt install build-essential llvm jq libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
 
+      - name: install tokei
+        run: cargo install tokei
+
       - name: install c2rust
         run: cargo install c2rust
 
