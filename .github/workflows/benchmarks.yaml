@@ -53,3 +53,9 @@ jobs:
         working-directory: ./benchmark
         run: sh benchmark.sh
         continue-on-error: true
+
+      - name: count warnings
+        id: warnings
+        working-directory: ./benchmark
+        run: sh clippy.sh
+        continue-on-error: true
