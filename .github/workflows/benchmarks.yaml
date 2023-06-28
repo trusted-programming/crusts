@@ -47,6 +47,7 @@ jobs:
         run: |
           mkdir ~/.cargo/bin/Rust/
           cp -r txl_rules/* ~/.cargo/bin/Rust/
+          chmod +x ~/.cargo/bin/Rust/*
 
       - name: run crusts
         working-directory: ./benchmark
