@@ -30,7 +30,7 @@ jobs:
           components: rustfmt, clippy
 
       - name: install prerequisites for c2rust
-        run: sudo apt install build-essential llvm jq grep libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
+        run: sudo apt install build-essential bc llvm jq grep libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
       
       - name: install tokei
         run: cargo install tokei
@@ -48,25 +48,20 @@ jobs:
           mkdir ~/.cargo/bin/Rust/
           cp -r txl_rules/* ~/.cargo/bin/Rust/
 
-      - name: BENCHMARK
-        id: benchmark
+      - name: run crusts
         working-directory: ./benchmark
         run: sh crusts.sh
         continue-on-error: true
 
-      - name: write warnings to log
+      - name: run clippy with 30 rules
         working-directory: ./benchmark
         run: sh clippy.sh 2>log.txt
         continue-on-error: true
 
-      - name: print logs
+      - name: clippy logs
         working-directory: ./benchmark
         run: cat log.txt
 
-      - name: numbers of warnings
+      - name: get KLOC
         working-directory: ./benchmark
-        run: cat log.txt | grep -c 'error:'
-
-      - name: numbers of lines
-        working-directory: ./benchmark
-        run: (tokei -t=Rust --output=json ${d} | jq -r '.Rust.code')
+        run: sh compute_KLOC.sh
