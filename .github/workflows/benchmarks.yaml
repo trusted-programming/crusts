@@ -78,10 +78,13 @@ jobs:
         continue-on-error: true
 
       - name: print logs
+        working-directory: ./benchmark
         run: cat log.txt
 
       - name: numbers of warnings
+        working-directory: ./benchmark
         run: cat log.txt | grep -c 'error:'
 
       - name: numbers of lines
+        working-directory: ./benchmark
         run: (tokei -t=Rust --output=json ${d} | jq -r '.Rust.code')
