@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # read error count from the log file
-errors=$(cat log.txt | grep -c 'error:')
+errors=$(grep 'error:' log.txt)
 
 # read line count from the directory
 lines=$(tokei -t=Rust --output=json ${d} | jq -r '.Rust.code')
