@@ -21,13 +21,13 @@ jobs:
       - name: Install rust nightly-2021-11-22 toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          components: rustfmt
+          components: rustfmt, clippy
           toolchain: nightly-2021-11-22
 
       - name: Install rust nightly toolchain
         uses: dtolnay/rust-toolchain@nightly
         with:
-          components: rustfmt
+          components: rustfmt, clippy
 
       - name: install prerequisites for c2rust
         run: sudo apt install build-essential llvm jq grep libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
@@ -42,24 +42,6 @@ jobs:
         run: |
           cargo install --path .
           export PATH=$PATH:~/.cargo/bin
-
-      - name: Cache cargo registry
-        uses: actions/cache@v3
-        with:
-          path: ~/.cargo/registry
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      
-      - name: Cache cargo index
-        uses: actions/cache@v3
-        with:
-          path: ~/.cargo/git
-          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
-      
-      - name: Cache cargo build
-        uses: actions/cache@v3
-        with:
-          path: target
-          key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
 
       - name: copy TXL transactions
         run: |
