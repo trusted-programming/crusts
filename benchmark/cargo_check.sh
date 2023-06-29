@@ -11,7 +11,7 @@ failed_folders=""
 # Loop over each directory (denoted by */) in the current directory
 for d in */; do
     # Print the current working directory
-    echo "Current directory: $(d)"
+    echo "Current directory: ${d}"
 
     # Change to directory "${d}" and run cargo check.
     # Parentheses are used to run these commands in a subshell,
