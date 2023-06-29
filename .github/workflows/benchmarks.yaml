@@ -3,26 +3,29 @@ on:
   push:
     branches:
       - master
-      
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
 
-env:
-  RUSTFLAGS: "-Awarnings"
 jobs:
   one:
-    name: c2rust -> txl -> cargo check
+    name: c2rust -> txl -> cargo-fix -> cargo check 
     runs-on: ubuntu-latest
 
     steps:
+      ##### PREPARATION STEPS ####
       - uses: actions/checkout@v3
+
+      - name: Install rust nightly toolchain
+        uses: dtolnay/rust-toolchain@nightly
 
       - name: Install rust nightly-2021-11-22 toolchain
         uses: dtolnay/rust-toolchain@master
         with:
+          toolchain: nightly-2021-11-22
+
+      - name: Install rust nightly-2023-06-02 toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
           components: rustfmt
-          toolchain: nightly-2021-11-22, nightly-2022-01-01
+          toolchain: nightly-2023-06-02
 
       - name: install prerequisites for c2rust
         run: sudo apt install build-essential bc llvm jq ripgrep libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
@@ -43,21 +46,32 @@ jobs:
           mkdir ~/.cargo/bin/Rust/
           cp -r txl_rules/* ~/.cargo/bin/Rust/
           chmod +x ~/.cargo/bin/Rust/*
+       
+      - name: copy modified clippy exec
+        run: cp utils/cargo-clippy ~/.cargo/bin/
+
+    ##### CODE MODIFICATION STEPS ####
 
       - name: run crusts
         working-directory: ./benchmark
         run: sh crusts.sh
         continue-on-error: true
 
+      - name: run clippy fix
+        working-directory: ./benchmark
+        run: sh clippy_fix.sh
+        continue-on-error: true
+
+     ##### GATHER DIAGNOSTICS STEPS ####
+      
       - name: run clippy with 30 rules
         working-directory: ./benchmark
         run: sh clippy.sh 2>log.txt
         continue-on-error: true
 
-      - name: run clippy fix
+      - name: percentage of working projects
         working-directory: ./benchmark
-        run: sh clippy_fix.sh
-        continue-on-error: true
+        run: sh cargo_check.sh
 
       - name: clippy logs
         working-directory: ./benchmark
