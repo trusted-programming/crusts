@@ -24,7 +24,7 @@ jobs:
       - name: Install rust nightly-2023-06-02 toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          components: rustfmt
+          components: rustfmt, rust-src, rustc-dev, llvm-tools-preview
           toolchain: nightly-2023-06-02
 
       - name: install packages
@@ -51,7 +51,7 @@ jobs:
         run: |
           git clone https://github.com/lucarlig/rust-clippy.git
           cd rust-clippy
-          cargo +nightly-2023-06-02 build --release --bin cargo-clippy --bin clippy-driver -Zunstable-options --out-dir "~/.cargo/bin"
+          cargo +nightly-2023-06-02 build --release --bin cargo-clippy --bin clippy-driver -Zunstable-options --out-dir "$(rustc --print=sysroot)/bin"
 
     ##### CODE MODIFICATION STEPS ####
       - name: run crusts
