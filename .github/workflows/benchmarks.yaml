@@ -51,10 +51,9 @@ jobs:
         run: |
           git clone https://github.com/lucarlig/rust-clippy.git
           cd rust-clippy
-          cargo +nightly-2023-06-02 build --release --bin cargo-clippy --bin clippy-driver -Zunstable-options --out-dir "$(rustc --print=sysroot)/bin"
+          cargo +nightly-2023-06-02 build --release --bin cargo-clippy --bin clippy-driver -Zunstable-options --out-dir "~/.cargo/bin"
 
     ##### CODE MODIFICATION STEPS ####
-
       - name: run crusts
         working-directory: ./benchmark
         run: sh crusts.sh
@@ -66,7 +65,12 @@ jobs:
         continue-on-error: true
 
      ##### GATHER DIAGNOSTICS STEPS ####
-      
+
+      - name: percentage of working projects
+        working-directory: ./benchmark
+        run: sh cargo_check.sh
+        continue-on-error: true
+
       - name: run clippy with 30 rules
         working-directory: ./benchmark
         run: sh clippy.sh 2>log.txt
@@ -75,10 +79,6 @@ jobs:
       - name: clippy logs
         working-directory: ./benchmark
         run: cat log.txt
-
-      - name: percentage of working projects
-        working-directory: ./benchmark
-        run: sh cargo_check.sh
 
       - name: compute KLOC
         working-directory: ./benchmark

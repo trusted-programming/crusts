@@ -1,10 +1,7 @@
 #!/bin/sh
 
-# Print the current working directory
-echo "Current directory: $(pwd)"
-
 # read error count from the log file
-warnings=$(rg -c 'error:' log.txt)
+warnings=$(rg -c 'error[' log.txt)
 
 echo "Warnings: $warnings"
 
