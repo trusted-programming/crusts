@@ -1,7 +1,8 @@
 #!/bin/sh
 
-# read error count from the log file
-warnings=$(rg -c 'error' log.txt)
+warnings_string=$(grep -i 'error:' log.txt | grep -iv 'could not compile')
+
+warnings=$(echo "$warnings_string" | wc -l)
 
 echo "Warnings: $warnings"
 
@@ -17,3 +18,7 @@ lines_in_k=$(echo "scale=3; $lines / 1000" | bc -l)
 warnings_per_k=$(echo "scale=3; $warnings / $lines_in_k" | bc -l)
 
 echo "KLOC: $warnings_per_k"
+
+warnings_types=$(echo "$warnings_string" | sort | uniq -c | sort -nr)
+
+echo "Warning types: \n $warnings_types"
