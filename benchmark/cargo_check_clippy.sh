@@ -2,6 +2,12 @@
 success_count=0
 failed_count=0
 
+# Initialize string variables to store the names of success and fail folders
+success_folders=""
+failed_folders=""
+
+export RUSTFLAGS="-Awarnings"
+
 for d in */; do
 
     (cd "${d}" && cargo +nightly-2023-06-02 check >/dev/null 2>&1)
@@ -16,5 +22,26 @@ for d in */; do
     fi
 done
 
+# Calculate the percentage of successful runs
+# First, calculate the total number of runs as the sum of successful and failed runs
+total_runs=$((success_count + failed_count))
+
+# If there were any runs, calculate the percentage of successful runs as (successful runs / total runs) * 100.
+# Use the bc command to do the division and multiplication, and set the scale to 2 to get two decimal places.
+# If there were no runs, set the percentage to 0.00 to prevent division by zero.
+if [ $total_runs -gt 0 ]; then
+    success_percentage=$(echo "scale=2; ($success_count / $total_runs) * 100" | bc)
+else
+    success_percentage=0.00
+fi
+
+# Print the names of the success and fail folders, and the number of successful and failed runs
+echo -e "Success folders:\n$success_folders"
+echo -e "Failed folders:\n$failed_folders"
+
+echo "Total runs: $total_runs"
 echo "Successful runs: $success_count"
 echo "Failed runs: $failed_count"
+
+# Print the percentage of successful runs
+echo "Successful runs percentage: $success_percentage%"

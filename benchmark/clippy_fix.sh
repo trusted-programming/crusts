@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export RUSTFLAGS="-Awarnings"
+
 for d in */; do
     # Print the current working directory
     echo "Current directory: ${d}"

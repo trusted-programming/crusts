@@ -64,21 +64,20 @@ jobs:
         run: sh clippy_fix.sh
         continue-on-error: true
 
+      - name: comment unsafe code
+        working-directory: ./benchmark
+        run: bash unsafe.sh
+
      ##### GATHER DIAGNOSTICS STEPS ####
 
-      - name: percentage of working projects
+      - name: run clippy on working projects with 30 rules
         working-directory: ./benchmark
-        run: sh cargo_check.sh
-        continue-on-error: true
-
-      - name: run clippy with 30 rules
-        working-directory: ./benchmark
-        run: sh clippy.sh 2>log.txt
+        run: sh cargo_check_clippy.sh >cargo_check.log 2>clippy_log.txt
         continue-on-error: true
 
       - name: clippy logs
         working-directory: ./benchmark
-        run: cat log.txt
+        run: cat clippy_log.txt
 
       - name: compute KLOC
         working-directory: ./benchmark
