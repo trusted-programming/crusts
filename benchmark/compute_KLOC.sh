@@ -21,4 +21,5 @@ echo "KLOC: $warnings_per_k"
 
 warnings_types=$(echo "$warnings_string" | sort | uniq -c | sort -nr)
 
-echo "Warning types: \n $warnings_types"
+echo "Warning types:"
+echo "$warnings_types"
