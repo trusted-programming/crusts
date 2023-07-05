@@ -5,5 +5,5 @@ for d in */; do
     echo "Current directory: ${d}"
 
     # run clippy fix
-    (cd "${d}" && cargo +nightly-2023-06-02 clippy --fix --allow-dirty --allow-no-vcs --allow-stagedcd)
+    (cd "${d}" && cargo +nightly-2023-06-02 clippy --fix --allow-dirty --allow-no-vcs -allow-staged)
 done
