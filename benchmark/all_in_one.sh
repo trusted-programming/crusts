@@ -1,37 +1,30 @@
-#!/bin/sh
+#!/bin/bash
+
 success_count=0
 failed_count=0
-
-# Initialize string variables to store the names of success and fail folders
 success_folders=""
 failed_folders=""
 
 for d in */; do
-    # Print the current working directory
     echo "Started directory: ${d}"
 
-    # Run crusts
+    # RUN CRUSTS
     (cd "${d}" && crusts) >>crusts.log 2>&1
 
-    # REMOVE UNSAFE WARNINGS
-    # Use find to find all .rs files recursively in the given folder
+    # REMOVE UNSAFE WARNINGS AND DERIVE DEBUG
     find "$d" -name "*.rs" -print0 | while IFS= read -r -d '' file; do
-        # Use grep to check if the file contains the keyword "unsafe", if not skip the file
         if grep -q "unsafe" "$file"; then
-            # Use sed to add comment above each line containing "unsafe"
             sed -i '/unsafe/ i\// SAFETY: machine generated unsafe code' "$file"
         fi
-
         if grep -q "struct" "$file"; then
-            # Use sed to add comment above each line containing "unsafe"
             sed -i '/struct/ i\#[derive(Debug)]' "$file"
         fi
     done
 
-    # run clippy fix
+    # RUN CLIPPY FIX
     (cd "${d}" && cargo +nightly-2023-06-02 clippy --fix --allow-dirty --allow-no-vcs) >>clippy_fix.log 2>&1
 
-    # filter out non compiling
+    # FILTER OUT NON COMPILING
     if [ $? -eq 0 ]; then
         success_count=$((success_count + 1))
         success_folders="${success_folders}${d%/}\n"
@@ -52,6 +45,8 @@ else
     success_percentage=0.00
 fi
 
+rm README.md
+
 warnings_string=$(grep -i 'error:' clippy.log | grep -iv 'could not compile')
 
 warnings=$(echo "$warnings_string" | wc -l)
@@ -59,7 +54,7 @@ warnings=$(echo "$warnings_string" | wc -l)
 echo "**Warnings**: $warnings" >>README.md
 
 # read line count from the directory
-lines=$(tokei -t=Rust --output=json ${d} | jq -r '.Rust.code')
+lines=$(tokei -t=Rust --output=json . | jq -r '.Rust.code')
 
 echo "**Lines**: $lines" >>README.md
 
