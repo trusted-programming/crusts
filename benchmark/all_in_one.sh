@@ -13,11 +13,11 @@ for d in */; do
 
     # REMOVE UNSAFE WARNINGS AND DERIVE DEBUG
     find "$d" -name "*.rs" -print0 | while IFS= read -r -d '' file; do
-        if grep -q "unsafe" "$file"; then
-            sed -i '/unsafe/ i\// SAFETY: machine generated unsafe code' "$file"
+        if grep -q "unsafe " "$file"; then
+            sed -i '/unsafe / i\// SAFETY: machine generated unsafe code' "$file"
         fi
-        if grep -q "struct" "$file"; then
-            sed -i '/struct/ i\#[derive(Debug)]' "$file"
+        if grep -q "struct " "$file"; then
+            sed -i '/struct / i\#[derive(Debug)]' "$file"
         fi
     done
 
@@ -45,11 +45,13 @@ else
     success_percentage=0.00
 fi
 
-rm README.md
+echo "# BENCHMARK RESULTS" >README.md
 
 warnings_string=$(grep -i 'error:' clippy.log | grep -iv 'could not compile')
 
 warnings=$(echo "$warnings_string" | wc -l)
+
+echo "## Warnings" >README.md
 
 echo "**Warnings**: $warnings" >>README.md
 
@@ -71,11 +73,11 @@ warnings_types=$(echo "$warnings_string" | sort | uniq -c | sort -nr)
 echo "**Warning types**:" >>README.md
 echo "$warnings_types" >>README.md
 
-echo -e "**Success folders**:\n$success_folders" >>README.md
-echo -e "**Failed folders**:\n$failed_folders" >>README.md
-
+echo "## Runs statics" >>README.md
 echo "**Total runs**: $total_runs" >>README.md
 echo "**Successful runs**: $success_count" >>README.md
 echo "**Failed runs**: $failed_count" >>README.md
-
 echo "**Successful runs percentage**: $success_percentage%" >>README.md
+
+echo -e "**Success folders**:\n$success_folders" >>README.md
+echo -e "**Failed folders**:\n$failed_folders" >>README.md
