@@ -21,6 +21,11 @@ for d in */; do
             # Use sed to add comment above each line containing "unsafe"
             sed -i '/unsafe/ i\// SAFETY: machine generated unsafe code' "$file"
         fi
+
+        if grep -q "struct" "$file"; then
+            # Use sed to add comment above each line containing "unsafe"
+            sed -i '/struct/ i\#[derive(Debug)]' "$file"
+        fi
     done
 
     # run clippy fix

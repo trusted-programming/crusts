@@ -53,26 +53,9 @@ jobs:
           cd rust-clippy
           cargo +nightly-2023-06-02 build --release --bin cargo-clippy --bin clippy-driver -Zunstable-options --out-dir "$(rustc --print=sysroot)/bin"
 
-    ##### CODE MODIFICATION STEPS ####
-      - name: run crusts
+      - name: apply all modifications and collect logs
         working-directory: ./benchmark
-        run: bash crusts.sh
-        continue-on-error: true
-
-      - name: run clippy fix
-        working-directory: ./benchmark
-        run: bash clippy_fix.sh
-        continue-on-error: true
-
-      - name: comment unsafe code
-        working-directory: ./benchmark
-        run: bash unsafe.sh
-
-     ##### GATHER DIAGNOSTICS STEPS ####
-
-      - name: run clippy on working projects with 30 rules
-        working-directory: ./benchmark
-        run: bash cargo_check_clippy.sh >cargo_check.log 2>clippy.log
+        run: bash all_in_one.sh 2>clippy.log
         continue-on-error: true
 
       - name: clippy logs
