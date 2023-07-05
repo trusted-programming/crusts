@@ -56,12 +56,12 @@ jobs:
     ##### CODE MODIFICATION STEPS ####
       - name: run crusts
         working-directory: ./benchmark
-        run: sh crusts.sh
+        run: bash crusts.sh
         continue-on-error: true
 
       - name: run clippy fix
         working-directory: ./benchmark
-        run: sh clippy_fix.sh
+        run: bash clippy_fix.sh
         continue-on-error: true
 
       - name: comment unsafe code
@@ -72,7 +72,7 @@ jobs:
 
       - name: run clippy on working projects with 30 rules
         working-directory: ./benchmark
-        run: sh cargo_check_clippy.sh >cargo_check.log 2>clippy_log.txt
+        run: bash cargo_check_clippy.sh >cargo_check.log 2>clippy_log.txt
         continue-on-error: true
 
       - name: clippy logs
@@ -81,4 +81,4 @@ jobs:
 
       - name: compute KLOC
         working-directory: ./benchmark
-        run: sh compute_KLOC.sh
+        run: bash compute_KLOC.sh

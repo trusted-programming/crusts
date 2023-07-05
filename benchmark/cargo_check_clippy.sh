@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 success_count=0
 failed_count=0
 
@@ -6,10 +6,8 @@ failed_count=0
 success_folders=""
 failed_folders=""
 
-export RUSTFLAGS="-Awarnings"
-
 for d in */; do
-
+    echo "${d}"
     (cd "${d}" && cargo +nightly-2023-06-02 check >/dev/null 2>&1)
 
     if [ $? -eq 0 ]; then

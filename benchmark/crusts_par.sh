@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 task() {
   # Print the current working directory

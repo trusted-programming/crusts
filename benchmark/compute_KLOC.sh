@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 warnings_string=$(grep -i 'error:' log.txt | grep -iv 'could not compile')
 
