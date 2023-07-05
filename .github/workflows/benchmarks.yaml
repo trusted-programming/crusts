@@ -28,7 +28,7 @@ jobs:
           toolchain: nightly-2023-06-02
 
       - name: install packages
-        run: sudo apt install build-essential bc llvm jq grep libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
+        run: sudo apt install build-essential bc bat llvm jq grep libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
       
       - name: install tokei
         run: cargo install tokei
@@ -58,10 +58,18 @@ jobs:
         run: bash all_in_one.sh 2>clippy.log
         continue-on-error: true
 
+      - name: Crusts logs
+        working-directory: ./benchmark
+        run: batcat crusts.log
+
+      - name: clippy fix logs
+        working-directory: ./benchmark
+        run: batcat clippy_fix.log
+
       - name: clippy logs
         working-directory: ./benchmark
-        run: cat clippy.log
+        run: batcat clippy.log
 
-      - name: compute KLOC
+      - name: RESULTS
         working-directory: ./benchmark
-        run: bash compute_KLOC.sh
+        run: batcat README.md
