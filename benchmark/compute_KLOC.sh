@@ -1,6 +1,6 @@
 #!/bin/bash
 
-warnings_string=$(grep -i 'error:' log.txt | grep -iv 'could not compile')
+warnings_string=$(grep -i 'error:' clippy.log | grep -iv 'could not compile')
 
 warnings=$(echo "$warnings_string" | wc -l)
 

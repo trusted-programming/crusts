@@ -72,12 +72,12 @@ jobs:
 
       - name: run clippy on working projects with 30 rules
         working-directory: ./benchmark
-        run: bash cargo_check_clippy.sh >cargo_check.log 2>clippy_log.txt
+        run: bash cargo_check_clippy.sh >cargo_check.log 2>clippy.log
         continue-on-error: true
 
       - name: clippy logs
         working-directory: ./benchmark
-        run: cat clippy_log.txt
+        run: cat clippy.log
 
       - name: compute KLOC
         working-directory: ./benchmark
