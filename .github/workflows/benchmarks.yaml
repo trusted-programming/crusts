@@ -24,11 +24,11 @@ jobs:
       - name: Install rust nightly-2023-06-02 toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          components: rustfmt, rust-src, rustc-dev, llvm-tools-preview
+          components: rustfmt, rust-src, rustc-dev, llvm-tools
           toolchain: nightly-2023-06-02
 
       - name: install packages
-        run: sudo apt install build-essential bc bat llvm jq grep libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
+        run: sudo apt install build-essential bc llvm jq grep libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
       
       - name: install tokei
         run: cargo install tokei
@@ -60,16 +60,16 @@ jobs:
 
       - name: Crusts logs
         working-directory: ./benchmark
-        run: batcat crusts.log
+        run: cat crusts.log
 
       - name: clippy fix logs
         working-directory: ./benchmark
-        run: batcat clippy_fix.log
+        run: cat clippy_fix.log
 
       - name: clippy logs
         working-directory: ./benchmark
-        run: batcat clippy.log
+        run: cat clippy.log
 
       - name: RESULTS
         working-directory: ./benchmark
-        run: batcat README.md
+        run: cat README.md

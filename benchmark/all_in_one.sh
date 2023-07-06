@@ -81,3 +81,8 @@ echo "**Successful runs percentage**: $success_percentage%" >>README.md
 
 echo -e "**Success folders**:\n$success_folders" >>README.md
 echo -e "**Failed folders**:\n$failed_folders" >>README.md
+
+cp clippy.log ..
+cp clippy_fix.log ..
+cp crusts.log ..
+cp README.md ..
