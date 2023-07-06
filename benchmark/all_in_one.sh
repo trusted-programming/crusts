@@ -47,7 +47,7 @@ fi
 
 echo "# BENCHMARK RESULTS" >README.md
 
-warnings_string=$(grep -i 'error:' clippy.log | grep -iv 'could not compile')
+warnings_string=$(grep -i 'error' clippy.log | grep -iv 'could not compile')
 
 warnings=$(echo "$warnings_string" | wc -l)
 
