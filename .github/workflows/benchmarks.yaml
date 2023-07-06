@@ -51,6 +51,7 @@ jobs:
         run: |
           git clone https://github.com/lucarlig/rust-clippy.git
           cd rust-clippy
+          cargo +nightly-2023-06-02 dev update_lints
           cargo +nightly-2023-06-02 build --release --bin cargo-clippy --bin clippy-driver -Zunstable-options --out-dir "$(rustc --print=sysroot)/bin"
 
       - name: apply all modifications and collect logs
@@ -73,3 +74,5 @@ jobs:
       - name: RESULTS
         working-directory: ./benchmark
         run: cat README.md
+
+    
