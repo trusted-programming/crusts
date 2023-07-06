@@ -25,7 +25,7 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           components: rustfmt, rust-src, rustc-dev, llvm-tools
-          toolchain: nightly-2023-06-02
+          toolchain: nightly-2023-06-29
 
       - name: install packages
         run: sudo apt install build-essential bc llvm jq grep libclang-dev cmake libssl-dev pkg-config python3 git clang bear -y
@@ -51,8 +51,8 @@ jobs:
         run: |
           git clone https://github.com/lucarlig/rust-clippy.git
           cd rust-clippy
-          cargo +nightly-2023-06-02 dev update_lints
-          cargo +nightly-2023-06-02 build --release --bin cargo-clippy --bin clippy-driver -Zunstable-options --out-dir "$(rustc --print=sysroot)/bin"
+          cargo +nightly-2023-06-29 dev update_lints
+          cargo +nightly-2023-06-29 build --release --bin cargo-clippy --bin clippy-driver -Zunstable-options --out-dir "$(rustc --print=sysroot)/bin"
 
       - name: apply all modifications and collect logs
         working-directory: ./benchmark
