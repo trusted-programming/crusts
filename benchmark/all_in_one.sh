@@ -5,8 +5,6 @@ failed_count=0
 success_folders=""
 failed_folders=""
 
-RUSTUP_TOOLCHAIN=nightly-2023-06-29
-
 for d in */; do
     echo "Started directory: ${d}"
 
