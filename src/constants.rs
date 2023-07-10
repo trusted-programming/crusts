@@ -28,7 +28,7 @@ pub static CONFIG: PlatformConfig = PlatformConfig {
     url: "http://bertrust.s3.amazonaws.com/crusts-linux.tar.gz",
 };
 
-pub const RULES: [&str; 12] = [
+pub const RULES: [&str; 13] = [
     "formalizeCode.x",
     "varTypeNoBounds.x",
     "null.x",
@@ -41,5 +41,6 @@ pub const RULES: [&str; 12] = [
     "stdio.x",
     "unsafe.x",
     "warns.x",
+    "rm_option_warn.x",
 ];
 pub const VERBOSITY: LevelFilter = LevelFilter::Info;
