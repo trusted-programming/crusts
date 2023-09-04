@@ -11,7 +11,7 @@ jobs:
 
     steps:
       ##### PREPARATION STEPS ####
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install rust nightly toolchain
         uses: dtolnay/rust-toolchain@nightly
